@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [dbo].[get_tournies_for_createatourney];
+﻿IF OBJECT_ID('dbo.get_tournies_for_createatourney') IS NOT NULL
+    DROP PROCEDURE [dbo].[get_tournies_for_createatourney];
 GO
 
 -- =============================================

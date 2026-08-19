@@ -1,4 +1,5 @@
-﻿DROP FUNCTION IF EXISTS [dbo].[base_report_fixing];
+﻿IF OBJECT_ID('dbo.base_report_fixing') IS NOT NULL
+    DROP FUNCTION [dbo].[base_report_fixing];
 GO
 
 CREATE FUNCTION [dbo].[base_report_fixing] 

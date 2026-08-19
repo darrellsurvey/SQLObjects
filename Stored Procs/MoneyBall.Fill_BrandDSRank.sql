@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [MoneyBall].[Fill_BrandDSRank];
+﻿IF OBJECT_ID('MoneyBall.Fill_BrandDSRank') IS NOT NULL
+    DROP PROCEDURE [MoneyBall].[Fill_BrandDSRank];
 GO
 
 -- =============================================

@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [OptOut].[Selection_LinkManager_Helper];
+﻿IF OBJECT_ID('OptOut.Selection_LinkManager_Helper') IS NOT NULL
+    DROP PROCEDURE [OptOut].[Selection_LinkManager_Helper];
 GO
 
 -- obsoleted but will keep around, used to populate the linkmanager table as we transitioned to a key/value lookup system for the links players/feeds

@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [dbo].[Get_TopSheet2];
+﻿IF OBJECT_ID('dbo.Get_TopSheet2') IS NOT NULL
+    DROP PROCEDURE [dbo].[Get_TopSheet2];
 GO
 
 -- =============================================

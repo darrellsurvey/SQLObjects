@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [Consumer].[Brands_Get];
+﻿IF OBJECT_ID('Consumer.Brands_Get') IS NOT NULL
+    DROP PROCEDURE [Consumer].[Brands_Get];
 GO
 
 CREATE PROCEDURE [Consumer].[Brands_Get]

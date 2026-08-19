@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [CR_Reports].[Shoes];
+﻿IF OBJECT_ID('CR_Reports.Shoes') IS NOT NULL
+    DROP PROCEDURE [CR_Reports].[Shoes];
 GO
 
 -- =============================================

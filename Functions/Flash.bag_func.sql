@@ -1,4 +1,5 @@
-﻿DROP FUNCTION IF EXISTS [Flash].[bag_func];
+﻿IF OBJECT_ID('Flash.bag_func') IS NOT NULL
+    DROP FUNCTION [Flash].[bag_func];
 GO
 
 -- =============================================

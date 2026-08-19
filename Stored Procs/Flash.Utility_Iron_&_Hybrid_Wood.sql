@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [Flash].[Utility_Iron_&_Hybrid_Wood];
+﻿IF OBJECT_ID('Flash.Utility_Iron_&_Hybrid_Wood') IS NOT NULL
+    DROP PROCEDURE [Flash].[Utility_Iron_&_Hybrid_Wood];
 GO
 
 -- =============================================

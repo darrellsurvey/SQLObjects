@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [DBAdmin].[ReseedIdentityColumns_sp];
+﻿IF OBJECT_ID('DBAdmin.ReseedIdentityColumns_sp') IS NOT NULL
+    DROP PROCEDURE [DBAdmin].[ReseedIdentityColumns_sp];
 GO
 
 CREATE PROCEDURE DBAdmin.ReseedIdentityColumns_sp

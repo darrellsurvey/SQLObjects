@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [dbo].[Taylor_QTR_report];
+﻿IF OBJECT_ID('dbo.Taylor_QTR_report') IS NOT NULL
+    DROP PROCEDURE [dbo].[Taylor_QTR_report];
 GO
 
 CREATE PROCEDURE [dbo].[Taylor_QTR_report]

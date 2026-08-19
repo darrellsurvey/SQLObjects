@@ -1,4 +1,5 @@
-﻿DROP FUNCTION IF EXISTS [LKP].[MoneyBall];
+﻿IF OBJECT_ID('LKP.MoneyBall') IS NOT NULL
+    DROP FUNCTION [LKP].[MoneyBall];
 GO
 
 CREATE Function [LKP].[MoneyBall]

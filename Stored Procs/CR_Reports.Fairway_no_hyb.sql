@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [CR_Reports].[Fairway_no_hyb];
+﻿IF OBJECT_ID('CR_Reports.Fairway_no_hyb') IS NOT NULL
+    DROP PROCEDURE [CR_Reports].[Fairway_no_hyb];
 GO
 
 -- =============================================

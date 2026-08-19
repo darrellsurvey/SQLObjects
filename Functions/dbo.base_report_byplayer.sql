@@ -1,4 +1,5 @@
-﻿DROP FUNCTION IF EXISTS [dbo].[base_report_byplayer];
+﻿IF OBJECT_ID('dbo.base_report_byplayer') IS NOT NULL
+    DROP FUNCTION [dbo].[base_report_byplayer];
 GO
 
 CREATE FUNCTION [dbo].[base_report_byplayer] 

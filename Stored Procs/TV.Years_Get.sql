@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [TV].[Years_Get];
+﻿IF OBJECT_ID('TV.Years_Get') IS NOT NULL
+    DROP PROCEDURE [TV].[Years_Get];
 GO
 
 CREATE PROCEDURE [TV].[Years_Get]

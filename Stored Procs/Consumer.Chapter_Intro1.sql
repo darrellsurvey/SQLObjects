@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [Consumer].[Chapter_Intro1];
+﻿IF OBJECT_ID('Consumer.Chapter_Intro1') IS NOT NULL
+    DROP PROCEDURE [Consumer].[Chapter_Intro1];
 GO
 
 CREATE procedure [Consumer].[Chapter_Intro1]

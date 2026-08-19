@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [Consumer].[MultiCountry_Top5_AllEquip];
+﻿IF OBJECT_ID('Consumer.MultiCountry_Top5_AllEquip') IS NOT NULL
+    DROP PROCEDURE [Consumer].[MultiCountry_Top5_AllEquip];
 GO
 
 CREATE procedure [Consumer].[MultiCountry_Top5_AllEquip]

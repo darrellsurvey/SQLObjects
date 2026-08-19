@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [MoneyBall].[Fill_NielsenRating];
+﻿IF OBJECT_ID('MoneyBall.Fill_NielsenRating') IS NOT NULL
+    DROP PROCEDURE [MoneyBall].[Fill_NielsenRating];
 GO
 
 -- =============================================

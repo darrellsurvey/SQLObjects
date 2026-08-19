@@ -1,4 +1,5 @@
-﻿DROP FUNCTION IF EXISTS [CR_Reports].[utility_iron_&_hybrid_wood_func];
+﻿IF OBJECT_ID('CR_Reports.utility_iron_&_hybrid_wood_func') IS NOT NULL
+    DROP FUNCTION [CR_Reports].[utility_iron_&_hybrid_wood_func];
 GO
 
 -- =============================================

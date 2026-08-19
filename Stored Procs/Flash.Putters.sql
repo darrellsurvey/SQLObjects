@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [Flash].[Putters];
+﻿IF OBJECT_ID('Flash.Putters') IS NOT NULL
+    DROP PROCEDURE [Flash].[Putters];
 GO
 
 -- =============================================

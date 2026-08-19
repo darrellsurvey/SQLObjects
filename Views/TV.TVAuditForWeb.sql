@@ -1,4 +1,5 @@
-﻿DROP VIEW IF EXISTS [TV].[TVAuditForWeb];
+﻿IF OBJECT_ID('TV.TVAuditForWeb') IS NOT NULL
+    DROP VIEW [TV].[TVAuditForWeb];
 GO
 
 CREATE VIEW TV.TVAuditForWeb

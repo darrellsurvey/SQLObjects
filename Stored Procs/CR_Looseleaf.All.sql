@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [CR_Looseleaf].[All];
+﻿IF OBJECT_ID('CR_Looseleaf.All') IS NOT NULL
+    DROP PROCEDURE [CR_Looseleaf].[All];
 GO
 
 SET QUOTED_IDENTIFIER ON;

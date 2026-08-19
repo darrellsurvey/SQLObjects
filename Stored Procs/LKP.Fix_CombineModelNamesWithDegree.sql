@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [LKP].[Fix_CombineModelNamesWithDegree];
+﻿IF OBJECT_ID('LKP.Fix_CombineModelNamesWithDegree') IS NOT NULL
+    DROP PROCEDURE [LKP].[Fix_CombineModelNamesWithDegree];
 GO
 
 -- =============================================

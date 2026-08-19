@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [Flash].[All_Equipment_OLD];
+﻿IF OBJECT_ID('Flash.All_Equipment_OLD') IS NOT NULL
+    DROP PROCEDURE [Flash].[All_Equipment_OLD];
 GO
 
 -- =============================================

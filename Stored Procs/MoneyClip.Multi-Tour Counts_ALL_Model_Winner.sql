@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [MoneyClip].[Multi-Tour Counts_ALL_Model_Winner];
+﻿IF OBJECT_ID('MoneyClip.Multi-Tour Counts_ALL_Model_Winner') IS NOT NULL
+    DROP PROCEDURE [MoneyClip].[Multi-Tour Counts_ALL_Model_Winner];
 GO
 
 CREATE PROCEDURE [MoneyClip].[Multi-Tour Counts_ALL_Model_Winner]

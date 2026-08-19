@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [Search].[Equipment_GetByDate];
+﻿IF OBJECT_ID('Search.Equipment_GetByDate') IS NOT NULL
+    DROP PROCEDURE [Search].[Equipment_GetByDate];
 GO
 
 CREATE PROCEDURE [Search].[Equipment_GetByDate]

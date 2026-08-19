@@ -1,4 +1,5 @@
-﻿DROP FUNCTION IF EXISTS [CR_Reports].[hybrid_woods_shaft_func];
+﻿IF OBJECT_ID('CR_Reports.hybrid_woods_shaft_func') IS NOT NULL
+    DROP FUNCTION [CR_Reports].[hybrid_woods_shaft_func];
 GO
 
 -- =============================================

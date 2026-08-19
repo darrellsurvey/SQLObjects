@@ -1,4 +1,5 @@
-﻿DROP VIEW IF EXISTS [dbo].[WebLogIn];
+﻿IF OBJECT_ID('dbo.WebLogIn') IS NOT NULL
+    DROP VIEW [dbo].[WebLogIn];
 GO
 
 CREATE VIEW dbo.WebLogIn

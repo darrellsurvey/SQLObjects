@@ -1,4 +1,5 @@
-﻿DROP VIEW IF EXISTS [dbo].[PriceRules];
+﻿IF OBJECT_ID('dbo.PriceRules') IS NOT NULL
+    DROP VIEW [dbo].[PriceRules];
 GO
 
 CREATE VIEW dbo.PriceRules

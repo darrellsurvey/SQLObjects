@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [dbo].[viewer_get_tourneys];
+﻿IF OBJECT_ID('dbo.viewer_get_tourneys') IS NOT NULL
+    DROP PROCEDURE [dbo].[viewer_get_tourneys];
 GO
 
 -- =============================================

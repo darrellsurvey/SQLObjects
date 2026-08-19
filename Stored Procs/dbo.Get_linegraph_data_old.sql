@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [dbo].[Get_linegraph_data_old];
+﻿IF OBJECT_ID('dbo.Get_linegraph_data_old') IS NOT NULL
+    DROP PROCEDURE [dbo].[Get_linegraph_data_old];
 GO
 
 -- =============================================

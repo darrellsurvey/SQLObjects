@@ -1,4 +1,5 @@
-﻿DROP VIEW IF EXISTS [Consumer].[LastSurvey_byCountry];
+﻿IF OBJECT_ID('Consumer.LastSurvey_byCountry') IS NOT NULL
+    DROP VIEW [Consumer].[LastSurvey_byCountry];
 GO
 
 CREATE VIEW Consumer.LastSurvey_byCountry

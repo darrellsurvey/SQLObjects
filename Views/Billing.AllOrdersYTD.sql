@@ -1,4 +1,5 @@
-﻿DROP VIEW IF EXISTS [Billing].[AllOrdersYTD];
+﻿IF OBJECT_ID('Billing.AllOrdersYTD') IS NOT NULL
+    DROP VIEW [Billing].[AllOrdersYTD];
 GO
 
 CREATE VIEW Billing.AllOrdersYTD

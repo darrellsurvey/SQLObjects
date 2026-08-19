@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [LKP].[Fix_ChangeModelName];
+﻿IF OBJECT_ID('LKP.Fix_ChangeModelName') IS NOT NULL
+    DROP PROCEDURE [LKP].[Fix_ChangeModelName];
 GO
 
 -- =============================================

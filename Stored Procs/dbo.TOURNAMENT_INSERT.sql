@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [dbo].[TOURNAMENT_INSERT];
+﻿IF OBJECT_ID('dbo.TOURNAMENT_INSERT') IS NOT NULL
+    DROP PROCEDURE [dbo].[TOURNAMENT_INSERT];
 GO
 
 -- =============================================

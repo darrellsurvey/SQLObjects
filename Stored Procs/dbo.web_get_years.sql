@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [dbo].[web_get_years];
+﻿IF OBJECT_ID('dbo.web_get_years') IS NOT NULL
+    DROP PROCEDURE [dbo].[web_get_years];
 GO
 
 -- =============================================

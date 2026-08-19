@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [OptOut].[Selection_SetNew];
+﻿IF OBJECT_ID('OptOut.Selection_SetNew') IS NOT NULL
+    DROP PROCEDURE [OptOut].[Selection_SetNew];
 GO
 
 CREATE procedure [OptOut].[Selection_SetNew]

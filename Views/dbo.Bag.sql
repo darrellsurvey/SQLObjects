@@ -1,4 +1,5 @@
-﻿DROP VIEW IF EXISTS [dbo].[Bag];
+﻿IF OBJECT_ID('dbo.Bag') IS NOT NULL
+    DROP VIEW [dbo].[Bag];
 GO
 
 CREATE VIEW dbo.Bag

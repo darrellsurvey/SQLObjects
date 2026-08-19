@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [MoneyBall].[rptExecutiveSummary];
+﻿IF OBJECT_ID('MoneyBall.rptExecutiveSummary') IS NOT NULL
+    DROP PROCEDURE [MoneyBall].[rptExecutiveSummary];
 GO
 
 CREATE procedure [MoneyBall].[rptExecutiveSummary]

@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [MoneyBall].[uspWebsiteUserLogin];
+﻿IF OBJECT_ID('MoneyBall.uspWebsiteUserLogin') IS NOT NULL
+    DROP PROCEDURE [MoneyBall].[uspWebsiteUserLogin];
 GO
 
 CREATE PROCEDURE MoneyBall.uspWebsiteUserLogin

@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [MoneyBall].[BrandHeaderCompanies];
+﻿IF OBJECT_ID('MoneyBall.BrandHeaderCompanies') IS NOT NULL
+    DROP PROCEDURE [MoneyBall].[BrandHeaderCompanies];
 GO
 
 CREATE procedure [MoneyBall].[BrandHeaderCompanies]

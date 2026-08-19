@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [LKP].[Fix_CombineModelNames];
+﻿IF OBJECT_ID('LKP.Fix_CombineModelNames') IS NOT NULL
+    DROP PROCEDURE [LKP].[Fix_CombineModelNames];
 GO
 
 -- =============================================

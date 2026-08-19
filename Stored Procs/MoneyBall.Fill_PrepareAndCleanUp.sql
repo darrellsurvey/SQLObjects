@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [MoneyBall].[Fill_PrepareAndCleanUp];
+﻿IF OBJECT_ID('MoneyBall.Fill_PrepareAndCleanUp') IS NOT NULL
+    DROP PROCEDURE [MoneyBall].[Fill_PrepareAndCleanUp];
 GO
 
 -- =============================================

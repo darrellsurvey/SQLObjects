@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [Consumer].[rptNewTotal];
+﻿IF OBJECT_ID('Consumer.rptNewTotal') IS NOT NULL
+    DROP PROCEDURE [Consumer].[rptNewTotal];
 GO
 
 CREATE procedure [Consumer].[rptNewTotal]

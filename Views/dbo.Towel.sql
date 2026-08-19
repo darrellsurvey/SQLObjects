@@ -1,4 +1,5 @@
-﻿DROP VIEW IF EXISTS [dbo].[Towel];
+﻿IF OBJECT_ID('dbo.Towel') IS NOT NULL
+    DROP VIEW [dbo].[Towel];
 GO
 
 CREATE VIEW dbo.Towel

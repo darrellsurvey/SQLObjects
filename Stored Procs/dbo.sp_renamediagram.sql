@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [dbo].[sp_renamediagram];
+﻿IF OBJECT_ID('dbo.sp_renamediagram') IS NOT NULL
+    DROP PROCEDURE [dbo].[sp_renamediagram];
 GO
 
 CREATE PROCEDURE [dbo].[sp_renamediagram]

@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [dbo].[CompaniesOverview];
+﻿IF OBJECT_ID('dbo.CompaniesOverview') IS NOT NULL
+    DROP PROCEDURE [dbo].[CompaniesOverview];
 GO
 
 -- =============================================

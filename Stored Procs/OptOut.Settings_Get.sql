@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [OptOut].[Settings_Get];
+﻿IF OBJECT_ID('OptOut.Settings_Get') IS NOT NULL
+    DROP PROCEDURE [OptOut].[Settings_Get];
 GO
 
 Create procedure [OptOut].[Settings_Get]

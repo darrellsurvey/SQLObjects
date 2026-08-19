@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [dbo].[Multi_Brand_Player_By_SID];
+﻿IF OBJECT_ID('dbo.Multi_Brand_Player_By_SID') IS NOT NULL
+    DROP PROCEDURE [dbo].[Multi_Brand_Player_By_SID];
 GO
 
 CREATE PROCEDURE [dbo].[Multi_Brand_Player_By_SID]

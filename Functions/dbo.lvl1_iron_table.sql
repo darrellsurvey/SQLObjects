@@ -1,4 +1,5 @@
-﻿DROP FUNCTION IF EXISTS [dbo].[lvl1_iron_table];
+﻿IF OBJECT_ID('dbo.lvl1_iron_table') IS NOT NULL
+    DROP FUNCTION [dbo].[lvl1_iron_table];
 GO
 
 -- =============================================

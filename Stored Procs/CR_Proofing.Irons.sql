@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [CR_Proofing].[Irons];
+﻿IF OBJECT_ID('CR_Proofing.Irons') IS NOT NULL
+    DROP PROCEDURE [CR_Proofing].[Irons];
 GO
 
 CREATE PROCEDURE [CR_Proofing].[Irons]

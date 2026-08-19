@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [Consumer].[rptPurchaseInfluence];
+﻿IF OBJECT_ID('Consumer.rptPurchaseInfluence') IS NOT NULL
+    DROP PROCEDURE [Consumer].[rptPurchaseInfluence];
 GO
 
 CREATE procedure [Consumer].[rptPurchaseInfluence]

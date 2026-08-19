@@ -1,4 +1,5 @@
-﻿DROP VIEW IF EXISTS [dbo].[Website_Viewership];
+﻿IF OBJECT_ID('dbo.Website_Viewership') IS NOT NULL
+    DROP VIEW [dbo].[Website_Viewership];
 GO
 
 CREATE VIEW dbo.Website_Viewership

@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [web].[login];
+﻿IF OBJECT_ID('web.login') IS NOT NULL
+    DROP PROCEDURE [web].[login];
 GO
 
 -- =============================================

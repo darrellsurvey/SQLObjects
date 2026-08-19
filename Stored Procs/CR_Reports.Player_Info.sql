@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [CR_Reports].[Player_Info];
+﻿IF OBJECT_ID('CR_Reports.Player_Info') IS NOT NULL
+    DROP PROCEDURE [CR_Reports].[Player_Info];
 GO
 
 CREATE PROCEDURE [CR_Reports].[Player_Info]

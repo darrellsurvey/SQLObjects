@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [MoneyBall].[Fill_WebsiteDataPlayer10];
+﻿IF OBJECT_ID('MoneyBall.Fill_WebsiteDataPlayer10') IS NOT NULL
+    DROP PROCEDURE [MoneyBall].[Fill_WebsiteDataPlayer10];
 GO
 
 -- =============================================

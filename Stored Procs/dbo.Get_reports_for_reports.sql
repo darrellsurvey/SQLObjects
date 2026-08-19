@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [dbo].[Get_reports_for_reports];
+﻿IF OBJECT_ID('dbo.Get_reports_for_reports') IS NOT NULL
+    DROP PROCEDURE [dbo].[Get_reports_for_reports];
 GO
 
 -- =============================================

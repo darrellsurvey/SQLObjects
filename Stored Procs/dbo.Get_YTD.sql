@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [dbo].[Get_YTD];
+﻿IF OBJECT_ID('dbo.Get_YTD') IS NOT NULL
+    DROP PROCEDURE [dbo].[Get_YTD];
 GO
 
 -- =============================================

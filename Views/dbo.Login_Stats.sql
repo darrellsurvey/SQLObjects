@@ -1,4 +1,5 @@
-﻿DROP VIEW IF EXISTS [dbo].[Login_Stats];
+﻿IF OBJECT_ID('dbo.Login_Stats') IS NOT NULL
+    DROP VIEW [dbo].[Login_Stats];
 GO
 
 CREATE VIEW dbo.Login_Stats

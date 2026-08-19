@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [Flash].[All_Woods];
+﻿IF OBJECT_ID('Flash.All_Woods') IS NOT NULL
+    DROP PROCEDURE [Flash].[All_Woods];
 GO
 
 -- =============================================

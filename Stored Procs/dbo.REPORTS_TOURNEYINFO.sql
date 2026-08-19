@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [dbo].[REPORTS_TOURNEYINFO];
+﻿IF OBJECT_ID('dbo.REPORTS_TOURNEYINFO') IS NOT NULL
+    DROP PROCEDURE [dbo].[REPORTS_TOURNEYINFO];
 GO
 
 -- =============================================

@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [MoneyClip].[XMLExport];
+﻿IF OBJECT_ID('MoneyClip.XMLExport') IS NOT NULL
+    DROP PROCEDURE [MoneyClip].[XMLExport];
 GO
 
 -- =============================================

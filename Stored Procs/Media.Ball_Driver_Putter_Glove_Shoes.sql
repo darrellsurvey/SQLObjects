@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [Media].[Ball_Driver_Putter_Glove_Shoes];
+﻿IF OBJECT_ID('Media.Ball_Driver_Putter_Glove_Shoes') IS NOT NULL
+    DROP PROCEDURE [Media].[Ball_Driver_Putter_Glove_Shoes];
 GO
 
 -- =============================================

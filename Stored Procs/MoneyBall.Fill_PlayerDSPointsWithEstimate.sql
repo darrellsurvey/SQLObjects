@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [MoneyBall].[Fill_PlayerDSPointsWithEstimate];
+﻿IF OBJECT_ID('MoneyBall.Fill_PlayerDSPointsWithEstimate') IS NOT NULL
+    DROP PROCEDURE [MoneyBall].[Fill_PlayerDSPointsWithEstimate];
 GO
 
 -- =============================================

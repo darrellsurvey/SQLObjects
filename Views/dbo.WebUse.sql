@@ -1,4 +1,5 @@
-﻿DROP VIEW IF EXISTS [dbo].[WebUse];
+﻿IF OBJECT_ID('dbo.WebUse') IS NOT NULL
+    DROP VIEW [dbo].[WebUse];
 GO
 
 CREATE VIEW [dbo].[WebUse]

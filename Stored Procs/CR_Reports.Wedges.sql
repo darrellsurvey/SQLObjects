@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [CR_Reports].[Wedges];
+﻿IF OBJECT_ID('CR_Reports.Wedges') IS NOT NULL
+    DROP PROCEDURE [CR_Reports].[Wedges];
 GO
 
 -- =============================================

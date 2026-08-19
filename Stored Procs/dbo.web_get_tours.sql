@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [dbo].[web_get_tours];
+﻿IF OBJECT_ID('dbo.web_get_tours') IS NOT NULL
+    DROP PROCEDURE [dbo].[web_get_tours];
 GO
 
 -- =============================================

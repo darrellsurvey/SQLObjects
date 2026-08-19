@@ -1,4 +1,5 @@
-﻿DROP VIEW IF EXISTS [dbo].[OrderSpecialDetail];
+﻿IF OBJECT_ID('dbo.OrderSpecialDetail') IS NOT NULL
+    DROP VIEW [dbo].[OrderSpecialDetail];
 GO
 
 CREATE VIEW [dbo].[OrderSpecialDetail]

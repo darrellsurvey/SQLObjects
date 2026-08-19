@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [Search].[Equipment_GetByTournament];
+﻿IF OBJECT_ID('Search.Equipment_GetByTournament') IS NOT NULL
+    DROP PROCEDURE [Search].[Equipment_GetByTournament];
 GO
 
 CREATE PROCEDURE [Search].[Equipment_GetByTournament]

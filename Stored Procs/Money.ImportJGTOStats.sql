@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [Money].[ImportJGTOStats];
+﻿IF OBJECT_ID('Money.ImportJGTOStats') IS NOT NULL
+    DROP PROCEDURE [Money].[ImportJGTOStats];
 GO
 
 -- =============================================

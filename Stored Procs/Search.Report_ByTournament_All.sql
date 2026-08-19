@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [Search].[Report_ByTournament_All];
+﻿IF OBJECT_ID('Search.Report_ByTournament_All') IS NOT NULL
+    DROP PROCEDURE [Search].[Report_ByTournament_All];
 GO
 
 CREATE PROCEDURE [Search].[Report_ByTournament_All]

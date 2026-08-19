@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [Input].[Get_Shaft_Mfgr];
+﻿IF OBJECT_ID('Input.Get_Shaft_Mfgr') IS NOT NULL
+    DROP PROCEDURE [Input].[Get_Shaft_Mfgr];
 GO
 
 -- =============================================

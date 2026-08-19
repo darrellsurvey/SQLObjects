@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [MoneyClip].[By_Tournament_Brands];
+﻿IF OBJECT_ID('MoneyClip.By_Tournament_Brands') IS NOT NULL
+    DROP PROCEDURE [MoneyClip].[By_Tournament_Brands];
 GO
 
 CREATE PROCEDURE [MoneyClip].[By_Tournament_Brands]

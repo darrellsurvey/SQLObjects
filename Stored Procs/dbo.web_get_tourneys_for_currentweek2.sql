@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [dbo].[web_get_tourneys_for_currentweek2];
+﻿IF OBJECT_ID('dbo.web_get_tourneys_for_currentweek2') IS NOT NULL
+    DROP PROCEDURE [dbo].[web_get_tourneys_for_currentweek2];
 GO
 
 -- =============================================

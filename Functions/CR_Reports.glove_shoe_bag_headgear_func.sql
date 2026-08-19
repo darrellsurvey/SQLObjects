@@ -1,4 +1,5 @@
-﻿DROP FUNCTION IF EXISTS [CR_Reports].[glove_shoe_bag_headgear_func];
+﻿IF OBJECT_ID('CR_Reports.glove_shoe_bag_headgear_func') IS NOT NULL
+    DROP FUNCTION [CR_Reports].[glove_shoe_bag_headgear_func];
 GO
 
 -- =============================================

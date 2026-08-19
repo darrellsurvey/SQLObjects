@@ -1,4 +1,5 @@
-﻿DROP VIEW IF EXISTS [TV].[TVAuditReport];
+﻿IF OBJECT_ID('TV.TVAuditReport') IS NOT NULL
+    DROP VIEW [TV].[TVAuditReport];
 GO
 
 CREATE VIEW TV.TVAuditReport

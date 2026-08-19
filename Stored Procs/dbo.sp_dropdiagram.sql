@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [dbo].[sp_dropdiagram];
+﻿IF OBJECT_ID('dbo.sp_dropdiagram') IS NOT NULL
+    DROP PROCEDURE [dbo].[sp_dropdiagram];
 GO
 
 CREATE PROCEDURE [dbo].[sp_dropdiagram]

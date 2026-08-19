@@ -1,4 +1,5 @@
-﻿DROP FUNCTION IF EXISTS [Billing].[Has_Permission_NOTUSED];
+﻿IF OBJECT_ID('Billing.Has_Permission_NOTUSED') IS NOT NULL
+    DROP FUNCTION [Billing].[Has_Permission_NOTUSED];
 GO
 
 -- =============================================

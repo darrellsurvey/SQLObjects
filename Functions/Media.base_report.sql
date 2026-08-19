@@ -1,4 +1,5 @@
-﻿DROP FUNCTION IF EXISTS [Media].[base_report];
+﻿IF OBJECT_ID('Media.base_report') IS NOT NULL
+    DROP FUNCTION [Media].[base_report];
 GO
 
 -- =============================================

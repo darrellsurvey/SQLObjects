@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [CR_Reports].[Puttergrip];
+﻿IF OBJECT_ID('CR_Reports.Puttergrip') IS NOT NULL
+    DROP PROCEDURE [CR_Reports].[Puttergrip];
 GO
 
 -- =============================================

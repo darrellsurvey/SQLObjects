@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [dbo].[get_field_looseleaf_results];
+﻿IF OBJECT_ID('dbo.get_field_looseleaf_results') IS NOT NULL
+    DROP PROCEDURE [dbo].[get_field_looseleaf_results];
 GO
 
 -- =============================================

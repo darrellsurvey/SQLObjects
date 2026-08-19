@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [CR_Looseleaf].[Putter];
+﻿IF OBJECT_ID('CR_Looseleaf.Putter') IS NOT NULL
+    DROP PROCEDURE [CR_Looseleaf].[Putter];
 GO
 
 CREATE PROCEDURE [CR_Looseleaf].[Putter]

@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [CR_Looseleaf].[Wedges];
+﻿IF OBJECT_ID('CR_Looseleaf.Wedges') IS NOT NULL
+    DROP PROCEDURE [CR_Looseleaf].[Wedges];
 GO
 
 CREATE PROCEDURE [CR_Looseleaf].[Wedges]

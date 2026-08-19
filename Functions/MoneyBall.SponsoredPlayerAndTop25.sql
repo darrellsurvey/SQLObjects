@@ -1,4 +1,5 @@
-﻿DROP FUNCTION IF EXISTS [MoneyBall].[SponsoredPlayerAndTop25];
+﻿IF OBJECT_ID('MoneyBall.SponsoredPlayerAndTop25') IS NOT NULL
+    DROP FUNCTION [MoneyBall].[SponsoredPlayerAndTop25];
 GO
 
 CREATE FUNCTION [MoneyBall].[SponsoredPlayerAndTop25]

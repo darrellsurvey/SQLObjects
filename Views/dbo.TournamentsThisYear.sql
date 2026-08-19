@@ -1,4 +1,5 @@
-﻿DROP VIEW IF EXISTS [dbo].[TournamentsThisYear];
+﻿IF OBJECT_ID('dbo.TournamentsThisYear') IS NOT NULL
+    DROP VIEW [dbo].[TournamentsThisYear];
 GO
 
 CREATE VIEW dbo.TournamentsThisYear

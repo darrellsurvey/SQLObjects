@@ -1,4 +1,5 @@
-﻿DROP VIEW IF EXISTS [dbo].[TVTime];
+﻿IF OBJECT_ID('dbo.TVTime') IS NOT NULL
+    DROP VIEW [dbo].[TVTime];
 GO
 
 CREATE VIEW dbo.TVTime

@@ -1,4 +1,5 @@
-﻿DROP VIEW IF EXISTS [dbo].[Wedges];
+﻿IF OBJECT_ID('dbo.Wedges') IS NOT NULL
+    DROP VIEW [dbo].[Wedges];
 GO
 
 CREATE VIEW dbo.Wedges

@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [CR_Reports].[Ball_Driver_Putter_Glove_Shoes];
+﻿IF OBJECT_ID('CR_Reports.Ball_Driver_Putter_Glove_Shoes') IS NOT NULL
+    DROP PROCEDURE [CR_Reports].[Ball_Driver_Putter_Glove_Shoes];
 GO
 
 -- =============================================

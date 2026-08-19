@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [Flash].[Wedge_Grips];
+﻿IF OBJECT_ID('Flash.Wedge_Grips') IS NOT NULL
+    DROP PROCEDURE [Flash].[Wedge_Grips];
 GO
 
 -- =============================================

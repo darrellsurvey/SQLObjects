@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [dbo].[Get_Flash_TopSheet];
+﻿IF OBJECT_ID('dbo.Get_Flash_TopSheet') IS NOT NULL
+    DROP PROCEDURE [dbo].[Get_Flash_TopSheet];
 GO
 
 -- =============================================

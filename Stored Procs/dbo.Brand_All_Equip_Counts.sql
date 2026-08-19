@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [dbo].[Brand_All_Equip_Counts];
+﻿IF OBJECT_ID('dbo.Brand_All_Equip_Counts') IS NOT NULL
+    DROP PROCEDURE [dbo].[Brand_All_Equip_Counts];
 GO
 
 CREATE PROCEDURE [dbo].[Brand_All_Equip_Counts]

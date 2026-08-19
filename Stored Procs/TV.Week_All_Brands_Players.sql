@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [TV].[Week_All_Brands_Players];
+﻿IF OBJECT_ID('TV.Week_All_Brands_Players') IS NOT NULL
+    DROP PROCEDURE [TV].[Week_All_Brands_Players];
 GO
 
 Create PROCEDURE [TV].[Week_All_Brands_Players]

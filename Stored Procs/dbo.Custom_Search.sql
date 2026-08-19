@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [dbo].[Custom_Search];
+﻿IF OBJECT_ID('dbo.Custom_Search') IS NOT NULL
+    DROP PROCEDURE [dbo].[Custom_Search];
 GO
 
 -- =============================================

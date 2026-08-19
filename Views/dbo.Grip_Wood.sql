@@ -1,4 +1,5 @@
-﻿DROP VIEW IF EXISTS [dbo].[Grip_Wood];
+﻿IF OBJECT_ID('dbo.Grip_Wood') IS NOT NULL
+    DROP VIEW [dbo].[Grip_Wood];
 GO
 
 CREATE VIEW dbo.Grip_Wood

@@ -1,4 +1,5 @@
-﻿DROP VIEW IF EXISTS [Proof].[MissingDriver];
+﻿IF OBJECT_ID('Proof.MissingDriver') IS NOT NULL
+    DROP VIEW [Proof].[MissingDriver];
 GO
 
 CREATE VIEW Proof.MissingDriver

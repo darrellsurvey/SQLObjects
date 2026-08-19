@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [OptOut].[Selection_SetFeedAll];
+﻿IF OBJECT_ID('OptOut.Selection_SetFeedAll') IS NOT NULL
+    DROP PROCEDURE [OptOut].[Selection_SetFeedAll];
 GO
 
 CREATE procedure [OptOut].[Selection_SetFeedAll]

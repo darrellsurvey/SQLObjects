@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [CR_Reports].[Get_TopSheet];
+﻿IF OBJECT_ID('CR_Reports.Get_TopSheet') IS NOT NULL
+    DROP PROCEDURE [CR_Reports].[Get_TopSheet];
 GO
 
 CREATE PROCEDURE [CR_Reports].[Get_TopSheet]

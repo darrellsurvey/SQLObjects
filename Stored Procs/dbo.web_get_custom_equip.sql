@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [dbo].[web_get_custom_equip];
+﻿IF OBJECT_ID('dbo.web_get_custom_equip') IS NOT NULL
+    DROP PROCEDURE [dbo].[web_get_custom_equip];
 GO
 
 CREATE PROCEDURE [dbo].[web_get_custom_equip]

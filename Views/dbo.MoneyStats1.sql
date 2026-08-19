@@ -1,4 +1,5 @@
-﻿DROP VIEW IF EXISTS [dbo].[MoneyStats1];
+﻿IF OBJECT_ID('dbo.MoneyStats1') IS NOT NULL
+    DROP VIEW [dbo].[MoneyStats1];
 GO
 
 CREATE VIEW dbo.MoneyStats1

@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [dbo].[web_get_single_items];
+﻿IF OBJECT_ID('dbo.web_get_single_items') IS NOT NULL
+    DROP PROCEDURE [dbo].[web_get_single_items];
 GO
 
 -- =============================================

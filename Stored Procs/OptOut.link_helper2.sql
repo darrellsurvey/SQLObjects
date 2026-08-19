@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [OptOut].[link_helper2];
+﻿IF OBJECT_ID('OptOut.link_helper2') IS NOT NULL
+    DROP PROCEDURE [OptOut].[link_helper2];
 GO
 
 CREATE PROCEDURE [OptOut].[link_helper2]

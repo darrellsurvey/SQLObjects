@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [MoneyBall].[Fill_CalculateDSPoints];
+﻿IF OBJECT_ID('MoneyBall.Fill_CalculateDSPoints') IS NOT NULL
+    DROP PROCEDURE [MoneyBall].[Fill_CalculateDSPoints];
 GO
 
 -- =============================================

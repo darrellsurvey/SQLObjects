@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [CR_Reports].[Drivers];
+﻿IF OBJECT_ID('CR_Reports.Drivers') IS NOT NULL
+    DROP PROCEDURE [CR_Reports].[Drivers];
 GO
 
 -- =============================================

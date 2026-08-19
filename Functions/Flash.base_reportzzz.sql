@@ -1,4 +1,5 @@
-﻿DROP FUNCTION IF EXISTS [Flash].[base_reportzzz];
+﻿IF OBJECT_ID('Flash.base_reportzzz') IS NOT NULL
+    DROP FUNCTION [Flash].[base_reportzzz];
 GO
 
 -- =============================================

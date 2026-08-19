@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [CR_Proofing].[Putter];
+﻿IF OBJECT_ID('CR_Proofing.Putter') IS NOT NULL
+    DROP PROCEDURE [CR_Proofing].[Putter];
 GO
 
 CREATE PROCEDURE [CR_Proofing].[Putter]

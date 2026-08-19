@@ -1,4 +1,5 @@
-﻿DROP FUNCTION IF EXISTS [LKP].[IPSegment_fn];
+﻿IF OBJECT_ID('LKP.IPSegment_fn') IS NOT NULL
+    DROP FUNCTION [LKP].[IPSegment_fn];
 GO
 
 CREATE FUNCTION [LKP].[IPSegment_fn]

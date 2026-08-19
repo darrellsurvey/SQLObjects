@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [Flash].[Drivers];
+﻿IF OBJECT_ID('Flash.Drivers') IS NOT NULL
+    DROP PROCEDURE [Flash].[Drivers];
 GO
 
 -- =============================================

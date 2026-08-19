@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [LKP].[FixPlayerName_All];
+﻿IF OBJECT_ID('LKP.FixPlayerName_All') IS NOT NULL
+    DROP PROCEDURE [LKP].[FixPlayerName_All];
 GO
 
 Create Procedure LKP.FixPlayerName_All

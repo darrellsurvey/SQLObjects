@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [Consumer].[rptEquipmenNew_Overview];
+﻿IF OBJECT_ID('Consumer.rptEquipmenNew_Overview') IS NOT NULL
+    DROP PROCEDURE [Consumer].[rptEquipmenNew_Overview];
 GO
 
 CREATE procedure [Consumer].[rptEquipmenNew_Overview]

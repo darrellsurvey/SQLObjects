@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [Media].[All_Equipment];
+﻿IF OBJECT_ID('Media.All_Equipment') IS NOT NULL
+    DROP PROCEDURE [Media].[All_Equipment];
 GO
 
 -- =============================================

@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [Search].[Reports_GetWithNoModel];
+﻿IF OBJECT_ID('Search.Reports_GetWithNoModel') IS NOT NULL
+    DROP PROCEDURE [Search].[Reports_GetWithNoModel];
 GO
 
 CREATE PROCEDURE [Search].[Reports_GetWithNoModel]

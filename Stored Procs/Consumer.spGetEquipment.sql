@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [Consumer].[spGetEquipment];
+﻿IF OBJECT_ID('Consumer.spGetEquipment') IS NOT NULL
+    DROP PROCEDURE [Consumer].[spGetEquipment];
 GO
 
 create procedure Consumer.spGetEquipment

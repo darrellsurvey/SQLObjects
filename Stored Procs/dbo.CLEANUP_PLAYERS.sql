@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [dbo].[CLEANUP_PLAYERS];
+﻿IF OBJECT_ID('dbo.CLEANUP_PLAYERS') IS NOT NULL
+    DROP PROCEDURE [dbo].[CLEANUP_PLAYERS];
 GO
 
 -- =============================================

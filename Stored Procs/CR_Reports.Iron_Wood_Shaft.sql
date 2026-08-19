@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [CR_Reports].[Iron_Wood_Shaft];
+﻿IF OBJECT_ID('CR_Reports.Iron_Wood_Shaft') IS NOT NULL
+    DROP PROCEDURE [CR_Reports].[Iron_Wood_Shaft];
 GO
 
 -- =============================================

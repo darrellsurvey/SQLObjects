@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [Flash].[Ball_Iron_Wood_Driver];
+﻿IF OBJECT_ID('Flash.Ball_Iron_Wood_Driver') IS NOT NULL
+    DROP PROCEDURE [Flash].[Ball_Iron_Wood_Driver];
 GO
 
 -- =============================================

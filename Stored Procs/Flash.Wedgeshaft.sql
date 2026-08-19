@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [Flash].[Wedgeshaft];
+﻿IF OBJECT_ID('Flash.Wedgeshaft') IS NOT NULL
+    DROP PROCEDURE [Flash].[Wedgeshaft];
 GO
 
 -- =============================================

@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [dbo].[Get_Modelsheet2];
+﻿IF OBJECT_ID('dbo.Get_Modelsheet2') IS NOT NULL
+    DROP PROCEDURE [dbo].[Get_Modelsheet2];
 GO
 
 -- =============================================

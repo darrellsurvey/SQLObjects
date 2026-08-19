@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [dbo].[CustomTourStudyYearly];
+﻿IF OBJECT_ID('dbo.CustomTourStudyYearly') IS NOT NULL
+    DROP PROCEDURE [dbo].[CustomTourStudyYearly];
 GO
 
 CREATE PROCEDURE [dbo].[CustomTourStudyYearly]

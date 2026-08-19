@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [CR_Proofing].[Wedges];
+﻿IF OBJECT_ID('CR_Proofing.Wedges') IS NOT NULL
+    DROP PROCEDURE [CR_Proofing].[Wedges];
 GO
 
 CREATE PROCEDURE [CR_Proofing].[Wedges]

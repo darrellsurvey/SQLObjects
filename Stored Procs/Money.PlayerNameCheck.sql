@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [Money].[PlayerNameCheck];
+﻿IF OBJECT_ID('Money.PlayerNameCheck') IS NOT NULL
+    DROP PROCEDURE [Money].[PlayerNameCheck];
 GO
 
 CREATE procedure [Money].[PlayerNameCheck]

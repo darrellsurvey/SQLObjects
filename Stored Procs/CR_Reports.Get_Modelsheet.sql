@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [CR_Reports].[Get_Modelsheet];
+﻿IF OBJECT_ID('CR_Reports.Get_Modelsheet') IS NOT NULL
+    DROP PROCEDURE [CR_Reports].[Get_Modelsheet];
 GO
 
 -- =============================================

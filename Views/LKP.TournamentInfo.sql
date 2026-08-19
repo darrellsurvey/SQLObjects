@@ -1,4 +1,5 @@
-﻿DROP VIEW IF EXISTS [LKP].[TournamentInfo];
+﻿IF OBJECT_ID('LKP.TournamentInfo') IS NOT NULL
+    DROP VIEW [LKP].[TournamentInfo];
 GO
 
 CREATE VIEW LKP.TournamentInfo

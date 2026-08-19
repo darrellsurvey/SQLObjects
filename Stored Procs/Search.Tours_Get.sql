@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [Search].[Tours_Get];
+﻿IF OBJECT_ID('Search.Tours_Get') IS NOT NULL
+    DROP PROCEDURE [Search].[Tours_Get];
 GO
 
 CREATE  PROCEDURE [Search].[Tours_Get]

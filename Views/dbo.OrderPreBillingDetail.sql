@@ -1,4 +1,5 @@
-﻿DROP VIEW IF EXISTS [dbo].[OrderPreBillingDetail];
+﻿IF OBJECT_ID('dbo.OrderPreBillingDetail') IS NOT NULL
+    DROP VIEW [dbo].[OrderPreBillingDetail];
 GO
 
 CREATE VIEW [dbo].[OrderPreBillingDetail]

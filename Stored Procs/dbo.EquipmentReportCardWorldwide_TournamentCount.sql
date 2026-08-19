@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [dbo].[EquipmentReportCardWorldwide_TournamentCount];
+﻿IF OBJECT_ID('dbo.EquipmentReportCardWorldwide_TournamentCount') IS NOT NULL
+    DROP PROCEDURE [dbo].[EquipmentReportCardWorldwide_TournamentCount];
 GO
 
 Create PROCEDURE [dbo].[EquipmentReportCardWorldwide_TournamentCount]

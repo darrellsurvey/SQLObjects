@@ -1,4 +1,5 @@
-﻿DROP FUNCTION IF EXISTS [Consumer].[EquipmentTableCase];
+﻿IF OBJECT_ID('Consumer.EquipmentTableCase') IS NOT NULL
+    DROP FUNCTION [Consumer].[EquipmentTableCase];
 GO
 
 CREATE function [Consumer].[EquipmentTableCase] 

@@ -1,4 +1,5 @@
-﻿DROP FUNCTION IF EXISTS [CR_Reports].[ball_iron_wood_putter_func];
+﻿IF OBJECT_ID('CR_Reports.ball_iron_wood_putter_func') IS NOT NULL
+    DROP FUNCTION [CR_Reports].[ball_iron_wood_putter_func];
 GO
 
 -- =============================================

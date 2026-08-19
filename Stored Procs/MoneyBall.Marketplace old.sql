@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [MoneyBall].[Marketplace old];
+﻿IF OBJECT_ID('MoneyBall.Marketplace old') IS NOT NULL
+    DROP PROCEDURE [MoneyBall].[Marketplace old];
 GO
 
 CREATE procedure [MoneyBall].[Marketplace old]

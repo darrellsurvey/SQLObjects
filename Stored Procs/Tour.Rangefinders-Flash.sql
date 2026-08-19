@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [Tour].[Rangefinders-Flash];
+﻿IF OBJECT_ID('Tour.Rangefinders-Flash') IS NOT NULL
+    DROP PROCEDURE [Tour].[Rangefinders-Flash];
 GO
 
 create PROCEDURE [Tour].[Rangefinders-Flash]

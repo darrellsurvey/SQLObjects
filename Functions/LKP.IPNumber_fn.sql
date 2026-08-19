@@ -1,4 +1,5 @@
-﻿DROP FUNCTION IF EXISTS [LKP].[IPNumber_fn];
+﻿IF OBJECT_ID('LKP.IPNumber_fn') IS NOT NULL
+    DROP FUNCTION [LKP].[IPNumber_fn];
 GO
 
 CREATE FUNCTION [LKP].[IPNumber_fn]

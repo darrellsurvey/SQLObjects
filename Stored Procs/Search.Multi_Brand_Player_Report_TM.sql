@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [Search].[Multi_Brand_Player_Report_TM];
+﻿IF OBJECT_ID('Search.Multi_Brand_Player_Report_TM') IS NOT NULL
+    DROP PROCEDURE [Search].[Multi_Brand_Player_Report_TM];
 GO
 
 CREATE PROCEDURE [Search].[Multi_Brand_Player_Report_TM]

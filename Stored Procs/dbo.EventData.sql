@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [dbo].[EventData];
+﻿IF OBJECT_ID('dbo.EventData') IS NOT NULL
+    DROP PROCEDURE [dbo].[EventData];
 GO
 
 CREATE PROCEDURE [dbo].[EventData]

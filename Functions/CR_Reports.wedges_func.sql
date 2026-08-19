@@ -1,4 +1,5 @@
-﻿DROP FUNCTION IF EXISTS [CR_Reports].[wedges_func];
+﻿IF OBJECT_ID('CR_Reports.wedges_func') IS NOT NULL
+    DROP FUNCTION [CR_Reports].[wedges_func];
 GO
 
 -- =============================================

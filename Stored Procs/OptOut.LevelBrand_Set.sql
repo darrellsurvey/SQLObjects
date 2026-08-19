@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [OptOut].[LevelBrand_Set];
+﻿IF OBJECT_ID('OptOut.LevelBrand_Set') IS NOT NULL
+    DROP PROCEDURE [OptOut].[LevelBrand_Set];
 GO
 
 CREATE procedure [OptOut].[LevelBrand_Set]

@@ -1,4 +1,5 @@
-﻿DROP FUNCTION IF EXISTS [LKP].[PlayerRank_BucketList];
+﻿IF OBJECT_ID('LKP.PlayerRank_BucketList') IS NOT NULL
+    DROP FUNCTION [LKP].[PlayerRank_BucketList];
 GO
 
 -- =============================================

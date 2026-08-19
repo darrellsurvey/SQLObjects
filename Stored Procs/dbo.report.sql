@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [dbo].[report];
+﻿IF OBJECT_ID('dbo.report') IS NOT NULL
+    DROP PROCEDURE [dbo].[report];
 GO
 
 -- =============================================

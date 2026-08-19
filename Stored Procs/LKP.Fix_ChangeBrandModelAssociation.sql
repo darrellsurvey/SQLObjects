@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [LKP].[Fix_ChangeBrandModelAssociation];
+﻿IF OBJECT_ID('LKP.Fix_ChangeBrandModelAssociation') IS NOT NULL
+    DROP PROCEDURE [LKP].[Fix_ChangeBrandModelAssociation];
 GO
 
 -- =============================================

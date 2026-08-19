@@ -1,4 +1,5 @@
-﻿DROP VIEW IF EXISTS [dbo].[Shaft_Wedge];
+﻿IF OBJECT_ID('dbo.Shaft_Wedge') IS NOT NULL
+    DROP VIEW [dbo].[Shaft_Wedge];
 GO
 
 CREATE VIEW dbo.Shaft_Wedge

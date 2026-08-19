@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [Flash].[Fairway_no_hyb];
+﻿IF OBJECT_ID('Flash.Fairway_no_hyb') IS NOT NULL
+    DROP PROCEDURE [Flash].[Fairway_no_hyb];
 GO
 
 -- =============================================

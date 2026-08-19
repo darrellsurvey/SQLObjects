@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [Media].[Ball_Iron_Wood_Driver];
+﻿IF OBJECT_ID('Media.Ball_Iron_Wood_Driver') IS NOT NULL
+    DROP PROCEDURE [Media].[Ball_Iron_Wood_Driver];
 GO
 
 -- =============================================

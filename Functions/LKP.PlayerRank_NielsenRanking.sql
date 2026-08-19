@@ -1,4 +1,5 @@
-﻿DROP FUNCTION IF EXISTS [LKP].[PlayerRank_NielsenRanking];
+﻿IF OBJECT_ID('LKP.PlayerRank_NielsenRanking') IS NOT NULL
+    DROP FUNCTION [LKP].[PlayerRank_NielsenRanking];
 GO
 
 -- =============================================

@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [Input].[finalize_tournament];
+﻿IF OBJECT_ID('Input.finalize_tournament') IS NOT NULL
+    DROP PROCEDURE [Input].[finalize_tournament];
 GO
 
 CREATE PROCEDURE [Input].[finalize_tournament]

@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [dbo].[MonthlyBilling_sp];
+﻿IF OBJECT_ID('dbo.MonthlyBilling_sp') IS NOT NULL
+    DROP PROCEDURE [dbo].[MonthlyBilling_sp];
 GO
 
 CREATE PROCEDURE [dbo].[MonthlyBilling_sp]

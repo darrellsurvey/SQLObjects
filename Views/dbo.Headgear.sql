@@ -1,4 +1,5 @@
-﻿DROP VIEW IF EXISTS [dbo].[Headgear];
+﻿IF OBJECT_ID('dbo.Headgear') IS NOT NULL
+    DROP VIEW [dbo].[Headgear];
 GO
 
 CREATE VIEW dbo.Headgear

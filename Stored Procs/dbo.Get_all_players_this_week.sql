@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [dbo].[Get_all_players_this_week];
+﻿IF OBJECT_ID('dbo.Get_all_players_this_week') IS NOT NULL
+    DROP PROCEDURE [dbo].[Get_all_players_this_week];
 GO
 
 -- =============================================

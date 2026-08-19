@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [CR_Reports].[Iron_Wood_Driver];
+﻿IF OBJECT_ID('CR_Reports.Iron_Wood_Driver') IS NOT NULL
+    DROP PROCEDURE [CR_Reports].[Iron_Wood_Driver];
 GO
 
 -- =============================================

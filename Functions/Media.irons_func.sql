@@ -1,4 +1,5 @@
-﻿DROP FUNCTION IF EXISTS [Media].[irons_func];
+﻿IF OBJECT_ID('Media.irons_func') IS NOT NULL
+    DROP FUNCTION [Media].[irons_func];
 GO
 
 -- =============================================

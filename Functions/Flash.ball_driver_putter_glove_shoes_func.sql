@@ -1,4 +1,5 @@
-﻿DROP FUNCTION IF EXISTS [Flash].[ball_driver_putter_glove_shoes_func];
+﻿IF OBJECT_ID('Flash.ball_driver_putter_glove_shoes_func') IS NOT NULL
+    DROP FUNCTION [Flash].[ball_driver_putter_glove_shoes_func];
 GO
 
 -- =============================================

@@ -1,4 +1,5 @@
-﻿DROP VIEW IF EXISTS [Consumer].[Billing];
+﻿IF OBJECT_ID('Consumer.Billing') IS NOT NULL
+    DROP VIEW [Consumer].[Billing];
 GO
 
 CREATE VIEW Consumer.Billing

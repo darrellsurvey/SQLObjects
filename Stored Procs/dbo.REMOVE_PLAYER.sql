@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [dbo].[REMOVE_PLAYER];
+﻿IF OBJECT_ID('dbo.REMOVE_PLAYER') IS NOT NULL
+    DROP PROCEDURE [dbo].[REMOVE_PLAYER];
 GO
 
 -- =============================================

@@ -1,4 +1,5 @@
-﻿DROP FUNCTION IF EXISTS [Consumer].[DemographicCase_Model];
+﻿IF OBJECT_ID('Consumer.DemographicCase_Model') IS NOT NULL
+    DROP FUNCTION [Consumer].[DemographicCase_Model];
 GO
 
 CREATE function [Consumer].[DemographicCase_Model] (@DataType nvarchar(20))

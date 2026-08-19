@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [dbo].[CustomSearch_Tournament];
+﻿IF OBJECT_ID('dbo.CustomSearch_Tournament') IS NOT NULL
+    DROP PROCEDURE [dbo].[CustomSearch_Tournament];
 GO
 
 -- =============================================

@@ -1,4 +1,5 @@
-﻿DROP FUNCTION IF EXISTS [dbo].[fn_diagramobjects];
+﻿IF OBJECT_ID('dbo.fn_diagramobjects') IS NOT NULL
+    DROP FUNCTION [dbo].[fn_diagramobjects];
 GO
 
 CREATE FUNCTION [dbo].[fn_diagramobjects]() 

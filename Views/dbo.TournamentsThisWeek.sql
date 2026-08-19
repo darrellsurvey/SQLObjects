@@ -1,4 +1,5 @@
-﻿DROP VIEW IF EXISTS [dbo].[TournamentsThisWeek];
+﻿IF OBJECT_ID('dbo.TournamentsThisWeek') IS NOT NULL
+    DROP VIEW [dbo].[TournamentsThisWeek];
 GO
 
 CREATE VIEW dbo.TournamentsThisWeek

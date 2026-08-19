@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [dbo].[EquipmentReportCard];
+﻿IF OBJECT_ID('dbo.EquipmentReportCard') IS NOT NULL
+    DROP PROCEDURE [dbo].[EquipmentReportCard];
 GO
 
 --execute [dbo].[EquipmentReportCard] 'Ball', 2019

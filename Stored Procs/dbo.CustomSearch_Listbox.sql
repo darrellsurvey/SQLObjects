@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [dbo].[CustomSearch_Listbox];
+﻿IF OBJECT_ID('dbo.CustomSearch_Listbox') IS NOT NULL
+    DROP PROCEDURE [dbo].[CustomSearch_Listbox];
 GO
 
 -- =============================================

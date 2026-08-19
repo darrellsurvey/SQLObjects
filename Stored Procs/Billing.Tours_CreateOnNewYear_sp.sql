@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [Billing].[Tours_CreateOnNewYear_sp];
+﻿IF OBJECT_ID('Billing.Tours_CreateOnNewYear_sp') IS NOT NULL
+    DROP PROCEDURE [Billing].[Tours_CreateOnNewYear_sp];
 GO
 
 CREATE PROCEDURE Billing.Tours_CreateOnNewYear_sp

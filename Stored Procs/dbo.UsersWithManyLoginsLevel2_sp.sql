@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [dbo].[UsersWithManyLoginsLevel2_sp];
+﻿IF OBJECT_ID('dbo.UsersWithManyLoginsLevel2_sp') IS NOT NULL
+    DROP PROCEDURE [dbo].[UsersWithManyLoginsLevel2_sp];
 GO
 
 CREATE PROCEDURE [dbo].[UsersWithManyLoginsLevel2_sp]

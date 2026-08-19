@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [dbo].[PlayersPerformance];
+﻿IF OBJECT_ID('dbo.PlayersPerformance') IS NOT NULL
+    DROP PROCEDURE [dbo].[PlayersPerformance];
 GO
 
 -- =============================================

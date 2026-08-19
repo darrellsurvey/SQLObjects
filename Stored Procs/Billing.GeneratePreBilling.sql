@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [Billing].[GeneratePreBilling];
+﻿IF OBJECT_ID('Billing.GeneratePreBilling') IS NOT NULL
+    DROP PROCEDURE [Billing].[GeneratePreBilling];
 GO
 
 CREATE PROCEDURE [Billing].[GeneratePreBilling]

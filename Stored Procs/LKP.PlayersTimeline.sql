@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [LKP].[PlayersTimeline];
+﻿IF OBJECT_ID('LKP.PlayersTimeline') IS NOT NULL
+    DROP PROCEDURE [LKP].[PlayersTimeline];
 GO
 
 CREATE procedure LKP.PlayersTimeline

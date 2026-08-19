@@ -1,4 +1,5 @@
-﻿DROP VIEW IF EXISTS [dbo].[Missing_Players_in_PMF];
+﻿IF OBJECT_ID('dbo.Missing_Players_in_PMF') IS NOT NULL
+    DROP VIEW [dbo].[Missing_Players_in_PMF];
 GO
 
 CREATE VIEW dbo.Missing_Players_in_PMF

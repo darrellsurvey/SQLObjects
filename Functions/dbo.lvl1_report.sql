@@ -1,4 +1,5 @@
-﻿DROP FUNCTION IF EXISTS [dbo].[lvl1_report];
+﻿IF OBJECT_ID('dbo.lvl1_report') IS NOT NULL
+    DROP FUNCTION [dbo].[lvl1_report];
 GO
 
 -- =============================================

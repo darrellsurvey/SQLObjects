@@ -1,4 +1,5 @@
-﻿DROP VIEW IF EXISTS [dbo].[Grips];
+﻿IF OBJECT_ID('dbo.Grips') IS NOT NULL
+    DROP VIEW [dbo].[Grips];
 GO
 
 CREATE VIEW dbo.Grips

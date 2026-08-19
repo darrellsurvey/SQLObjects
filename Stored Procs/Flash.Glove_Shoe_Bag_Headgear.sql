@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [Flash].[Glove_Shoe_Bag_Headgear];
+﻿IF OBJECT_ID('Flash.Glove_Shoe_Bag_Headgear') IS NOT NULL
+    DROP PROCEDURE [Flash].[Glove_Shoe_Bag_Headgear];
 GO
 
 -- =============================================

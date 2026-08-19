@@ -1,4 +1,5 @@
-﻿DROP FUNCTION IF EXISTS [Consumer].[BrandExceptionCase];
+﻿IF OBJECT_ID('Consumer.BrandExceptionCase') IS NOT NULL
+    DROP FUNCTION [Consumer].[BrandExceptionCase];
 GO
 
 CREATE function [Consumer].[BrandExceptionCase] ()

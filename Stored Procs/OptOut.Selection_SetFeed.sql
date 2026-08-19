@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [OptOut].[Selection_SetFeed];
+﻿IF OBJECT_ID('OptOut.Selection_SetFeed') IS NOT NULL
+    DROP PROCEDURE [OptOut].[Selection_SetFeed];
 GO
 
 CREATE procedure [OptOut].[Selection_SetFeed]

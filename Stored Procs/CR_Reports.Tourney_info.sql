@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [CR_Reports].[Tourney_info];
+﻿IF OBJECT_ID('CR_Reports.Tourney_info') IS NOT NULL
+    DROP PROCEDURE [CR_Reports].[Tourney_info];
 GO
 
 -- =============================================

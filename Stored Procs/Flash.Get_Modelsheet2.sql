@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [Flash].[Get_Modelsheet2];
+﻿IF OBJECT_ID('Flash.Get_Modelsheet2') IS NOT NULL
+    DROP PROCEDURE [Flash].[Get_Modelsheet2];
 GO
 
 -- =============================================

@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [OptOut].[LevelPlayer_Get_20260209];
+﻿IF OBJECT_ID('OptOut.LevelPlayer_Get_20260209') IS NOT NULL
+    DROP PROCEDURE [OptOut].[LevelPlayer_Get_20260209];
 GO
 
 create procedure [OptOut].[LevelPlayer_Get_20260209]

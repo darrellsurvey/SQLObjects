@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [MoneyBall].[Dashboard6];
+﻿IF OBJECT_ID('MoneyBall.Dashboard6') IS NOT NULL
+    DROP PROCEDURE [MoneyBall].[Dashboard6];
 GO
 
 CREATE procedure [MoneyBall].[Dashboard6]

@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [OptOut].[Selection_GetNew_Backup];
+﻿IF OBJECT_ID('OptOut.Selection_GetNew_Backup') IS NOT NULL
+    DROP PROCEDURE [OptOut].[Selection_GetNew_Backup];
 GO
 
 Create procedure [OptOut].[Selection_GetNew_Backup]

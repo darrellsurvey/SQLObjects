@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [CR_Looseleaf].[Woods];
+﻿IF OBJECT_ID('CR_Looseleaf.Woods') IS NOT NULL
+    DROP PROCEDURE [CR_Looseleaf].[Woods];
 GO
 
 CREATE PROCEDURE [CR_Looseleaf].[Woods]

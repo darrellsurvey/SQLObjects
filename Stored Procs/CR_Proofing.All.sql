@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [CR_Proofing].[All];
+﻿IF OBJECT_ID('CR_Proofing.All') IS NOT NULL
+    DROP PROCEDURE [CR_Proofing].[All];
 GO
 
 SET QUOTED_IDENTIFIER ON;

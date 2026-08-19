@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [dbo].[LKP_Recover];
+﻿IF OBJECT_ID('dbo.LKP_Recover') IS NOT NULL
+    DROP PROCEDURE [dbo].[LKP_Recover];
 GO
 
 -- =============================================

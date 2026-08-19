@@ -1,4 +1,5 @@
-﻿DROP FUNCTION IF EXISTS [CR_Reports].[ball_iron_wood_driver_func];
+﻿IF OBJECT_ID('CR_Reports.ball_iron_wood_driver_func') IS NOT NULL
+    DROP FUNCTION [CR_Reports].[ball_iron_wood_driver_func];
 GO
 
 -- =============================================

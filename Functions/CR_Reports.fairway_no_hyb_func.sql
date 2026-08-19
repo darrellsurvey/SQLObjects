@@ -1,4 +1,5 @@
-﻿DROP FUNCTION IF EXISTS [CR_Reports].[fairway_no_hyb_func];
+﻿IF OBJECT_ID('CR_Reports.fairway_no_hyb_func') IS NOT NULL
+    DROP FUNCTION [CR_Reports].[fairway_no_hyb_func];
 GO
 
 -- =============================================

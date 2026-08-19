@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [Billing].[GeneratePastInvoicesPlaceholders_sp];
+﻿IF OBJECT_ID('Billing.GeneratePastInvoicesPlaceholders_sp') IS NOT NULL
+    DROP PROCEDURE [Billing].[GeneratePastInvoicesPlaceholders_sp];
 GO
 
 CREATE PROCEDURE [Billing].[GeneratePastInvoicesPlaceholders_sp]

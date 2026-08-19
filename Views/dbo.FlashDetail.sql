@@ -1,4 +1,5 @@
-﻿DROP VIEW IF EXISTS [dbo].[FlashDetail];
+﻿IF OBJECT_ID('dbo.FlashDetail') IS NOT NULL
+    DROP VIEW [dbo].[FlashDetail];
 GO
 
 CREATE VIEW dbo.FlashDetail

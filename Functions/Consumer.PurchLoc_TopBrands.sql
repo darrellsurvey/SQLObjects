@@ -1,4 +1,5 @@
-﻿DROP FUNCTION IF EXISTS [Consumer].[PurchLoc_TopBrands];
+﻿IF OBJECT_ID('Consumer.PurchLoc_TopBrands') IS NOT NULL
+    DROP FUNCTION [Consumer].[PurchLoc_TopBrands];
 GO
 
 CREATE function Consumer.[PurchLoc_TopBrands]

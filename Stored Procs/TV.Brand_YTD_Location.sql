@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [TV].[Brand_YTD_Location];
+﻿IF OBJECT_ID('TV.Brand_YTD_Location') IS NOT NULL
+    DROP PROCEDURE [TV].[Brand_YTD_Location];
 GO
 
 CREATE PROCEDURE [TV].[Brand_YTD_Location]

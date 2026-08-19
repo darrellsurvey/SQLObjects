@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [MoneyBall].[Fill_AddNewWeek];
+﻿IF OBJECT_ID('MoneyBall.Fill_AddNewWeek') IS NOT NULL
+    DROP PROCEDURE [MoneyBall].[Fill_AddNewWeek];
 GO
 
 -- =============================================

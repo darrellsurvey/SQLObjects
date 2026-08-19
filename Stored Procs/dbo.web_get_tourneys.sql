@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [dbo].[web_get_tourneys];
+﻿IF OBJECT_ID('dbo.web_get_tourneys') IS NOT NULL
+    DROP PROCEDURE [dbo].[web_get_tourneys];
 GO
 
 --EXECUTE dbo.web_get_tourneys 'TITLEIST', 'PGA', 2011, 'Charles'

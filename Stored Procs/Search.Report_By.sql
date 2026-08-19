@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [Search].[Report_By];
+﻿IF OBJECT_ID('Search.Report_By') IS NOT NULL
+    DROP PROCEDURE [Search].[Report_By];
 GO
 
 CREATE PROCEDURE [Search].[Report_By]

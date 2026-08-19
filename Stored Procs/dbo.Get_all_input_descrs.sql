@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [dbo].[Get_all_input_descrs];
+﻿IF OBJECT_ID('dbo.Get_all_input_descrs') IS NOT NULL
+    DROP PROCEDURE [dbo].[Get_all_input_descrs];
 GO
 
 CREATE PROCEDURE [dbo].[Get_all_input_descrs]

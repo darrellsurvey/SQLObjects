@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [Search].[EquipmentTableCase];
+﻿IF OBJECT_ID('Search.EquipmentTableCase') IS NOT NULL
+    DROP PROCEDURE [Search].[EquipmentTableCase];
 GO
 
 CREATE PROCEDURE [Search].[EquipmentTableCase]

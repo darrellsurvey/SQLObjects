@@ -1,4 +1,5 @@
-﻿DROP FUNCTION IF EXISTS [LKP].[PlayerRank_Median];
+﻿IF OBJECT_ID('LKP.PlayerRank_Median') IS NOT NULL
+    DROP FUNCTION [LKP].[PlayerRank_Median];
 GO
 
 -- =============================================

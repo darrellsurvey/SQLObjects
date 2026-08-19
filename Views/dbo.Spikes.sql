@@ -1,4 +1,5 @@
-﻿DROP VIEW IF EXISTS [dbo].[Spikes];
+﻿IF OBJECT_ID('dbo.Spikes') IS NOT NULL
+    DROP VIEW [dbo].[Spikes];
 GO
 
 CREATE VIEW dbo.Spikes

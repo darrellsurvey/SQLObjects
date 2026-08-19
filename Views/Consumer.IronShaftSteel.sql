@@ -1,4 +1,5 @@
-﻿DROP VIEW IF EXISTS [Consumer].[IronShaftSteel];
+﻿IF OBJECT_ID('Consumer.IronShaftSteel') IS NOT NULL
+    DROP VIEW [Consumer].[IronShaftSteel];
 GO
 
 CREATE VIEW dbo.IronShaftSteel

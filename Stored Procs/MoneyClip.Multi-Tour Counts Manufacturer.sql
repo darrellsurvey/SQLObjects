@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [MoneyClip].[Multi-Tour Counts Manufacturer];
+﻿IF OBJECT_ID('MoneyClip.Multi-Tour Counts Manufacturer') IS NOT NULL
+    DROP PROCEDURE [MoneyClip].[Multi-Tour Counts Manufacturer];
 GO
 
 CREATE PROCEDURE [MoneyClip].[Multi-Tour Counts Manufacturer]

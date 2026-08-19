@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [Search].[Items_Get];
+﻿IF OBJECT_ID('Search.Items_Get') IS NOT NULL
+    DROP PROCEDURE [Search].[Items_Get];
 GO
 
 CREATE PROCEDURE [Search].[Items_Get]

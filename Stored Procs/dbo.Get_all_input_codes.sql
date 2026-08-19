@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [dbo].[Get_all_input_codes];
+﻿IF OBJECT_ID('dbo.Get_all_input_codes') IS NOT NULL
+    DROP PROCEDURE [dbo].[Get_all_input_codes];
 GO
 
 -- =============================================

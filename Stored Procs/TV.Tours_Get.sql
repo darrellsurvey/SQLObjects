@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [TV].[Tours_Get];
+﻿IF OBJECT_ID('TV.Tours_Get') IS NOT NULL
+    DROP PROCEDURE [TV].[Tours_Get];
 GO
 
 CREATE PROCEDURE [TV].[Tours_Get]

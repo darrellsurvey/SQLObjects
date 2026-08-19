@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [TV].[Player_Money_TVtime];
+﻿IF OBJECT_ID('TV.Player_Money_TVtime') IS NOT NULL
+    DROP PROCEDURE [TV].[Player_Money_TVtime];
 GO
 
 CREATE PROCEDURE [TV].[Player_Money_TVtime]

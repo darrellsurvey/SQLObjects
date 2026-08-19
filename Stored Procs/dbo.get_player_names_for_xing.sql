@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [dbo].[get_player_names_for_xing];
+﻿IF OBJECT_ID('dbo.get_player_names_for_xing') IS NOT NULL
+    DROP PROCEDURE [dbo].[get_player_names_for_xing];
 GO
 
 -- =============================================

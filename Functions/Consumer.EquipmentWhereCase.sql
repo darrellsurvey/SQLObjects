@@ -1,4 +1,5 @@
-﻿DROP FUNCTION IF EXISTS [Consumer].[EquipmentWhereCase];
+﻿IF OBJECT_ID('Consumer.EquipmentWhereCase') IS NOT NULL
+    DROP FUNCTION [Consumer].[EquipmentWhereCase];
 GO
 
 CREATE function [Consumer].[EquipmentWhereCase] (@Equipment nvarchar(20))

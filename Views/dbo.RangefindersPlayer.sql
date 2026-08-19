@@ -1,4 +1,5 @@
-﻿DROP VIEW IF EXISTS [dbo].[RangefindersPlayer];
+﻿IF OBJECT_ID('dbo.RangefindersPlayer') IS NOT NULL
+    DROP VIEW [dbo].[RangefindersPlayer];
 GO
 
 CREATE VIEW [dbo].[RangefindersPlayer]

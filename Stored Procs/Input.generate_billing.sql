@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [Input].[generate_billing];
+﻿IF OBJECT_ID('Input.generate_billing') IS NOT NULL
+    DROP PROCEDURE [Input].[generate_billing];
 GO
 
 CREATE PROCEDURE [Input].[generate_billing]

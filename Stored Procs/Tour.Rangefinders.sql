@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [Tour].[Rangefinders];
+﻿IF OBJECT_ID('Tour.Rangefinders') IS NOT NULL
+    DROP PROCEDURE [Tour].[Rangefinders];
 GO
 
 CREATE PROCEDURE [Tour].[Rangefinders]

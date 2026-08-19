@@ -1,4 +1,5 @@
-﻿DROP VIEW IF EXISTS [dbo].[Putters];
+﻿IF OBJECT_ID('dbo.Putters') IS NOT NULL
+    DROP VIEW [dbo].[Putters];
 GO
 
 CREATE VIEW dbo.Putters

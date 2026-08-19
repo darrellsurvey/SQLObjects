@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [dbo].[web_get_reports];
+﻿IF OBJECT_ID('dbo.web_get_reports') IS NOT NULL
+    DROP PROCEDURE [dbo].[web_get_reports];
 GO
 
 CREATE PROCEDURE [dbo].[web_get_reports]

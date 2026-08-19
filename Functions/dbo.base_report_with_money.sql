@@ -1,4 +1,5 @@
-﻿DROP FUNCTION IF EXISTS [dbo].[base_report_with_money];
+﻿IF OBJECT_ID('dbo.base_report_with_money') IS NOT NULL
+    DROP FUNCTION [dbo].[base_report_with_money];
 GO
 
 CREATE FUNCTION [dbo].[base_report_with_money] 

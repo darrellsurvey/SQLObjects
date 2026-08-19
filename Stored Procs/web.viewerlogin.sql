@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [web].[viewerlogin];
+﻿IF OBJECT_ID('web.viewerlogin') IS NOT NULL
+    DROP PROCEDURE [web].[viewerlogin];
 GO
 
 -- =============================================

@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [TV].[Player_YTD_By_Day];
+﻿IF OBJECT_ID('TV.Player_YTD_By_Day') IS NOT NULL
+    DROP PROCEDURE [TV].[Player_YTD_By_Day];
 GO
 
 CREATE PROCEDURE [TV].[Player_YTD_By_Day]

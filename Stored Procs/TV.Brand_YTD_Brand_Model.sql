@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [TV].[Brand_YTD_Brand_Model];
+﻿IF OBJECT_ID('TV.Brand_YTD_Brand_Model') IS NOT NULL
+    DROP PROCEDURE [TV].[Brand_YTD_Brand_Model];
 GO
 
 /****** Script for SelectTopNRows command from SSMS  ******/

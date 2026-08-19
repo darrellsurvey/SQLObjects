@@ -1,4 +1,5 @@
-﻿DROP FUNCTION IF EXISTS [LKP].[TourIDforYear];
+﻿IF OBJECT_ID('LKP.TourIDforYear') IS NOT NULL
+    DROP FUNCTION [LKP].[TourIDforYear];
 GO
 
 -- =============================================

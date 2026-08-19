@@ -1,4 +1,5 @@
-﻿DROP FUNCTION IF EXISTS [CR_Reports].[all_equipment_func];
+﻿IF OBJECT_ID('CR_Reports.all_equipment_func') IS NOT NULL
+    DROP FUNCTION [CR_Reports].[all_equipment_func];
 GO
 
 -- =============================================

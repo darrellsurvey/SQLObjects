@@ -1,4 +1,5 @@
-﻿DROP PROCEDURE IF EXISTS [Flash].[Get_TopSheet_with_money];
+﻿IF OBJECT_ID('Flash.Get_TopSheet_with_money') IS NOT NULL
+    DROP PROCEDURE [Flash].[Get_TopSheet_with_money];
 GO
 
 -- =============================================

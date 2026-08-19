@@ -1,4 +1,5 @@
-﻿DROP VIEW IF EXISTS [dbo].[Raingear];
+﻿IF OBJECT_ID('dbo.Raingear') IS NOT NULL
+    DROP VIEW [dbo].[Raingear];
 GO
 
 CREATE VIEW [dbo].[Raingear]

@@ -1,4 +1,5 @@
-﻿DROP FUNCTION IF EXISTS [CR_Reports].[utility_irons_func];
+﻿IF OBJECT_ID('CR_Reports.utility_irons_func') IS NOT NULL
+    DROP FUNCTION [CR_Reports].[utility_irons_func];
 GO
 
 -- =============================================
