@@ -1,0 +1,180 @@
+﻿DROP PROCEDURE IF EXISTS [dbo].[LOOSELEAF_GENERATOR_ALL];
+GO
+
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[LOOSELEAF_GENERATOR_ALL]
+	-- Add the parameters for the stored procedure here
+	@PLAYERNAME varchar(50),
+	@LOOKUPDATE date
+AS
+BEGIN
+    -- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	--exec [dbo].[LOOSELEAF_GENERATOR_ALL] 'ABERG, LUDVIG', '6/26/2026'
+	
+SELECT a."Mfgr Descr", a."Model Descr", a."Matl Descr", a."Misc Descr", b."Mfgr Descr", c."Mfgr Descr", d."Mfgr Descr", e."Mfgr Descr", e."Model Descr", 
+f."Mfgr Descr", g."Mfgr Descr", h.[Mfgr Descr], q.[Mfgr Descr],
+r."Mfgr Descr", s."Mfgr Descr", t.[Mfgr Descr], u.[Mfgr Descr],
+v."Mfgr Descr", w."Mfgr Descr", lm."Mfgr Descr"
+FROM (
+
+--selects balls on all 4 lookup tables (subselects run faster)
+SELECT TOP 1 "Mfgr Descr", "Model Descr", "Matl Descr", "Misc Descr", PLAYERNAME FROM (
+SELECT TOP 1 BALLBRAND, BALLMODEL, BALLMATERIAL, BALLMISC, PLAYERNAME FROM
+(Select * from [Player_Master].[All] where "FIRST DAY" < @LOOKUPDATE) aa WHERE PLAYERNAME = @PLAYERNAME AND BALLBRAND IS NOT NULL ORDER BY "FIRST DAY" DESC
+) aaa
+LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] ON BALLBRAND = "Mfgr Code"
+LEFT OUTER JOIN LKP.[Model Codes and Descr] ON BALLMODEL = "Model Code"
+LEFT OUTER JOIN LKP.[Material Codes and Descript] ON BALLMATERIAL = "Matl Code"
+LEFT OUTER JOIN LKP.[Miscellaneous Codes and Des] ON BALLMISC = "Misc Code"
+) a
+
+--joins the next item on the playername
+--bags
+LEFT OUTER JOIN (
+SELECT TOP 1 "Mfgr Descr", PLAYERNAME FROM (
+SELECT TOP 1 BAGBRAND, PLAYERNAME FROM
+(Select * from [Player_Master].[All] where "FIRST DAY" < @LOOKUPDATE) bb WHERE PLAYERNAME = @PLAYERNAME AND BAGBRAND IS NOT NULL ORDER BY "FIRST DAY" DESC 
+) bbb
+LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] ON BAGBRAND = "Mfgr Code"
+) b ON a.PLAYERNAME = b.PLAYERNAME
+
+--gloves
+LEFT OUTER JOIN (
+SELECT TOP 1 "Mfgr Descr", PLAYERNAME FROM (
+SELECT TOP 1 GLOVEBRAND, PLAYERNAME FROM
+(Select * from [Player_Master].[All] where "FIRST DAY" < @LOOKUPDATE) cc WHERE PLAYERNAME = @PLAYERNAME AND GLOVEBRAND IS NOT NULL ORDER BY "FIRST DAY" DESC
+) ccc
+LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] ON GLOVEBRAND = "Mfgr Code"
+) c ON a.PLAYERNAME = c.PLAYERNAME
+
+--shoes
+LEFT OUTER JOIN (
+SELECT TOP 1 "Mfgr Descr", PLAYERNAME FROM (
+SELECT TOP 1 SHOEBRAND, PLAYERNAME FROM
+(Select * from [Player_Master].[All] where "FIRST DAY" < @LOOKUPDATE) dd WHERE PLAYERNAME = @PLAYERNAME AND SHOEBRAND IS NOT NULL ORDER BY "FIRST DAY" DESC
+) ddd
+LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] ON SHOEBRAND = "Mfgr Code"
+) d ON a.PLAYERNAME = d.PLAYERNAME
+
+--spikes
+LEFT OUTER JOIN (
+SELECT TOP 1 "Mfgr Descr", "Model Descr", PLAYERNAME FROM (
+SELECT TOP 1 SPIKEBRAND, SPIKEMODEL, PLAYERNAME FROM
+(Select * from [Player_Master].[All] where "FIRST DAY" < @LOOKUPDATE) ee WHERE PLAYERNAME = @PLAYERNAME AND SPIKEBRAND IS NOT NULL ORDER BY "FIRST DAY" DESC
+) eee
+LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] ON SPIKEBRAND = "Mfgr Code"
+LEFT OUTER JOIN LKP.[Model Codes and Descr] ON SPIKEMODEL = "Model Code"
+) e ON a.PLAYERNAME = e.PLAYERNAME
+
+--player shirt
+LEFT OUTER JOIN (
+SELECT TOP 1 "Mfgr Descr", PLAYERNAME FROM (
+SELECT TOP 1 SHIRTBRAND, PLAYERNAME FROM
+(Select * from [Player_Master].[All] where "FIRST DAY" < @LOOKUPDATE) ff WHERE PLAYERNAME = @PLAYERNAME AND SHIRTBRAND IS NOT NULL ORDER BY "FIRST DAY" DESC
+) fff
+LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] ON SHIRTBRAND = "Mfgr Code"
+) f ON a.PLAYERNAME = f.PLAYERNAME
+
+--headgear
+LEFT OUTER JOIN (
+SELECT TOP 1 "Mfgr Descr", PLAYERNAME FROM (
+SELECT TOP 1 HEADGEARBRAND, PLAYERNAME FROM
+(Select * from [Player_Master].[All] where "FIRST DAY" < @LOOKUPDATE) gg WHERE PLAYERNAME = @PLAYERNAME AND HEADGEARBRAND IS NOT NULL ORDER BY "FIRST DAY" DESC
+) ggg
+LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] ON HEADGEARBRAND = "Mfgr Code"
+) g ON a.PLAYERNAME = g.PLAYERNAME
+
+--Sunglasses
+LEFT OUTER JOIN (
+SELECT TOP 1 "Mfgr Descr", PLAYERNAME FROM (
+SELECT TOP 1 GLASSESBRAND, PLAYERNAME FROM
+(Select * from [Player_Master].[All] where "FIRST DAY" < @LOOKUPDATE) gg WHERE PLAYERNAME = @PLAYERNAME AND GLASSESBRAND IS NOT NULL ORDER BY "FIRST DAY" DESC
+) hhh
+LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] ON GLASSESBRAND = "Mfgr Code"
+) h ON a.PLAYERNAME = h.PLAYERNAME
+
+--Caddie shirt
+LEFT OUTER JOIN (
+SELECT TOP 1 "Mfgr Descr", PLAYERNAME FROM (
+SELECT TOP 1 CADDYHEADBRAND, PLAYERNAME FROM
+(Select * from [Player_Master].[All] where "FIRST DAY" < @LOOKUPDATE) qq WHERE PLAYERNAME = @PLAYERNAME AND CADDYHEADBRAND IS NOT NULL ORDER BY "FIRST DAY" DESC
+) qqq
+LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] ON CADDYHEADBRAND = "Mfgr Code"
+) q ON a.PLAYERNAME = q.PLAYERNAME
+
+--RangefinderPlayer
+LEFT OUTER JOIN (
+SELECT TOP 1 "Mfgr Descr", PLAYERNAME FROM (
+SELECT TOP 1 RANGEPLAYERBRAND, PLAYERNAME FROM
+(Select * from [Player_Master].[All] where "FIRST DAY" < @LOOKUPDATE) qq WHERE PLAYERNAME = @PLAYERNAME AND RANGEPLAYERBRAND IS NOT NULL ORDER BY "FIRST DAY" DESC
+) qqq
+LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] ON RANGEPLAYERBRAND = "Mfgr Code"
+) r ON a.PLAYERNAME = r.PLAYERNAME
+
+
+--RangefinderCaddy
+LEFT OUTER JOIN (
+SELECT TOP 1 "Mfgr Descr", PLAYERNAME FROM (
+SELECT TOP 1 RANGECADDIEBRAND, PLAYERNAME FROM
+(Select * from [Player_Master].[All] where "FIRST DAY" < @LOOKUPDATE) qq WHERE PLAYERNAME = @PLAYERNAME AND RANGECADDIEBRAND IS NOT NULL ORDER BY "FIRST DAY" DESC
+) qqq
+LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] ON RANGECADDIEBRAND = "Mfgr Code"
+) s ON a.PLAYERNAME = s.PLAYERNAME
+
+
+--Raingear
+LEFT OUTER JOIN (
+SELECT TOP 1 "Mfgr Descr", PLAYERNAME FROM (
+SELECT TOP 1 RAINGEARBRAND, PLAYERNAME FROM
+(Select * from [Player_Master].[All] where "FIRST DAY" < @LOOKUPDATE) qq WHERE PLAYERNAME = @PLAYERNAME AND RAINGEARBRAND IS NOT NULL ORDER BY "FIRST DAY" DESC
+) qqq
+LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] ON RAINGEARBRAND = "Mfgr Code"
+) t ON a.PLAYERNAME = t.PLAYERNAME
+
+--Raincover
+LEFT OUTER JOIN (
+SELECT TOP 1 "Mfgr Descr", PLAYERNAME FROM (
+SELECT TOP 1 RAINCOVERBRAND, PLAYERNAME FROM
+(Select * from [Player_Master].[All] where "FIRST DAY" < @LOOKUPDATE) qq WHERE PLAYERNAME = @PLAYERNAME AND RAINCOVERBRAND IS NOT NULL ORDER BY "FIRST DAY" DESC
+) qqq
+LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] ON RAINCOVERBRAND = "Mfgr Code"
+) u ON a.PLAYERNAME = u.PLAYERNAME
+
+
+--Towel
+LEFT OUTER JOIN (
+SELECT TOP 1 "Mfgr Descr", PLAYERNAME FROM (
+SELECT TOP 1 TOWELBRAND, PLAYERNAME FROM
+(Select * from [Player_Master].[All] where "FIRST DAY" < @LOOKUPDATE) qq WHERE PLAYERNAME = @PLAYERNAME AND TOWELBRAND IS NOT NULL ORDER BY "FIRST DAY" DESC
+) qqq
+LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] ON TOWELBRAND = "Mfgr Code"
+) v ON a.PLAYERNAME = v.PLAYERNAME
+
+
+--Travel Bag
+LEFT OUTER JOIN (
+SELECT TOP 1 "Mfgr Descr", PLAYERNAME FROM (
+SELECT TOP 1 TRAVELBAGBRAND, PLAYERNAME FROM
+(Select * from [Player_Master].[All] where "FIRST DAY" < @LOOKUPDATE) qq WHERE PLAYERNAME = @PLAYERNAME AND TRAVELBAGBRAND IS NOT NULL ORDER BY "FIRST DAY" DESC
+) qqq
+LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] ON TRAVELBAGBRAND = "Mfgr Code"
+) w ON a.PLAYERNAME = w.PLAYERNAME
+
+--Launch Monitor
+LEFT OUTER JOIN (
+SELECT TOP 1 "Mfgr Descr", PLAYERNAME FROM (
+SELECT TOP 1 LAUNCHMONITORBRAND, PLAYERNAME FROM
+(Select * from [Player_Master].[All] where "FIRST DAY" < @LOOKUPDATE) qq WHERE PLAYERNAME = @PLAYERNAME AND LAUNCHMONITORBRAND IS NOT NULL ORDER BY "FIRST DAY" DESC
+) qqq
+LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] ON LAUNCHMONITORBRAND = "Mfgr Code"
+) lm ON a.PLAYERNAME = lm.PLAYERNAME
+
+END
+GO

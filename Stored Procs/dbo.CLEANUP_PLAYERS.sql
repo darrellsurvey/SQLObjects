@@ -1,0 +1,49 @@
+﻿DROP PROCEDURE IF EXISTS [dbo].[CLEANUP_PLAYERS];
+GO
+
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[CLEANUP_PLAYERS]
+	-- Add the parameters for the stored procedure here
+	@OLDMAX int,
+	@SID integer,
+	@FIRSTDAY date
+
+        
+AS
+BEGIN
+    -- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+	
+	
+	DELETE FROM Input.[All] WHERE PLAYERNAME IN
+	(SELECT PLAYERNAME FROM Player_Master.PLAYERNAMES WHERE SID = @SID and FIRSTDAY = @FIRSTDAY AND PKEY <= @OLDMAX)
+
+	DELETE FROM Input.Grip WHERE PLAYERNAME IN
+	(SELECT PLAYERNAME FROM Player_Master.PLAYERNAMES WHERE SID = @SID and FIRSTDAY = @FIRSTDAY AND PKEY <= @OLDMAX)
+	
+	DELETE FROM Input.Iron WHERE PLAYERNAME IN
+	(SELECT PLAYERNAME FROM Player_Master.PLAYERNAMES WHERE SID = @SID and FIRSTDAY = @FIRSTDAY AND PKEY <= @OLDMAX)
+	
+	DELETE FROM Input.Putter WHERE PLAYERNAME IN
+	(SELECT PLAYERNAME FROM Player_Master.PLAYERNAMES WHERE SID = @SID and FIRSTDAY = @FIRSTDAY AND PKEY <= @OLDMAX)
+	
+	DELETE FROM Input.Shaft WHERE PLAYERNAME IN
+	(SELECT PLAYERNAME FROM Player_Master.PLAYERNAMES WHERE SID = @SID and FIRSTDAY = @FIRSTDAY AND PKEY <= @OLDMAX)
+	
+	DELETE FROM Input.Wedge WHERE PLAYERNAME IN
+	(SELECT PLAYERNAME FROM Player_Master.PLAYERNAMES WHERE SID = @SID and FIRSTDAY = @FIRSTDAY AND PKEY <= @OLDMAX)
+	
+	DELETE FROM Input.Wood WHERE PLAYERNAME IN
+	(SELECT PLAYERNAME FROM Player_Master.PLAYERNAMES WHERE SID = @SID and FIRSTDAY = @FIRSTDAY AND PKEY <= @OLDMAX)
+
+	
+	DELETE FROM Player_Master.PLAYERNAMES where SID = @SID and FIRSTDAY = @FIRSTDAY and PKEY <= @OLDMAX
+
+
+END
+GO

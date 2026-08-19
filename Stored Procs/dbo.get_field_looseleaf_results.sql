@@ -1,0 +1,52 @@
+﻿DROP PROCEDURE IF EXISTS [dbo].[get_field_looseleaf_results];
+GO
+
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[get_field_looseleaf_results]
+	@RUNBY VARCHAR(50)
+
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+		DECLARE @RUN_ID INT
+		SELECT @RUN_ID = MAX(RUN_ID) FROM dbo.field_looseleaf_lookup WHERE RUNBY = @RUNBY
+
+		SELECT PLAYERNAME, CATEGORY, EXTRA, TOUR, FIRSTDAY, PROBABILITY, [NAME ENTERED] FROM 
+		
+		(SELECT PLAYERNAME, CATEGORY, EXTRA, TOUR, FIRSTDAY, PROBABILITY, [NAME ENTERED], [ENTERED_ORDER], TERMS_MISSING
+		FROM dbo.field_looseleaf_lookup WHERE PROBABILITY = 1 AND RUNBY = @RUNBY AND RUN_ID = @RUN_ID
+		
+		UNION ALL
+		
+		SELECT b.PLAYERNAME, b.CATEGORY, b.EXTRA, b.TOUR, b.FIRSTDAY, b.PROBABILITY, b.[NAME ENTERED], [ENTERED_ORDER], TERMS_MISSING FROM (
+		SELECT [NAME ENTERED], PROBABILITY AS MIN_PROB FROM (
+		SELECT [NAME ENTERED], PROBABILITY,
+		ROW_NUMBER() OVER (ORDER BY [NAME ENTERED], PROBABILITY desc) AS rank1,
+		RANK() OVER (ORDER BY [NAME ENTERED]) AS rank2 FROM dbo.field_looseleaf_lookup
+		WHERE [NAME ENTERED] NOT IN
+		(SELECT DISTINCT([NAME ENTERED]) FROM dbo.field_looseleaf_lookup WHERE PROBABILITY = 1 AND RUNBY = @RUNBY AND RUN_ID = @RUN_ID)
+		AND RUNBY = @RUNBY AND RUN_ID = @RUN_ID
+		) ranks
+		-- rank1 - 2 = the third highest probability
+		WHERE rank1 - 2 = rank2
+		) a
+		LEFT OUTER JOIN
+		(SELECT PLAYERNAME, CATEGORY, EXTRA, TOUR, FIRSTDAY, PROBABILITY, TERMS_MISSING, [NAME ENTERED], [ENTERED_ORDER]
+		FROM dbo.field_looseleaf_lookup
+		WHERE RUNBY = @RUNBY AND RUN_ID = @RUN_ID
+		GROUP BY PLAYERNAME, CATEGORY, EXTRA, TOUR, FIRSTDAY, PROBABILITY, TERMS_MISSING, [NAME ENTERED], [ENTERED_ORDER]) b
+		ON a.[NAME ENTERED] = b.[NAME ENTERED] AND a.MIN_PROB <= b.PROBABILITY 
+		) results
+		
+		ORDER BY [ENTERED_ORDER], TERMS_MISSING
+
+
+END
+GO

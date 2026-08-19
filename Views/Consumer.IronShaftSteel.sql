@@ -1,0 +1,10 @@
+﻿DROP VIEW IF EXISTS [Consumer].[IronShaftSteel];
+GO
+
+CREATE VIEW dbo.IronShaftSteel
+AS
+SELECT        CASE MATERIAL WHEN 1 THEN 'STEEL' ELSE BRAND END AS BRAND, CASE MATERIAL WHEN 1 THEN NULL ELSE MODEL END AS Expr1, 
+                         CASE MATERIAL WHEN 1 THEN NULL ELSE SERIES END AS Expr2, YEARS, MATERIAL, INFLUENCE, INFLUENCE_SERIES, PURCHASE, IronShaftId, 
+                         PlayerProfileId
+FROM            Consumer.IronShaft
+GO
