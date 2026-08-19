@@ -20,14 +20,14 @@ BEGIN
 	SET NOCOUNT ON;
 
 
-SELECT d.PLAYERNAME, CATEGORY, EXTRA, ISNULL(a."Mfgr Abbrev", a."Mfgr Descr") AS SPIKEBRAND, DSPIKEBRAND, ISNULL(b."Model Abbrev", b."Model Descr") AS SPIKEMODEL, DSPIKEMODEL
+SELECT d.PLAYERNAME, CATEGORY, EXTRA, ISNULL(a.[Mfgr Abbrev], a.[Mfgr Descr]) AS SPIKEBRAND, DSPIKEBRAND, ISNULL(b.[Model Abbrev], b.[Model Descr]) AS SPIKEMODEL, DSPIKEMODEL
 
 FROM input.[All] d
-LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] a ON SPIKEBRAND = a."Mfgr Descr" 
-LEFT OUTER JOIN [LKP].[Model Codes and Descr] b ON SPIKEMODEL = b."Model Descr" 
+LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] a ON SPIKEBRAND = a.[Mfgr Descr] 
+LEFT OUTER JOIN [LKP].[Model Codes and Descr] b ON SPIKEMODEL = b.[Model Descr] 
 LEFT OUTER JOIN Player_Master.PLAYERNAMES c on d.PLAYERNAME = c.PLAYERNAME AND c.FIRSTDAY = d.[FIRST DAY] and c.SID = d.SID
 
-WHERE d."FIRST DAY" = @FIRSTDAY AND d.SID = @SID
+WHERE d.[FIRST DAY] = @FIRSTDAY AND d.SID = @SID
 ORDER BY EXTRA, d.PLAYERNAME
 END
 GO

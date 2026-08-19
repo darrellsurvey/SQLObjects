@@ -46,7 +46,7 @@ DECLARE @SID INT;
 
 
 
-SELECT TOP 1 @SID = SID FROM player_master.[TOURNAMENTS_TABLE] WHERE "TOURNAMENT NAME" = @TOURNAMENTNAME AND [FIRST DAY] = @FIRSTDAY;
+SELECT TOP 1 @SID = SID FROM player_master.[TOURNAMENTS_TABLE] WHERE [TOURNAMENT NAME] = @TOURNAMENTNAME AND [FIRST DAY] = @FIRSTDAY;
 
 
 
@@ -102,25 +102,25 @@ ELSE IF (@REPORTNAME = 'Driver')
 
 /*
 
-SELECT a."Mfgr Descr" AS Brand, "Model Descr" + N' - ' + coalesce([Size Descr], '') AS Model, COUNT(a."Mfgr Descr") AS "Count",
+SELECT a.[Mfgr Descr] AS Brand, [Model Descr] + N' - ' + coalesce([Size Descr], '') AS Model, COUNT(a.[Mfgr Descr]) AS [Count],
 
-(SELECT COUNT("BRAND") FROM [Input].[Wood] WHERE "SID" = @SID AND "First Day" = @FIRSTDAY  and ISDRIVER = 1) AS "TOTAL"
+(SELECT COUNT([BRAND]) FROM [Input].[Wood] WHERE [SID] = @SID AND [First Day] = @FIRSTDAY  and ISDRIVER = 1) AS [TOTAL]
 
  FROM
 
-(SELECT * FROM [Input].[Wood] WHERE "First Day" = @FIRSTDAY AND "SID" = @SID) c
+(SELECT * FROM [Input].[Wood] WHERE [First Day] = @FIRSTDAY AND [SID] = @SID) c
 
-LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] a ON "BRAND" = a."Mfgr Descr" 
+LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] a ON [BRAND] = a.[Mfgr Descr] 
 
-LEFT OUTER JOIN LKP.[Model Codes and Descr] ON "MODEL" = "Model Descr" 
+LEFT OUTER JOIN LKP.[Model Codes and Descr] ON [MODEL] = [Model Descr] 
 
 LEFT OUTER JOIN LKP.[Size Codes and Description] ON [SIZE] = [Size Code]
 
-WHERE "First Day" = @FIRSTDAY AND "SID" = @SID and ISDRIVER = 1
+WHERE [First Day] = @FIRSTDAY AND [SID] = @SID and ISDRIVER = 1
 
-GROUP BY "Mfgr Descr", "Model Descr", [Size Descr]
+GROUP BY [Mfgr Descr], [Model Descr], [Size Descr]
 
-ORDER BY a."Mfgr Descr" ASC, Model ASC;
+ORDER BY a.[Mfgr Descr] ASC, Model ASC;
 
 */
 
@@ -152,39 +152,39 @@ ELSE IF (@REPORTNAME = 'Driver Shaft Brand')
 
 
 
-SELECT f."Mfgr Descr" AS Brand, COUNT(f."Mfgr Descr") AS "Count",
+SELECT f.[Mfgr Descr] AS Brand, COUNT(f.[Mfgr Descr]) AS [Count],
 
-(SELECT COUNT([BRAND]) FROM [Input].[Wood] WHERE "SID" = @SID AND "First Day" = @FIRSTDAY and ISDRIVER = 1) AS TOTAL
+(SELECT COUNT([BRAND]) FROM [Input].[Wood] WHERE [SID] = @SID AND [First Day] = @FIRSTDAY and ISDRIVER = 1) AS TOTAL
 
   
 
 FROM (
 
-SELECT "PKey", PLAYERNAME, "SID", "First Day", ISDRIVER, CLUBCODE, [BRAND], DBRANDCODE, [MODEL], DMODELCODE, SIZE, DSIZECODE, MATERIAL, DMATERIAL
+SELECT [PKey], PLAYERNAME, [SID], [First Day], ISDRIVER, CLUBCODE, [BRAND], DBRANDCODE, [MODEL], DMODELCODE, SIZE, DSIZECODE, MATERIAL, DMATERIAL
 
 FROM Input.[Wood]
 
-WHERE "First Day" = @FIRSTDAY AND "SID" = @SID and ISDRIVER = 1
+WHERE [First Day] = @FIRSTDAY AND [SID] = @SID and ISDRIVER = 1
 
-GROUP BY "PKey", PLAYERNAME, "SID", "First Day", ISDRIVER, CLUBCODE, [BRAND], DBRANDCODE, [MODEL], DMODELCODE, SIZE, DSIZECODE, MATERIAL, DMATERIAL) a
+GROUP BY [PKey], PLAYERNAME, [SID], [First Day], ISDRIVER, CLUBCODE, [BRAND], DBRANDCODE, [MODEL], DMODELCODE, SIZE, DSIZECODE, MATERIAL, DMATERIAL) a
 
 
 
 LEFT OUTER JOIN (SELECT *
 
-FROM Input.[Shaft] WHERE "First Day" = @FIRSTDAY AND "SID" = @SID AND "SHAFTEQUIPTYPE" = 'WOOD') b
+FROM Input.[Shaft] WHERE [First Day] = @FIRSTDAY AND [SID] = @SID AND [SHAFTEQUIPTYPE] = 'WOOD') b
 
 ON a.PLAYERNAME = b.PLAYERNAME and a.CLUBCODE = b.[SHAFTCLUBCODE]
 
 
 
-LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] f ON [SHAFTBRAND] = f."Mfgr Descr" 
+LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] f ON [SHAFTBRAND] = f.[Mfgr Descr] 
 
-WHERE a."First Day" = @FIRSTDAY AND a."SID" = @SID and a.ISDRIVER = 1
+WHERE a.[First Day] = @FIRSTDAY AND a.[SID] = @SID and a.ISDRIVER = 1
 
-GROUP BY "Mfgr Descr"
+GROUP BY [Mfgr Descr]
 
-ORDER BY COUNT(f."Mfgr Descr") DESC, f."Mfgr Descr" ASC;
+ORDER BY COUNT(f.[Mfgr Descr]) DESC, f.[Mfgr Descr] ASC;
 
 
 
@@ -192,27 +192,27 @@ ELSE IF (@REPORTNAME = 'Driver Shaft Material')
 
 
 
-SELECT f.[Matl Code] AS Brand, COUNT(f.[Matl Code]) AS "Count",
+SELECT f.[Matl Code] AS Brand, COUNT(f.[Matl Code]) AS [Count],
 
-(SELECT COUNT([BRAND]) FROM [Input].[Wood] WHERE "SID" = @SID AND "First Day" = @FIRSTDAY and ISDRIVER = 1) AS TOTAL
+(SELECT COUNT([BRAND]) FROM [Input].[Wood] WHERE [SID] = @SID AND [First Day] = @FIRSTDAY and ISDRIVER = 1) AS TOTAL
 
   
 
 FROM (
 
-SELECT "PKey", PLAYERNAME, "SID", "First Day", ISDRIVER, CLUBCODE, [BRAND], DBRANDCODE, [MODEL], DMODELCODE, SIZE, DSIZECODE, MATERIAL, DMATERIAL
+SELECT [PKey], PLAYERNAME, [SID], [First Day], ISDRIVER, CLUBCODE, [BRAND], DBRANDCODE, [MODEL], DMODELCODE, SIZE, DSIZECODE, MATERIAL, DMATERIAL
 
 FROM Input.[Wood]
 
-WHERE "First Day" = @FIRSTDAY AND "SID" = @SID and ISDRIVER = 1
+WHERE [First Day] = @FIRSTDAY AND [SID] = @SID and ISDRIVER = 1
 
-GROUP BY "PKey", PLAYERNAME, "SID", "First Day", ISDRIVER, CLUBCODE, [BRAND], DBRANDCODE, [MODEL], DMODELCODE, SIZE, DSIZECODE, MATERIAL, DMATERIAL) a
+GROUP BY [PKey], PLAYERNAME, [SID], [First Day], ISDRIVER, CLUBCODE, [BRAND], DBRANDCODE, [MODEL], DMODELCODE, SIZE, DSIZECODE, MATERIAL, DMATERIAL) a
 
 
 
 LEFT OUTER JOIN (SELECT *
 
-FROM Input.[Shaft] WHERE "First Day" = @FIRSTDAY AND "SID" = @SID AND "SHAFTEQUIPTYPE" = 'WOOD') b
+FROM Input.[Shaft] WHERE [First Day] = @FIRSTDAY AND [SID] = @SID AND [SHAFTEQUIPTYPE] = 'WOOD') b
 
 ON a.PLAYERNAME = b.PLAYERNAME and a.CLUBCODE = b.[SHAFTCLUBCODE]
 
@@ -220,7 +220,7 @@ ON a.PLAYERNAME = b.PLAYERNAME and a.CLUBCODE = b.[SHAFTCLUBCODE]
 
 LEFT OUTER JOIN LKP.[Material Codes and Descript] f ON [SHAFTMATL] = f.[Matl Code]
 
-WHERE a."First Day" = @FIRSTDAY AND a."SID" = @SID and a.ISDRIVER = 1
+WHERE a.[First Day] = @FIRSTDAY AND a.[SID] = @SID and a.ISDRIVER = 1
 
 GROUP BY [Matl Code]
 
@@ -232,39 +232,39 @@ ELSE IF (@REPORTNAME = 'Driver Shaft Manufacturer')
 
 
 
-SELECT f."Mfgr Descr" AS Brand, COUNT(f."Mfgr Descr") AS "Count",
+SELECT f.[Mfgr Descr] AS Brand, COUNT(f.[Mfgr Descr]) AS [Count],
 
-(SELECT COUNT([BRAND]) FROM [Input].[Wood] WHERE "SID" = @SID AND "First Day" = @FIRSTDAY and ISDRIVER = 1) AS TOTAL
+(SELECT COUNT([BRAND]) FROM [Input].[Wood] WHERE [SID] = @SID AND [First Day] = @FIRSTDAY and ISDRIVER = 1) AS TOTAL
 
   
 
 FROM (
 
-SELECT "PKey", PLAYERNAME, "SID", "First Day", ISDRIVER, CLUBCODE, [BRAND], DBRANDCODE, [MODEL], DMODELCODE, SIZE, DSIZECODE, MATERIAL, DMATERIAL
+SELECT [PKey], PLAYERNAME, [SID], [First Day], ISDRIVER, CLUBCODE, [BRAND], DBRANDCODE, [MODEL], DMODELCODE, SIZE, DSIZECODE, MATERIAL, DMATERIAL
 
 FROM Input.[Wood]
 
-WHERE "First Day" = @FIRSTDAY AND "SID" = @SID and ISDRIVER = 1
+WHERE [First Day] = @FIRSTDAY AND [SID] = @SID and ISDRIVER = 1
 
-GROUP BY "PKey", PLAYERNAME, "SID", "First Day", ISDRIVER, CLUBCODE, [BRAND], DBRANDCODE, [MODEL], DMODELCODE, SIZE, DSIZECODE, MATERIAL, DMATERIAL) a
+GROUP BY [PKey], PLAYERNAME, [SID], [First Day], ISDRIVER, CLUBCODE, [BRAND], DBRANDCODE, [MODEL], DMODELCODE, SIZE, DSIZECODE, MATERIAL, DMATERIAL) a
 
 
 
 LEFT OUTER JOIN (SELECT *
 
-FROM Input.[Shaft] WHERE "First Day" = @FIRSTDAY AND "SID" = @SID AND "SHAFTEQUIPTYPE" = 'WOOD') b
+FROM Input.[Shaft] WHERE [First Day] = @FIRSTDAY AND [SID] = @SID AND [SHAFTEQUIPTYPE] = 'WOOD') b
 
 ON a.PLAYERNAME = b.PLAYERNAME and a.CLUBCODE = b.[SHAFTCLUBCODE]
 
 
 
-LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] f ON [SHAFTMFGR] = f."Mfgr Descr" 
+LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] f ON [SHAFTMFGR] = f.[Mfgr Descr] 
 
-WHERE a."First Day" = @FIRSTDAY AND a."SID" = @SID and a.ISDRIVER = 1
+WHERE a.[First Day] = @FIRSTDAY AND a.[SID] = @SID and a.ISDRIVER = 1
 
-GROUP BY "Mfgr Descr"
+GROUP BY [Mfgr Descr]
 
-ORDER BY COUNT(f."Mfgr Descr") DESC, f."Mfgr Descr" ASC;
+ORDER BY COUNT(f.[Mfgr Descr]) DESC, f.[Mfgr Descr] ASC;
 
 
 
@@ -274,39 +274,39 @@ ELSE IF (@REPORTNAME = 'Driver Shaft Brand Model')
 
 
 
-SELECT f."Mfgr Descr" AS Brand, "Model Descr" as Model, COUNT(f."Mfgr Descr") AS "Count",
+SELECT f.[Mfgr Descr] AS Brand, [Model Descr] as Model, COUNT(f.[Mfgr Descr]) AS [Count],
 
-(SELECT COUNT([BRAND]) FROM [Input].[Wood] WHERE "SID" = @SID AND "First Day" = @FIRSTDAY and ISDRIVER = 1) AS TOTAL
+(SELECT COUNT([BRAND]) FROM [Input].[Wood] WHERE [SID] = @SID AND [First Day] = @FIRSTDAY and ISDRIVER = 1) AS TOTAL
 
   
 
 FROM (
 
-SELECT "PKey", PLAYERNAME, "SID", "First Day", ISDRIVER, CLUBCODE, [BRAND], DBRANDCODE, [MODEL], DMODELCODE, SIZE, DSIZECODE, MATERIAL, DMATERIAL
+SELECT [PKey], PLAYERNAME, [SID], [First Day], ISDRIVER, CLUBCODE, [BRAND], DBRANDCODE, [MODEL], DMODELCODE, SIZE, DSIZECODE, MATERIAL, DMATERIAL
 
 FROM Input.[Wood]
 
-WHERE "First Day" = @FIRSTDAY AND "SID" = @SID and ISDRIVER = 1
+WHERE [First Day] = @FIRSTDAY AND [SID] = @SID and ISDRIVER = 1
 
-GROUP BY "PKey", PLAYERNAME, "SID", "First Day", ISDRIVER, CLUBCODE, [BRAND], DBRANDCODE, [MODEL], DMODELCODE, SIZE, DSIZECODE, MATERIAL, DMATERIAL) a
+GROUP BY [PKey], PLAYERNAME, [SID], [First Day], ISDRIVER, CLUBCODE, [BRAND], DBRANDCODE, [MODEL], DMODELCODE, SIZE, DSIZECODE, MATERIAL, DMATERIAL) a
 
 
 
 LEFT OUTER JOIN (SELECT *
 
-FROM Input.[Shaft] WHERE "First Day" = @FIRSTDAY AND "SID" = @SID AND "SHAFTEQUIPTYPE" = 'WOOD') b
+FROM Input.[Shaft] WHERE [First Day] = @FIRSTDAY AND [SID] = @SID AND [SHAFTEQUIPTYPE] = 'WOOD') b
 
 ON a.PLAYERNAME = b.PLAYERNAME and a.CLUBCODE = b.[SHAFTCLUBCODE]
 
-  LEFT OUTER JOIN LKP.[Model Codes and Descr] ON "Model Descr" = SHAFTMODEL
+  LEFT OUTER JOIN LKP.[Model Codes and Descr] ON [Model Descr] = SHAFTMODEL
 
-LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] f ON [SHAFTBRAND] = f."Mfgr Descr" 
+LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] f ON [SHAFTBRAND] = f.[Mfgr Descr] 
 
-WHERE a."First Day" = @FIRSTDAY AND a."SID" = @SID and a.ISDRIVER = 1
+WHERE a.[First Day] = @FIRSTDAY AND a.[SID] = @SID and a.ISDRIVER = 1
 
-  GROUP BY "Mfgr Descr", "Model Descr" 
+  GROUP BY [Mfgr Descr], [Model Descr] 
 
-      ORDER BY "Mfgr Descr" ASC, Model ASC;
+      ORDER BY [Mfgr Descr] ASC, Model ASC;
 
 
 
@@ -320,67 +320,67 @@ ELSE IF (@REPORTNAME = 'All Woods')
 
      
 
-"Mfgr Descr" AS Brand, "Model Descr" + N' - ' + coalesce([Size Descr], '') as Model, COUNT("BRAND") AS "Count",
+[Mfgr Descr] AS Brand, [Model Descr] + N' - ' + coalesce([Size Descr], '') as Model, COUNT([BRAND]) AS [Count],
 
-(SELECT COUNT("BRAND") FROM [Input].[Wood] WHERE "SID" = @SID AND "First Day" = @FIRSTDAY) AS "TOTAL"
+(SELECT COUNT([BRAND]) FROM [Input].[Wood] WHERE [SID] = @SID AND [First Day] = @FIRSTDAY) AS [TOTAL]
 
   FROM [Input].[Wood]
 
-  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON "Mfgr Descr" = "BRAND"
+  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON [Mfgr Descr] = [BRAND]
 
-  LEFT OUTER JOIN LKP.[Model Codes and Descr] ON "Model Descr" = "MODEL"
+  LEFT OUTER JOIN LKP.[Model Codes and Descr] ON [Model Descr] = [MODEL]
 
   LEFT OUTER JOIN LKP.[Size Codes and Description] ON [SIZE] = [Size Code]
 
   WHERE [SID]= @SID AND [First Day] = @FIRSTDAY
 
-  GROUP BY "Mfgr Descr", "Model Descr", [Size Descr] 
+  GROUP BY [Mfgr Descr], [Model Descr], [Size Descr] 
 
-      ORDER BY "Mfgr Descr" ASC, Model ASC;
+      ORDER BY [Mfgr Descr] ASC, Model ASC;
 
 */
 
-SELECT "Mfgr Descr" AS Brand, "Model Descr" as Model, COUNT("BRAND") AS "Count",
+SELECT [Mfgr Descr] AS Brand, [Model Descr] as Model, COUNT([BRAND]) AS [Count],
 
-(SELECT COUNT("BRAND") FROM [Input].[Wood] WHERE "SID" = @SID AND "First Day" = @FIRSTDAY) AS "TOTAL"
+(SELECT COUNT([BRAND]) FROM [Input].[Wood] WHERE [SID] = @SID AND [First Day] = @FIRSTDAY) AS [TOTAL]
 
   FROM [Input].[Wood]
 
-  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON "Mfgr Descr" = "BRAND"
+  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON [Mfgr Descr] = [BRAND]
 
-  LEFT OUTER JOIN LKP.[Model Codes and Descr] ON "Model Descr" = "MODEL"
+  LEFT OUTER JOIN LKP.[Model Codes and Descr] ON [Model Descr] = [MODEL]
 
   WHERE [SID]= @SID AND [First Day] = @FIRSTDAY
 
-  GROUP BY "Mfgr Descr", "Model Descr" 
+  GROUP BY [Mfgr Descr], [Model Descr] 
 
-      ORDER BY "Mfgr Descr" ASC, Model ASC;            
+      ORDER BY [Mfgr Descr] ASC, Model ASC;            
 
 
 
 ELSE IF (@REPORTNAME = 'Fairway w/ Hybrid')
 
-SELECT b."Mfgr Descr" AS Brand, "Model Descr" as Model, COUNT("BRAND") AS Model, COUNT(b."Mfgr Descr") AS "Count",
+SELECT b.[Mfgr Descr] AS Brand, [Model Descr] as Model, COUNT([BRAND]) AS Model, COUNT(b.[Mfgr Descr]) AS [Count],
 
-(SELECT COUNT("BRAND") FROM [Input].[Wood] WHERE "SID" = @SID AND "First Day" = @FIRSTDAY  and ISDRIVER = 0) AS "TOTAL"
+(SELECT COUNT([BRAND]) FROM [Input].[Wood] WHERE [SID] = @SID AND [First Day] = @FIRSTDAY  and ISDRIVER = 0) AS [TOTAL]
 
  FROM [Input].[Wood] a
 
-LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] b ON "BRAND" = b."Mfgr Descr" 
+LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] b ON [BRAND] = b.[Mfgr Descr] 
 
-LEFT OUTER JOIN LKP.[Model Codes and Descr] ON "MODEL" = "Model Descr" 
+LEFT OUTER JOIN LKP.[Model Codes and Descr] ON [MODEL] = [Model Descr] 
 
-WHERE "First Day" = @FIRSTDAY AND "SID" = @SID and ISDRIVER = 0
+WHERE [First Day] = @FIRSTDAY AND [SID] = @SID and ISDRIVER = 0
 
-GROUP BY "Mfgr Descr", "Model Descr"
+GROUP BY [Mfgr Descr], [Model Descr]
 
-ORDER BY b."Mfgr Descr" ASC, "Model Descr" ASC;
+ORDER BY b.[Mfgr Descr] ASC, [Model Descr] ASC;
 
       
 
-/*SELECT b."Mfgr Descr" AS Brand, "Model Descr" + N' - ' + coalesce([Size Descr], '') as Model, COUNT("BRAND") AS Model, COUNT(b."Mfgr Descr") AS "Count",
+/*SELECT b.[Mfgr Descr] AS Brand, [Model Descr] + N' - ' + coalesce([Size Descr], '') as Model, COUNT([BRAND]) AS Model, COUNT(b.[Mfgr Descr]) AS [Count],
 
-(SELECT COUNT("BRAND") FROM [Input].[Wood] WHERE "SID" = @SID AND "First Day" = @FIRSTDAY  and ISDRIVER = 0) AS "TOTAL"
+(SELECT COUNT([BRAND]) FROM [Input].[Wood] WHERE [SID] = @SID AND [First Day] = @FIRSTDAY  and ISDRIVER = 0) AS [TOTAL]
 
  FROM
 
@@ -388,21 +388,21 @@ ORDER BY b."Mfgr Descr" ASC, "Model Descr" ASC;
 
 LEFT OUTER JOIN
 
-(SELECT PLAYERNAME AS DRIVER, MIN("PKey") AS PKEY FROM [Input].[Wood] WHERE "First Day" = @FIRSTDAY AND "SID" = @SID GROUP BY PLAYERNAME) c
+(SELECT PLAYERNAME AS DRIVER, MIN([PKey]) AS PKEY FROM [Input].[Wood] WHERE [First Day] = @FIRSTDAY AND [SID] = @SID GROUP BY PLAYERNAME) c
 
 ON a.PKey = c.PKEY 
 
-LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] b ON "BRAND" = b."Mfgr Descr" 
+LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] b ON [BRAND] = b.[Mfgr Descr] 
 
-LEFT OUTER JOIN LKP.[Model Codes and Descr] ON "MODEL" = "Model Descr" 
+LEFT OUTER JOIN LKP.[Model Codes and Descr] ON [MODEL] = [Model Descr] 
 
 LEFT OUTER JOIN LKP.[Size Codes and Description] ON [SIZE] = [Size Code]
 
-WHERE "First Day" = @FIRSTDAY AND "SID" = @SID AND DRIVER IS NULL
+WHERE [First Day] = @FIRSTDAY AND [SID] = @SID AND DRIVER IS NULL
 
-GROUP BY "Mfgr Descr", "Model Descr", [Size Descr] 
+GROUP BY [Mfgr Descr], [Model Descr], [Size Descr] 
 
-ORDER BY b."Mfgr Descr" ASC, "Model Descr" ASC, [Size Descr];
+ORDER BY b.[Mfgr Descr] ASC, [Model Descr] ASC, [Size Descr];
 
 */      
 
@@ -410,27 +410,27 @@ ORDER BY b."Mfgr Descr" ASC, "Model Descr" ASC, [Size Descr];
 
 ELSE IF (@REPORTNAME = 'Fairway w/o Hybrid')
 
-SELECT b."Mfgr Descr" AS Brand, "Model Descr" as Model, COUNT("BRAND") as Model, COUNT(b."Mfgr Descr") AS "Count",
+SELECT b.[Mfgr Descr] AS Brand, [Model Descr] as Model, COUNT([BRAND]) as Model, COUNT(b.[Mfgr Descr]) AS [Count],
 
-(SELECT COUNT("BRAND") FROM [Input].[Wood] WHERE "SID" = @SID AND "First Day" = @FIRSTDAY  and ISDRIVER = 0 and CLUBCODE<>'HYB') AS "TOTAL"
+(SELECT COUNT([BRAND]) FROM [Input].[Wood] WHERE [SID] = @SID AND [First Day] = @FIRSTDAY  and ISDRIVER = 0 and CLUBCODE<>'HYB') AS [TOTAL]
 
  FROM [Input].[Wood] a
 
-LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] b ON "BRAND" = b."Mfgr Descr" 
+LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] b ON [BRAND] = b.[Mfgr Descr] 
 
-LEFT OUTER JOIN LKP.[Model Codes and Descr] ON "MODEL" = "Model Descr" 
+LEFT OUTER JOIN LKP.[Model Codes and Descr] ON [MODEL] = [Model Descr] 
 
-WHERE "First Day" = @FIRSTDAY AND "SID" = @SID and ISDRIVER = 0 AND a."CLUBCODE" <> 'HYB'
+WHERE [First Day] = @FIRSTDAY AND [SID] = @SID and ISDRIVER = 0 AND a.[CLUBCODE] <> 'HYB'
 
-GROUP BY "Mfgr Descr", "Model Descr"
+GROUP BY [Mfgr Descr], [Model Descr]
 
-ORDER BY b."Mfgr Descr" ASC, "Model Descr" ASC;
+ORDER BY b.[Mfgr Descr] ASC, [Model Descr] ASC;
 
 
 
-/*SELECT b."Mfgr Descr" AS Brand, "Model Descr" + N' - ' + coalesce([Size Descr], '') as Model, COUNT("BRAND") as Model, COUNT(b."Mfgr Descr") AS "Count",
+/*SELECT b.[Mfgr Descr] AS Brand, [Model Descr] + N' - ' + coalesce([Size Descr], '') as Model, COUNT([BRAND]) as Model, COUNT(b.[Mfgr Descr]) AS [Count],
 
-(SELECT COUNT("BRAND") FROM [Input].[Wood] WHERE "SID" = @SID AND "First Day" = @FIRSTDAY  and ISDRIVER = 1 and CLUBCODE<>'HYB') AS "TOTAL"
+(SELECT COUNT([BRAND]) FROM [Input].[Wood] WHERE [SID] = @SID AND [First Day] = @FIRSTDAY  and ISDRIVER = 1 and CLUBCODE<>'HYB') AS [TOTAL]
 
  FROM
 
@@ -438,21 +438,21 @@ ORDER BY b."Mfgr Descr" ASC, "Model Descr" ASC;
 
 LEFT OUTER JOIN
 
-(SELECT PLAYERNAME AS DRIVER, MIN("PKey") AS PKEY FROM [Input].[Wood] WHERE "First Day" = @FIRSTDAY AND "SID" = @SID GROUP BY PLAYERNAME) c
+(SELECT PLAYERNAME AS DRIVER, MIN([PKey]) AS PKEY FROM [Input].[Wood] WHERE [First Day] = @FIRSTDAY AND [SID] = @SID GROUP BY PLAYERNAME) c
 
 ON a.PKey = c.PKEY 
 
-LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] b ON "BRAND" = b."Mfgr Descr" 
+LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] b ON [BRAND] = b.[Mfgr Descr] 
 
-LEFT OUTER JOIN LKP.[Model Codes and Descr] ON "MODEL" = "Model Descr" 
+LEFT OUTER JOIN LKP.[Model Codes and Descr] ON [MODEL] = [Model Descr] 
 
 LEFT OUTER JOIN LKP.[Size Codes and Description] ON [SIZE] = [Size Code]
 
-WHERE "First Day" = @FIRSTDAY AND "SID" = @SID AND DRIVER IS NULL AND a."CLUBCODE" <> 'HYB'
+WHERE [First Day] = @FIRSTDAY AND [SID] = @SID AND DRIVER IS NULL AND a.[CLUBCODE] <> 'HYB'
 
-GROUP BY "Mfgr Descr", "Model Descr", [Size Descr] 
+GROUP BY [Mfgr Descr], [Model Descr], [Size Descr] 
 
-ORDER BY b."Mfgr Descr" ASC, "Model Descr" ASC, [Size Descr];
+ORDER BY b.[Mfgr Descr] ASC, [Model Descr] ASC, [Size Descr];
 
 */
 
@@ -464,21 +464,21 @@ ELSE IF (@REPORTNAME = 'Hybrid Woods')
 
       SELECT
 
-"Mfgr Descr" AS Brand, "Model Descr" as Model, COUNT("BRAND") AS Model, COUNT("BRAND") AS "Count",
+[Mfgr Descr] AS Brand, [Model Descr] as Model, COUNT([BRAND]) AS Model, COUNT([BRAND]) AS [Count],
 
-(SELECT COUNT("BRAND") FROM [Input].[Wood] WHERE "SID" = @SID AND "First Day" = @FIRSTDAY AND "CLUBCODE" = 'HYB') AS "TOTAL"
+(SELECT COUNT([BRAND]) FROM [Input].[Wood] WHERE [SID] = @SID AND [First Day] = @FIRSTDAY AND [CLUBCODE] = 'HYB') AS [TOTAL]
 
   FROM [Input].[Wood]
 
-  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON "Mfgr Descr" = "BRAND"
+  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON [Mfgr Descr] = [BRAND]
 
-  LEFT OUTER JOIN LKP.[Model Codes and Descr] ON "Model Descr" = [MODEL] 
+  LEFT OUTER JOIN LKP.[Model Codes and Descr] ON [Model Descr] = [MODEL] 
 
-  WHERE [SID]= @SID AND [First Day] = @FIRSTDAY AND "CLUBCODE" = 'HYB'
+  WHERE [SID]= @SID AND [First Day] = @FIRSTDAY AND [CLUBCODE] = 'HYB'
 
-  GROUP BY "Mfgr Descr", "Model Descr"
+  GROUP BY [Mfgr Descr], [Model Descr]
 
-      ORDER BY "Mfgr Descr" ASC, "Model Descr" ASC;            
+      ORDER BY [Mfgr Descr] ASC, [Model Descr] ASC;            
 
 
 
@@ -488,23 +488,23 @@ ELSE IF (@REPORTNAME = 'Wood wo Hybrid')
 
       SELECT
 
-"Mfgr Descr" AS Brand, "Model Descr" + N' - ' + coalesce([Size Descr], '') as Model, COUNT("BRAND") AS Model, COUNT("BRAND") AS "Count",
+[Mfgr Descr] AS Brand, [Model Descr] + N' - ' + coalesce([Size Descr], '') as Model, COUNT([BRAND]) AS Model, COUNT([BRAND]) AS [Count],
 
-(SELECT COUNT("BRAND") FROM [Input].[Wood] WHERE "SID" = @SID AND "First Day" = @FIRSTDAY AND "CLUBCODE" <> 'HYB') AS "TOTAL"
+(SELECT COUNT([BRAND]) FROM [Input].[Wood] WHERE [SID] = @SID AND [First Day] = @FIRSTDAY AND [CLUBCODE] <> 'HYB') AS [TOTAL]
 
   FROM [Input].[Wood]
 
-  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON "Mfgr Descr" = "BRAND"
+  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON [Mfgr Descr] = [BRAND]
 
-  LEFT OUTER JOIN LKP.[Model Codes and Descr] ON "Model Descr" = [MODEL] 
+  LEFT OUTER JOIN LKP.[Model Codes and Descr] ON [Model Descr] = [MODEL] 
 
   LEFT OUTER JOIN LKP.[Size Codes and Description] ON [SIZE] = [Size Code]
 
-  WHERE [SID]= @SID AND [First Day] = @FIRSTDAY AND "CLUBCODE" <> 'HYB'
+  WHERE [SID]= @SID AND [First Day] = @FIRSTDAY AND [CLUBCODE] <> 'HYB'
 
-  GROUP BY "Mfgr Descr", "Model Descr", [Size Descr] 
+  GROUP BY [Mfgr Descr], [Model Descr], [Size Descr] 
 
-      ORDER BY "Mfgr Descr" ASC, "Model Descr" ASC, [Size Descr];            
+      ORDER BY [Mfgr Descr] ASC, [Model Descr] ASC, [Size Descr];            
 
 
 
@@ -512,23 +512,23 @@ ELSE IF (@REPORTNAME = 'Wood wo Hybrid')
 
       SELECT
 
-"Mfgr Descr" AS Brand, "Model Descr" + N' - ' + coalesce([Size Descr], '') as Model, COUNT("BRAND") AS Model, COUNT("BRAND") AS "Count",
+[Mfgr Descr] AS Brand, [Model Descr] + N' - ' + coalesce([Size Descr], '') as Model, COUNT([BRAND]) AS Model, COUNT([BRAND]) AS [Count],
 
-(SELECT COUNT("BRAND") FROM [Input].[Wood] WHERE "SID" = @SID AND "First Day" = @FIRSTDAY AND "CLUBCODE" = 'HYB') AS "TOTAL"
+(SELECT COUNT([BRAND]) FROM [Input].[Wood] WHERE [SID] = @SID AND [First Day] = @FIRSTDAY AND [CLUBCODE] = 'HYB') AS [TOTAL]
 
   FROM [Input].[Wood]
 
-  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON "Mfgr Descr" = "BRAND"
+  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON [Mfgr Descr] = [BRAND]
 
-  LEFT OUTER JOIN LKP.[Model Codes and Descr] ON "Model Descr" = [MODEL] 
+  LEFT OUTER JOIN LKP.[Model Codes and Descr] ON [Model Descr] = [MODEL] 
 
   LEFT OUTER JOIN LKP.[Size Codes and Description] ON [SIZE] = [Size Code]
 
-  WHERE [SID]= @SID AND [First Day] = @FIRSTDAY AND "CLUBCODE" = 'HYB'
+  WHERE [SID]= @SID AND [First Day] = @FIRSTDAY AND [CLUBCODE] = 'HYB'
 
-  GROUP BY "Mfgr Descr", "Model Descr", [Size Descr] 
+  GROUP BY [Mfgr Descr], [Model Descr], [Size Descr] 
 
-      ORDER BY "Mfgr Descr" ASC, "Model Descr" ASC, [Size Descr];     
+      ORDER BY [Mfgr Descr] ASC, [Model Descr] ASC, [Size Descr];     
 
       */            
 
@@ -538,19 +538,19 @@ ELSE IF (@REPORTNAME = 'Hybrid Wood Shaft Material')
 
       SELECT
 
-"Matl Descr" AS Brand, COUNT("SHAFTMATL") AS "Count",
+[Matl Descr] AS Brand, COUNT([SHAFTMATL]) AS [Count],
 
-(SELECT COUNT("SHAFTMATL") FROM [Input].[Shaft] WHERE "SID" = @SID AND "First Day" = @FIRSTDAY AND [SHAFTEQUIPTYPE] = 'WOOD' and [SHAFTCLUBCODE] = 'HYB') AS TOTAL
+(SELECT COUNT([SHAFTMATL]) FROM [Input].[Shaft] WHERE [SID] = @SID AND [First Day] = @FIRSTDAY AND [SHAFTEQUIPTYPE] = 'WOOD' and [SHAFTCLUBCODE] = 'HYB') AS TOTAL
 
   FROM [Input].[Shaft]
 
-  LEFT OUTER JOIN [LKP].[Material Codes and Descript] ON "Matl Descr" = "SHAFTMATL" 
+  LEFT OUTER JOIN [LKP].[Material Codes and Descript] ON [Matl Descr] = [SHAFTMATL] 
 
   WHERE [SID]= @SID AND [First Day] = @FIRSTDAY AND [SHAFTEQUIPTYPE] = 'WOOD' and [SHAFTCLUBCODE] = 'HYB'
 
-  GROUP BY "Matl Descr"
+  GROUP BY [Matl Descr]
 
-      ORDER BY COUNT("SHAFTMATL") DESC, "Matl Descr" ASC;
+      ORDER BY COUNT([SHAFTMATL]) DESC, [Matl Descr] ASC;
 
 
 
@@ -560,19 +560,19 @@ ELSE IF (@REPORTNAME = 'Hybrid Wood Shaft Manufacturer')
 
       SELECT
 
-"Mfgr Descr" AS Brand, COUNT("SHAFTMFGR") AS "Count",
+[Mfgr Descr] AS Brand, COUNT([SHAFTMFGR]) AS [Count],
 
-(SELECT COUNT("SHAFTMFGR") FROM [Input].[Shaft] WHERE "SID" = @SID AND "First Day" = @FIRSTDAY AND [SHAFTEQUIPTYPE] = 'WOOD' and [SHAFTCLUBCODE] = 'HYB') AS TOTAL
+(SELECT COUNT([SHAFTMFGR]) FROM [Input].[Shaft] WHERE [SID] = @SID AND [First Day] = @FIRSTDAY AND [SHAFTEQUIPTYPE] = 'WOOD' and [SHAFTCLUBCODE] = 'HYB') AS TOTAL
 
   FROM [Input].[Shaft]
 
-  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON "Mfgr Descr" = "SHAFTMFGR" 
+  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON [Mfgr Descr] = [SHAFTMFGR] 
 
   WHERE [SID]= @SID AND [First Day] = @FIRSTDAY AND [SHAFTEQUIPTYPE] = 'WOOD' and [SHAFTCLUBCODE] = 'HYB'
 
-  GROUP BY "Mfgr Descr"
+  GROUP BY [Mfgr Descr]
 
-      ORDER BY COUNT("SHAFTMFGR") DESC, "Mfgr Descr" ASC;
+      ORDER BY COUNT([SHAFTMFGR]) DESC, [Mfgr Descr] ASC;
 
 
 
@@ -582,19 +582,19 @@ ELSE IF (@REPORTNAME = 'Hybrid Wood Shaft Brand')
 
       SELECT
 
-"Mfgr Descr" AS Brand, COUNT("SHAFTBRAND") AS "Count",
+[Mfgr Descr] AS Brand, COUNT([SHAFTBRAND]) AS [Count],
 
-(SELECT COUNT("SHAFTBRAND") FROM [Input].[Shaft] WHERE "SID" = @SID AND "First Day" = @FIRSTDAY AND [SHAFTEQUIPTYPE] = 'WOOD' and [SHAFTCLUBCODE] = 'HYB') AS TOTAL
+(SELECT COUNT([SHAFTBRAND]) FROM [Input].[Shaft] WHERE [SID] = @SID AND [First Day] = @FIRSTDAY AND [SHAFTEQUIPTYPE] = 'WOOD' and [SHAFTCLUBCODE] = 'HYB') AS TOTAL
 
   FROM [Input].[Shaft]
 
-  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON "Mfgr Descr" = "SHAFTBRAND"
+  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON [Mfgr Descr] = [SHAFTBRAND]
 
   WHERE [SID]= @SID AND [First Day] = @FIRSTDAY AND [SHAFTEQUIPTYPE] = 'WOOD' and [SHAFTCLUBCODE] = 'HYB'
 
-  GROUP BY "Mfgr Descr"
+  GROUP BY [Mfgr Descr]
 
-      ORDER BY COUNT("SHAFTBRAND") DESC, "Mfgr Descr" ASC;
+      ORDER BY COUNT([SHAFTBRAND]) DESC, [Mfgr Descr] ASC;
 
 
 
@@ -604,21 +604,21 @@ ELSE IF (@REPORTNAME = 'Hybrid Wood Shaft Brand Model')
 
       SELECT
 
-"Mfgr Descr" AS Brand, "Model Descr" as Model, COUNT("SHAFTBRAND") AS "Count",
+[Mfgr Descr] AS Brand, [Model Descr] as Model, COUNT([SHAFTBRAND]) AS [Count],
 
-(SELECT COUNT("SHAFTBRAND") FROM [Input].[Shaft] WHERE "SID" = @SID AND "First Day" = @FIRSTDAY AND [SHAFTEQUIPTYPE] = 'WOOD' and [SHAFTCLUBCODE] = 'HYB') AS TOTAL
+(SELECT COUNT([SHAFTBRAND]) FROM [Input].[Shaft] WHERE [SID] = @SID AND [First Day] = @FIRSTDAY AND [SHAFTEQUIPTYPE] = 'WOOD' and [SHAFTCLUBCODE] = 'HYB') AS TOTAL
 
   FROM [Input].[Shaft]
 
-  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON "Mfgr Descr" = "SHAFTBRAND"
+  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON [Mfgr Descr] = [SHAFTBRAND]
 
-  LEFT OUTER JOIN LKP.[Model Codes and Descr] ON "Model Descr" = [SHAFTMODEL] 
+  LEFT OUTER JOIN LKP.[Model Codes and Descr] ON [Model Descr] = [SHAFTMODEL] 
 
   WHERE [SID]= @SID AND [First Day] = @FIRSTDAY AND [SHAFTEQUIPTYPE] = 'WOOD' and [SHAFTCLUBCODE] = 'HYB'
 
-  GROUP BY "Mfgr Descr", "Model Descr"
+  GROUP BY [Mfgr Descr], [Model Descr]
 
-      ORDER BY "Mfgr Descr" ASC, Model ASC;
+      ORDER BY [Mfgr Descr] ASC, Model ASC;
 
 
 
@@ -628,21 +628,21 @@ ELSE IF (@REPORTNAME = 'Iron')
 
       SELECT
 
-"Mfgr Descr" AS Brand, "Model Descr" as Model, COUNT("BRAND") AS "Count",
+[Mfgr Descr] AS Brand, [Model Descr] as Model, COUNT([BRAND]) AS [Count],
 
-(SELECT COUNT("BRAND") FROM [Input].[Iron] WHERE "SID" = @SID AND "First Day" = @FIRSTDAY) AS "TOTAL"
+(SELECT COUNT([BRAND]) FROM [Input].[Iron] WHERE [SID] = @SID AND [First Day] = @FIRSTDAY) AS [TOTAL]
 
   FROM [Input].[Iron]
 
-  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON "Mfgr Descr" = "BRAND"
+  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON [Mfgr Descr] = [BRAND]
 
-  LEFT OUTER JOIN LKP.[Model Codes and Descr] ON "Model Descr" = [MODEL] 
+  LEFT OUTER JOIN LKP.[Model Codes and Descr] ON [Model Descr] = [MODEL] 
 
   WHERE [SID]= @SID AND [First Day] = @FIRSTDAY and isset = 1 and not [Input].[Iron].CLUBCODE = '%^%'
 
-  GROUP BY "Mfgr Descr", "Model Descr"
+  GROUP BY [Mfgr Descr], [Model Descr]
 
-      ORDER BY "Mfgr Descr" ASC, Model ASC;
+      ORDER BY [Mfgr Descr] ASC, Model ASC;
 
 
 
@@ -652,25 +652,25 @@ ELSE IF (@REPORTNAME = 'Utility Iron')
 
         select *, SUM([COUNT]) over() as TOTAL from (
 
-  SELECT "Mfgr Descr" AS Brand, "Model Descr" as Model, 
+  SELECT [Mfgr Descr] AS Brand, [Model Descr] as Model, 
 
 		 sum(case when CLUBCODE like '%-%' then (cast(SUBSTRING(clubcode,3,1) AS tinyint) - 
 
 												cast(SUBSTRING(clubcode,1,1) AS tinyint) +1)
 
-				 else 1 end) AS "Count"
+				 else 1 end) AS [Count]
 
   FROM [Input].[Iron]
 
-  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON "Mfgr Descr" = "BRAND"
+  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON [Mfgr Descr] = [BRAND]
 
-  LEFT OUTER JOIN LKP.[Model Codes and Descr] ON "Model Descr" = "MODEL" 
+  LEFT OUTER JOIN LKP.[Model Codes and Descr] ON [Model Descr] = [MODEL] 
 
-  WHERE [SID]= @SID AND [First Day] = @FIRSTDAY AND "CLUBCODE" LIKE '%^%'
+  WHERE [SID]= @SID AND [First Day] = @FIRSTDAY AND [CLUBCODE] LIKE '%^%'
 
-  GROUP BY "Mfgr Descr", "Model Descr") a
+  GROUP BY [Mfgr Descr], [Model Descr]) a
 
-      ORDER BY "Brand" ASC, [Count] desc;
+      ORDER BY [Brand] ASC, [Count] desc;
 
       
 
@@ -680,21 +680,21 @@ ELSE IF (@REPORTNAME = 'Putter')
 
       SELECT
 
-"Mfgr Descr" AS Brand, "Model Descr" as Model, COUNT("BRAND") AS "Count",
+[Mfgr Descr] AS Brand, [Model Descr] as Model, COUNT([BRAND]) AS [Count],
 
-(SELECT COUNT("BRAND") FROM [Input].[Putter] WHERE "SID" = @SID AND "First Day" = @FIRSTDAY) AS "TOTAL"
+(SELECT COUNT([BRAND]) FROM [Input].[Putter] WHERE [SID] = @SID AND [First Day] = @FIRSTDAY) AS [TOTAL]
 
   FROM [Input].[Putter]
 
-  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON "Mfgr Descr" = "BRAND"
+  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON [Mfgr Descr] = [BRAND]
 
-  LEFT OUTER JOIN LKP.[Model Codes and Descr] ON "Model Descr" = [MODEL] 
+  LEFT OUTER JOIN LKP.[Model Codes and Descr] ON [Model Descr] = [MODEL] 
 
   WHERE [SID]= @SID AND [First Day] = @FIRSTDAY
 
-  GROUP BY "Mfgr Descr", "Model Descr"
+  GROUP BY [Mfgr Descr], [Model Descr]
 
-      ORDER BY "Mfgr Descr" ASC, Model ASC;
+      ORDER BY [Mfgr Descr] ASC, Model ASC;
 
 
 
@@ -706,21 +706,21 @@ ELSE IF (@REPORTNAME = 'Shaft')
 
       SELECT
 
-"Mfgr Descr" AS Brand, "Model Descr" as Model, COUNT("SHAFTBRAND") AS "Count",
+[Mfgr Descr] AS Brand, [Model Descr] as Model, COUNT([SHAFTBRAND]) AS [Count],
 
-(SELECT COUNT("SHAFTBRAND") FROM [Input].[Shaft] WHERE "SID" = @SID AND "First Day" = @FIRSTDAY) AS "TOTAL"
+(SELECT COUNT([SHAFTBRAND]) FROM [Input].[Shaft] WHERE [SID] = @SID AND [First Day] = @FIRSTDAY) AS [TOTAL]
 
   FROM [Input].[Shaft]
 
-  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON "Mfgr Descr" = "SHAFTBRAND"
+  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON [Mfgr Descr] = [SHAFTBRAND]
 
-  LEFT OUTER JOIN LKP.[Model Codes and Descr] ON "Model Descr" = [SHAFTMODEL] 
+  LEFT OUTER JOIN LKP.[Model Codes and Descr] ON [Model Descr] = [SHAFTMODEL] 
 
   WHERE [SID]= @SID AND [First Day] = @FIRSTDAY
 
-  GROUP BY "Mfgr Descr", "Model Descr"
+  GROUP BY [Mfgr Descr], [Model Descr]
 
-      ORDER BY "Mfgr Descr" ASC, Model ASC;
+      ORDER BY [Mfgr Descr] ASC, Model ASC;
 
 
 
@@ -736,7 +736,7 @@ FROM Input.[Iron] a
 
 LEFT OUTER JOIN Input.[Shaft] b ON a.PLAYERNAME = b.PLAYERNAME and a.[First Day]= b.[First Day] and a.[SID] = b.[SID] and a.[CLUBCODE] = b.[SHAFTCLUBCODE]
 
-WHERE a."SID" = @SID AND a."First Day" = @FIRSTDAY and [SHAFTEQUIPTYPE]= 'IRON' and isset = 1
+WHERE a.[SID] = @SID AND a.[First Day] = @FIRSTDAY and [SHAFTEQUIPTYPE]= 'IRON' and isset = 1
 
 group by a.PLAYERNAME, [CLUBCODE], [BRAND], [MODEL], [SHAFTMFGR], [SHAFTBRAND], [SHAFTMODEL], [SHAFTMATL]
 
@@ -750,19 +750,19 @@ SELECT PLAYERNAME, [BRAND], [MODEL] FROM IRONSETTABLE_SHAFT GROUP BY PLAYERNAME,
 
       SELECT
 
-"Mfgr Descr" AS Brand, "Model Descr" as Model, COUNT(BRAND) AS "Count",
+[Mfgr Descr] AS Brand, [Model Descr] as Model, COUNT(BRAND) AS [Count],
 
-(SELECT COUNT(PLAYERNAME) FROM IRONSHAFTBRANDTABLE) AS " TOTAL"
+(SELECT COUNT(PLAYERNAME) FROM IRONSHAFTBRANDTABLE) AS [ TOTAL]
 
   FROM IRONSHAFTBRANDTABLE
 
-  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON "Mfgr Descr" = BRAND
+  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON [Mfgr Descr] = BRAND
 
-  LEFT OUTER JOIN LKP.[Model Codes and Descr] ON "Model Descr" = MODEL 
+  LEFT OUTER JOIN LKP.[Model Codes and Descr] ON [Model Descr] = MODEL 
 
-  GROUP BY "Mfgr Descr", "Model Descr"
+  GROUP BY [Mfgr Descr], [Model Descr]
 
-      ORDER BY "Mfgr Descr" ASC, Model ASC;
+      ORDER BY [Mfgr Descr] ASC, Model ASC;
 
       
 
@@ -776,7 +776,7 @@ FROM Input.[Iron] a
 
 LEFT OUTER JOIN Input.[Shaft] b ON a.PLAYERNAME = b.PLAYERNAME and a.[First Day]= b.[First Day] and a.[SID] = b.[SID] and a.[CLUBCODE] = b.[SHAFTCLUBCODE]
 
-WHERE a."SID" = @SID AND a."First Day" = @FIRSTDAY and [SHAFTEQUIPTYPE]= 'IRON' and isset = 1
+WHERE a.[SID] = @SID AND a.[First Day] = @FIRSTDAY and [SHAFTEQUIPTYPE]= 'IRON' and isset = 1
 
 group by a.PLAYERNAME, [CLUBCODE], [BRAND], [MODEL], [SHAFTMFGR], [SHAFTBRAND], [SHAFTMODEL], [SHAFTMATL]
 
@@ -792,17 +792,17 @@ SELECT PLAYERNAME, [BRAND], [SHAFTMATL] FROM IRONSETTABLE_SHAFT GROUP BY PLAYERN
 
       SELECT
 
-"Matl Descr" AS Brand, COUNT("SHAFTMATL") AS "Count",
+[Matl Descr] AS Brand, COUNT([SHAFTMATL]) AS [Count],
 
-(SELECT COUNT("SHAFTMATL") FROM IRONSHAFTMATLTABLE) AS TOTAL
+(SELECT COUNT([SHAFTMATL]) FROM IRONSHAFTMATLTABLE) AS TOTAL
 
   FROM IRONSHAFTMATLTABLE
 
-  LEFT OUTER JOIN [LKP].[Material Codes and Descript] ON "Matl Descr" = "SHAFTMATL" 
+  LEFT OUTER JOIN [LKP].[Material Codes and Descript] ON [Matl Descr] = [SHAFTMATL] 
 
-  GROUP BY "Matl Descr"
+  GROUP BY [Matl Descr]
 
-      ORDER BY COUNT("SHAFTMATL") DESC, "Matl Descr" ASC;
+      ORDER BY COUNT([SHAFTMATL]) DESC, [Matl Descr] ASC;
 
       
 
@@ -816,7 +816,7 @@ FROM Input.[Iron] a
 
 LEFT OUTER JOIN Input.[Shaft] b ON a.PLAYERNAME = b.PLAYERNAME and a.[First Day]= b.[First Day] and a.[SID] = b.[SID] and a.[CLUBCODE] = b.[SHAFTCLUBCODE]
 
-WHERE a."SID" = @SID AND a."First Day" = @FIRSTDAY and [SHAFTEQUIPTYPE]= 'IRON' and isset = 1
+WHERE a.[SID] = @SID AND a.[First Day] = @FIRSTDAY and [SHAFTEQUIPTYPE]= 'IRON' and isset = 1
 
 group by a.PLAYERNAME, [CLUBCODE], [BRAND], [MODEL], [SHAFTMFGR], [SHAFTBRAND], [SHAFTMODEL], [SHAFTMATL]
 
@@ -830,17 +830,17 @@ SELECT PLAYERNAME, [SHAFTMFGR] from IRONSETTABLE_SHAFT Group by PLAYERNAME, [SHA
 
       SELECT
 
-"Mfgr Descr" AS Brand, COUNT("SHAFTMFGR") AS "Count",
+[Mfgr Descr] AS Brand, COUNT([SHAFTMFGR]) AS [Count],
 
-(SELECT COUNT("SHAFTMFGR") FROM IRONSHAFTMFGRTABLE) AS TOTAL
+(SELECT COUNT([SHAFTMFGR]) FROM IRONSHAFTMFGRTABLE) AS TOTAL
 
   FROM IRONSHAFTMFGRTABLE
 
-  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON "Mfgr Descr" = "SHAFTMFGR" 
+  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON [Mfgr Descr] = [SHAFTMFGR] 
 
-  GROUP BY "Mfgr Descr"
+  GROUP BY [Mfgr Descr]
 
-      ORDER BY COUNT("SHAFTMFGR") DESC, "Mfgr Descr" ASC;
+      ORDER BY COUNT([SHAFTMFGR]) DESC, [Mfgr Descr] ASC;
 
 
 
@@ -854,7 +854,7 @@ FROM Input.[Iron] a
 
 LEFT OUTER JOIN Input.[Grip] b ON a.PLAYERNAME = b.PLAYERNAME and a.[First Day]= b.[First Day] and a.[SID] = b.[SID] and a.[CLUBCODE] = b.[GripCLUBCODE]
 
-WHERE a."SID" = @SID AND a."First Day" = @FIRSTDAY and [GripEQUIPTYPE]= 'IRON' and isset = 1
+WHERE a.[SID] = @SID AND a.[First Day] = @FIRSTDAY and [GripEQUIPTYPE]= 'IRON' and isset = 1
 
 group by a.PLAYERNAME, [CLUBCODE], [BRAND], [MODEL], [GripMFGR], [GripBRAND], [GripMODEL], [GripMATL]
 
@@ -870,19 +870,19 @@ SELECT PLAYERNAME, [GRIPBRAND], GRIPMODEL FROM IRONSETTABLE_Grip GROUP BY PLAYER
 
       SELECT
 
-"Mfgr Descr" AS Brand, "Model Descr" as Model, COUNT(GRIPBRAND) AS "Count",
+[Mfgr Descr] AS Brand, [Model Descr] as Model, COUNT(GRIPBRAND) AS [Count],
 
-(SELECT COUNT([GRIPBRAND]) FROM IRONGripBRANDTABLE) AS "TOTAL"
+(SELECT COUNT([GRIPBRAND]) FROM IRONGripBRANDTABLE) AS [TOTAL]
 
   FROM IRONGripBRANDTABLE
 
-  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON "Mfgr Descr" = GRIPBRAND
+  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON [Mfgr Descr] = GRIPBRAND
 
-  LEFT OUTER JOIN LKP.[Model Codes and Descr] ON "Model Descr" = GRIPMODEL 
+  LEFT OUTER JOIN LKP.[Model Codes and Descr] ON [Model Descr] = GRIPMODEL 
 
-   GROUP BY "Mfgr Descr", "Model Descr"
+   GROUP BY [Mfgr Descr], [Model Descr]
 
-      ORDER BY "Mfgr Descr" ASC, Model ASC;
+      ORDER BY [Mfgr Descr] ASC, Model ASC;
 
       
 
@@ -896,7 +896,7 @@ FROM Input.[Iron] a
 
 LEFT OUTER JOIN Input.[Grip] b ON a.PLAYERNAME = b.PLAYERNAME and a.[First Day]= b.[First Day] and a.[SID] = b.[SID] and a.[CLUBCODE] = b.[GripCLUBCODE]
 
-WHERE a."SID" = @SID AND a."First Day" = @FIRSTDAY and [GripEQUIPTYPE]= 'IRON' and isset = 1
+WHERE a.[SID] = @SID AND a.[First Day] = @FIRSTDAY and [GripEQUIPTYPE]= 'IRON' and isset = 1
 
 group by a.PLAYERNAME, [CLUBCODE], [BRAND], [MODEL], [GripMFGR], [GripBRAND], [GripMODEL], [GripMATL]
 
@@ -912,17 +912,17 @@ SELECT PLAYERNAME, [BRAND], [GripMATL] FROM IRONSETTABLE_Grip GROUP BY PLAYERNAM
 
       SELECT
 
-"Matl Descr" AS Brand, COUNT("GripMATL") AS "Count",
+[Matl Descr] AS Brand, COUNT([GripMATL]) AS [Count],
 
-(SELECT COUNT("GripMATL") FROM IRONGripMATLTABLE) AS TOTAL
+(SELECT COUNT([GripMATL]) FROM IRONGripMATLTABLE) AS TOTAL
 
   FROM IRONGripMATLTABLE
 
-  LEFT OUTER JOIN [LKP].[Material Codes and Descript] ON "Matl Descr" = "GripMATL" 
+  LEFT OUTER JOIN [LKP].[Material Codes and Descript] ON [Matl Descr] = [GripMATL] 
 
-  GROUP BY "Matl Descr"
+  GROUP BY [Matl Descr]
 
-      ORDER BY COUNT("GripMATL") DESC, "Matl Descr" ASC;
+      ORDER BY COUNT([GripMATL]) DESC, [Matl Descr] ASC;
 
       
 
@@ -936,7 +936,7 @@ FROM Input.[Iron] a
 
 LEFT OUTER JOIN Input.[Grip] b ON a.PLAYERNAME = b.PLAYERNAME and a.[First Day]= b.[First Day] and a.[SID] = b.[SID] and a.[CLUBCODE] = b.[GripCLUBCODE]
 
-WHERE a."SID" = @SID AND a."First Day" = @FIRSTDAY and [GripEQUIPTYPE]= 'IRON' and isset = 1
+WHERE a.[SID] = @SID AND a.[First Day] = @FIRSTDAY and [GripEQUIPTYPE]= 'IRON' and isset = 1
 
 group by a.PLAYERNAME, [CLUBCODE], [BRAND], [MODEL], [GripMFGR], [GripBRAND], [GripMODEL], [GripMATL]
 
@@ -950,17 +950,17 @@ SELECT PLAYERNAME, [GripMFGR] from IRONSETTABLE_Grip Group by PLAYERNAME, [GripM
 
       SELECT
 
-"Mfgr Descr" AS Brand, COUNT("GripMFGR") AS "Count",
+[Mfgr Descr] AS Brand, COUNT([GripMFGR]) AS [Count],
 
-(SELECT COUNT("GripMFGR") FROM IRONGripMFGRTABLE) AS TOTAL
+(SELECT COUNT([GripMFGR]) FROM IRONGripMFGRTABLE) AS TOTAL
 
   FROM IRONGripMFGRTABLE
 
-  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON "Mfgr Descr" = "GripMFGR" 
+  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON [Mfgr Descr] = [GripMFGR] 
 
-  GROUP BY "Mfgr Descr"
+  GROUP BY [Mfgr Descr]
 
-      ORDER BY COUNT("GripMFGR") DESC, "Mfgr Descr" ASC;
+      ORDER BY COUNT([GripMFGR]) DESC, [Mfgr Descr] ASC;
 
 
 
@@ -974,7 +974,7 @@ FROM Input.[Iron] a
 
 LEFT OUTER JOIN Input.[Shaft] b ON a.PLAYERNAME = b.PLAYERNAME and a.[First Day]= b.[First Day] and a.[SID] = b.[SID] and a.[CLUBCODE] = b.[SHAFTCLUBCODE]
 
-WHERE a."SID" = @SID AND a."First Day" = @FIRSTDAY and [SHAFTEQUIPTYPE]= 'IRON' and [CLUBCODE] like '%^%'
+WHERE a.[SID] = @SID AND a.[First Day] = @FIRSTDAY and [SHAFTEQUIPTYPE]= 'IRON' and [CLUBCODE] like '%^%'
 
 group by a.PLAYERNAME, [CLUBCODE], [BRAND], [MODEL], [SHAFTMFGR], [SHAFTBRAND], [SHAFTMODEL], [SHAFTMATL]
 
@@ -994,17 +994,17 @@ SELECT PLAYERNAME, [BRAND], [SHAFTMATL] FROM IRONSETTABLE_SHAFT GROUP BY PLAYERN
 
       SELECT
 
-"Matl Descr" AS Brand, COUNT("SHAFTMATL") AS "Count",
+[Matl Descr] AS Brand, COUNT([SHAFTMATL]) AS [Count],
 
-(SELECT COUNT("SHAFTMATL") FROM IRONSHAFTMATLTABLE) AS TOTAL
+(SELECT COUNT([SHAFTMATL]) FROM IRONSHAFTMATLTABLE) AS TOTAL
 
   FROM IRONSHAFTMATLTABLE
 
-  LEFT OUTER JOIN [LKP].[Material Codes and Descript] ON "Matl Descr" = "SHAFTMATL" 
+  LEFT OUTER JOIN [LKP].[Material Codes and Descript] ON [Matl Descr] = [SHAFTMATL] 
 
-  GROUP BY "Matl Descr"
+  GROUP BY [Matl Descr]
 
-      ORDER BY COUNT("SHAFTMATL") DESC, "Matl Descr" ASC;
+      ORDER BY COUNT([SHAFTMATL]) DESC, [Matl Descr] ASC;
 
 
 
@@ -1020,7 +1020,7 @@ FROM Input.[Iron] a
 
 LEFT OUTER JOIN Input.[Shaft] b ON a.PLAYERNAME = b.PLAYERNAME and a.[First Day]= b.[First Day] and a.[SID] = b.[SID] and a.[CLUBCODE] = b.[SHAFTCLUBCODE]
 
-WHERE a."SID" = @SID AND a."First Day" = @FIRSTDAY and [SHAFTEQUIPTYPE]= 'IRON' and [CLUBCODE] like '%^%'
+WHERE a.[SID] = @SID AND a.[First Day] = @FIRSTDAY and [SHAFTEQUIPTYPE]= 'IRON' and [CLUBCODE] like '%^%'
 
 group by a.PLAYERNAME, [CLUBCODE], [BRAND], [MODEL], [SHAFTMFGR], [SHAFTBRAND], [SHAFTMODEL], [SHAFTMATL]
 
@@ -1034,17 +1034,17 @@ SELECT PLAYERNAME, [SHAFTMFGR] from IRONSETTABLE_SHAFT Group by PLAYERNAME, [SHA
 
       SELECT
 
-"Mfgr Descr" AS Brand, COUNT("SHAFTMFGR") AS "Count",
+[Mfgr Descr] AS Brand, COUNT([SHAFTMFGR]) AS [Count],
 
-(SELECT COUNT("SHAFTMFGR") FROM IRONSHAFTMFGRTABLE) AS TOTAL
+(SELECT COUNT([SHAFTMFGR]) FROM IRONSHAFTMFGRTABLE) AS TOTAL
 
   FROM IRONSHAFTMFGRTABLE
 
-  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON "Mfgr Descr" = "SHAFTMFGR" 
+  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON [Mfgr Descr] = [SHAFTMFGR] 
 
-  GROUP BY "Mfgr Descr"
+  GROUP BY [Mfgr Descr]
 
-      ORDER BY COUNT("SHAFTMFGR") DESC, "Mfgr Descr" ASC;
+      ORDER BY COUNT([SHAFTMFGR]) DESC, [Mfgr Descr] ASC;
 
 
 
@@ -1060,7 +1060,7 @@ FROM Input.[Iron] a
 
 LEFT OUTER JOIN Input.[Shaft] b ON a.PLAYERNAME = b.PLAYERNAME and a.[First Day]= b.[First Day] and a.[SID] = b.[SID] and a.[CLUBCODE] = b.[SHAFTCLUBCODE]
 
-WHERE a."SID" = @SID AND a."First Day" = @FIRSTDAY and [SHAFTEQUIPTYPE]= 'IRON' and [CLUBCODE] like '%^%'
+WHERE a.[SID] = @SID AND a.[First Day] = @FIRSTDAY and [SHAFTEQUIPTYPE]= 'IRON' and [CLUBCODE] like '%^%'
 
 group by a.PLAYERNAME, [CLUBCODE], [BRAND], [MODEL], [SHAFTMFGR], [SHAFTBRAND], [SHAFTMODEL], [SHAFTMATL]
 
@@ -1074,17 +1074,17 @@ SELECT PLAYERNAME, [SHAFTBRAND] from IRONSETTABLE_SHAFT Group by PLAYERNAME, [SH
 
       SELECT
 
-"Mfgr Descr" AS Brand, COUNT("SHAFTBRAND") AS "Count",
+[Mfgr Descr] AS Brand, COUNT([SHAFTBRAND]) AS [Count],
 
-(SELECT COUNT("SHAFTBRAND") FROM IRONSHAFTBRANDTABLE) AS TOTAL
+(SELECT COUNT([SHAFTBRAND]) FROM IRONSHAFTBRANDTABLE) AS TOTAL
 
   FROM IRONSHAFTBRANDTABLE
 
-  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON "Mfgr Descr" = "SHAFTBRAND"
+  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON [Mfgr Descr] = [SHAFTBRAND]
 
-  GROUP BY "Mfgr Descr"
+  GROUP BY [Mfgr Descr]
 
-      ORDER BY COUNT("SHAFTBRAND") DESC, "Mfgr Descr" ASC;
+      ORDER BY COUNT([SHAFTBRAND]) DESC, [Mfgr Descr] ASC;
 
 
 
@@ -1094,21 +1094,21 @@ ELSE IF (@REPORTNAME = 'Utility Iron Shaft Brand Model')
 
       SELECT
 
-"Mfgr Descr" AS Brand, "Model Descr" as Model, COUNT("SHAFTBRAND") AS "Count",
+[Mfgr Descr] AS Brand, [Model Descr] as Model, COUNT([SHAFTBRAND]) AS [Count],
 
-(SELECT COUNT("SHAFTBRAND") FROM [Input].[Shaft] WHERE "SID" = @SID AND "First Day" = @FIRSTDAY AND "SHAFTEQUIPTYPE" = 'IRON' and shaftclubcode like '%^%') AS " TOTAL"
+(SELECT COUNT([SHAFTBRAND]) FROM [Input].[Shaft] WHERE [SID] = @SID AND [First Day] = @FIRSTDAY AND [SHAFTEQUIPTYPE] = 'IRON' and shaftclubcode like '%^%') AS [ TOTAL]
 
   FROM [Input].[Shaft]
 
-  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON "Mfgr Descr" = "SHAFTBRAND"
+  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON [Mfgr Descr] = [SHAFTBRAND]
 
-  LEFT OUTER JOIN LKP.[Model Codes and Descr] ON "Model Descr" = "SHAFTMODEL" 
+  LEFT OUTER JOIN LKP.[Model Codes and Descr] ON [Model Descr] = [SHAFTMODEL] 
 
-  WHERE [SID]= @SID AND [First Day] = @FIRSTDAY AND "SHAFTEQUIPTYPE" = 'IRON' and [SHAFTCLUBCODE] like '%^%'
+  WHERE [SID]= @SID AND [First Day] = @FIRSTDAY AND [SHAFTEQUIPTYPE] = 'IRON' and [SHAFTCLUBCODE] like '%^%'
 
-  GROUP BY "Mfgr Descr", "Model Descr"
+  GROUP BY [Mfgr Descr], [Model Descr]
 
-      ORDER BY "Mfgr Descr" ASC, Model ASC;
+      ORDER BY [Mfgr Descr] ASC, Model ASC;
 
 
 
@@ -1118,21 +1118,21 @@ ELSE IF (@REPORTNAME = 'Wood Shaft Brand Model')
 
       SELECT
 
-"Mfgr Descr" AS Brand, "Model Descr" as Model, COUNT("SHAFTBRAND") AS "Count",
+[Mfgr Descr] AS Brand, [Model Descr] as Model, COUNT([SHAFTBRAND]) AS [Count],
 
-(SELECT COUNT("SHAFTBRAND") FROM [Input].[Shaft] WHERE "SID" = @SID AND "First Day" = @FIRSTDAY AND "SHAFTEQUIPTYPE" = 'WOOD') AS " TOTAL"
+(SELECT COUNT([SHAFTBRAND]) FROM [Input].[Shaft] WHERE [SID] = @SID AND [First Day] = @FIRSTDAY AND [SHAFTEQUIPTYPE] = 'WOOD') AS [ TOTAL]
 
   FROM [Input].[Shaft]
 
-  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON "Mfgr Descr" = "SHAFTBRAND"
+  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON [Mfgr Descr] = [SHAFTBRAND]
 
-  LEFT OUTER JOIN LKP.[Model Codes and Descr] ON "Model Descr" = "SHAFTMODEL" 
+  LEFT OUTER JOIN LKP.[Model Codes and Descr] ON [Model Descr] = [SHAFTMODEL] 
 
-  WHERE [SID]= @SID AND [First Day] = @FIRSTDAY AND "SHAFTEQUIPTYPE" = 'WOOD'
+  WHERE [SID]= @SID AND [First Day] = @FIRSTDAY AND [SHAFTEQUIPTYPE] = 'WOOD'
 
-  GROUP BY "Mfgr Descr", "Model Descr"
+  GROUP BY [Mfgr Descr], [Model Descr]
 
-      ORDER BY "Mfgr Descr" ASC, Model ASC;
+      ORDER BY [Mfgr Descr] ASC, Model ASC;
 
 
 
@@ -1142,19 +1142,19 @@ ELSE IF (@REPORTNAME = 'Wood Shaft Manufacturer Model')
 
       SELECT
 
-"Mfgr Descr" AS Brand, COUNT(SHAFTMFGR) AS "Count",
+[Mfgr Descr] AS Brand, COUNT(SHAFTMFGR) AS [Count],
 
-(SELECT COUNT("SHAFTMATL") FROM [Input].[Shaft] WHERE "SID" = @SID AND "First Day" = @FIRSTDAY AND [SHAFTEQUIPTYPE] = 'WOOD') AS TOTAL
+(SELECT COUNT([SHAFTMATL]) FROM [Input].[Shaft] WHERE [SID] = @SID AND [First Day] = @FIRSTDAY AND [SHAFTEQUIPTYPE] = 'WOOD') AS TOTAL
 
   FROM [Input].[Shaft]
 
-  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON "Mfgr Descr" = SHAFTMFGR 
+  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON [Mfgr Descr] = SHAFTMFGR 
 
   WHERE [SID]= @SID AND [First Day] = @FIRSTDAY AND [SHAFTEQUIPTYPE] = 'WOOD'
 
-  GROUP BY "Mfgr Descr"
+  GROUP BY [Mfgr Descr]
 
-      ORDER BY COUNT(SHAFTMFGR) DESC, "Mfgr Descr" ASC;
+      ORDER BY COUNT(SHAFTMFGR) DESC, [Mfgr Descr] ASC;
 
 
 
@@ -1164,19 +1164,19 @@ ELSE IF (@REPORTNAME = 'Wood Shaft Material Model')
 
       SELECT
 
-"Matl Descr" AS Brand, COUNT("SHAFTMATL") AS "Count",
+[Matl Descr] AS Brand, COUNT([SHAFTMATL]) AS [Count],
 
-(SELECT COUNT("SHAFTMATL") FROM [Input].[Shaft] WHERE "SID" = @SID AND "First Day" = @FIRSTDAY AND [SHAFTEQUIPTYPE] = 'WOOD') AS TOTAL
+(SELECT COUNT([SHAFTMATL]) FROM [Input].[Shaft] WHERE [SID] = @SID AND [First Day] = @FIRSTDAY AND [SHAFTEQUIPTYPE] = 'WOOD') AS TOTAL
 
   FROM [Input].[Shaft]
 
-  LEFT OUTER JOIN [LKP].[Material Codes and Descript] ON "Matl Descr" = "SHAFTMATL" 
+  LEFT OUTER JOIN [LKP].[Material Codes and Descript] ON [Matl Descr] = [SHAFTMATL] 
 
   WHERE [SID]= @SID AND [First Day] = @FIRSTDAY AND [SHAFTEQUIPTYPE] = 'WOOD'
 
-  GROUP BY "Matl Descr"
+  GROUP BY [Matl Descr]
 
-      ORDER BY COUNT("SHAFTMATL") DESC, "Matl Descr" ASC;
+      ORDER BY COUNT([SHAFTMATL]) DESC, [Matl Descr] ASC;
 
 
 
@@ -1186,21 +1186,21 @@ ELSE IF (@REPORTNAME = 'Wedge Shaft Brand Model')
 
       SELECT
 
-"Mfgr Descr" AS Brand, "Model Descr" as Model, COUNT("SHAFTBRAND") AS "Count",
+[Mfgr Descr] AS Brand, [Model Descr] as Model, COUNT([SHAFTBRAND]) AS [Count],
 
-(SELECT COUNT("SHAFTBRAND") FROM [Input].[Shaft] WHERE "SID" = @SID AND "First Day" = @FIRSTDAY AND "SHAFTEQUIPTYPE" = 'WEDG') AS " TOTAL"
+(SELECT COUNT([SHAFTBRAND]) FROM [Input].[Shaft] WHERE [SID] = @SID AND [First Day] = @FIRSTDAY AND [SHAFTEQUIPTYPE] = 'WEDG') AS [ TOTAL]
 
   FROM [Input].[Shaft]
 
-  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON "Mfgr Descr" = "SHAFTBRAND"
+  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON [Mfgr Descr] = [SHAFTBRAND]
 
-  LEFT OUTER JOIN LKP.[Model Codes and Descr] ON "Model Descr" = "SHAFTMODEL" 
+  LEFT OUTER JOIN LKP.[Model Codes and Descr] ON [Model Descr] = [SHAFTMODEL] 
 
-  WHERE [SID]= @SID AND [First Day] = @FIRSTDAY AND "SHAFTEQUIPTYPE" = 'WEDG'
+  WHERE [SID]= @SID AND [First Day] = @FIRSTDAY AND [SHAFTEQUIPTYPE] = 'WEDG'
 
-  GROUP BY "Mfgr Descr", "Model Descr"
+  GROUP BY [Mfgr Descr], [Model Descr]
 
-      ORDER BY "Mfgr Descr" ASC, Model ASC;
+      ORDER BY [Mfgr Descr] ASC, Model ASC;
 
 
 
@@ -1210,19 +1210,19 @@ ELSE IF (@REPORTNAME = 'Wedge Shaft Manufacturer Model')
 
       SELECT
 
-"Mfgr Descr" AS Brand, COUNT(SHAFTMFGR) AS "Count",
+[Mfgr Descr] AS Brand, COUNT(SHAFTMFGR) AS [Count],
 
-(SELECT COUNT("SHAFTMATL") FROM [Input].[Shaft] WHERE "SID" = @SID AND "First Day" = @FIRSTDAY AND [SHAFTEQUIPTYPE] = 'WEDG') AS TOTAL
+(SELECT COUNT([SHAFTMATL]) FROM [Input].[Shaft] WHERE [SID] = @SID AND [First Day] = @FIRSTDAY AND [SHAFTEQUIPTYPE] = 'WEDG') AS TOTAL
 
   FROM [Input].[Shaft]
 
-  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON "Mfgr Descr" = SHAFTMFGR 
+  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON [Mfgr Descr] = SHAFTMFGR 
 
   WHERE [SID]= @SID AND [First Day] = @FIRSTDAY AND [SHAFTEQUIPTYPE] = 'WEDG'
 
-  GROUP BY "Mfgr Descr"
+  GROUP BY [Mfgr Descr]
 
-      ORDER BY COUNT(SHAFTMFGR) DESC, "Mfgr Descr" ASC;
+      ORDER BY COUNT(SHAFTMFGR) DESC, [Mfgr Descr] ASC;
 
 
 
@@ -1232,19 +1232,19 @@ ELSE IF (@REPORTNAME = 'Wedge Shaft Material Model')
 
       SELECT
 
-"Matl Descr" AS Brand, COUNT("SHAFTMATL") AS "Count",
+[Matl Descr] AS Brand, COUNT([SHAFTMATL]) AS [Count],
 
-(SELECT COUNT("SHAFTMATL") FROM [Input].[Shaft] WHERE "SID" = @SID AND "First Day" = @FIRSTDAY AND [SHAFTEQUIPTYPE] = 'WEDG') AS TOTAL
+(SELECT COUNT([SHAFTMATL]) FROM [Input].[Shaft] WHERE [SID] = @SID AND [First Day] = @FIRSTDAY AND [SHAFTEQUIPTYPE] = 'WEDG') AS TOTAL
 
   FROM [Input].[Shaft]
 
-  LEFT OUTER JOIN [LKP].[Material Codes and Descript] ON "Matl Descr" = "SHAFTMATL" 
+  LEFT OUTER JOIN [LKP].[Material Codes and Descript] ON [Matl Descr] = [SHAFTMATL] 
 
   WHERE [SID]= @SID AND [First Day] = @FIRSTDAY AND [SHAFTEQUIPTYPE] = 'WEDG'
 
-  GROUP BY "Matl Descr"
+  GROUP BY [Matl Descr]
 
-      ORDER BY COUNT("SHAFTMATL") DESC, "Matl Descr" ASC;
+      ORDER BY COUNT([SHAFTMATL]) DESC, [Matl Descr] ASC;
 
       
 
@@ -1254,21 +1254,21 @@ ELSE IF (@REPORTNAME = 'Wedge Grip Brand Model')
 
       SELECT
 
-"Mfgr Descr" AS Brand, "Model Descr" as Model, COUNT("GripBRAND") AS "Count",
+[Mfgr Descr] AS Brand, [Model Descr] as Model, COUNT([GripBRAND]) AS [Count],
 
-(SELECT COUNT("GripBRAND") FROM [Input].[Grip] WHERE "SID" = @SID AND "First Day" = @FIRSTDAY AND "GripEQUIPTYPE" = 'WEDG') AS " TOTAL"
+(SELECT COUNT([GripBRAND]) FROM [Input].[Grip] WHERE [SID] = @SID AND [First Day] = @FIRSTDAY AND [GripEQUIPTYPE] = 'WEDG') AS [ TOTAL]
 
   FROM [Input].[Grip]
 
-  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON "Mfgr Descr" = "GripBRAND"
+  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON [Mfgr Descr] = [GripBRAND]
 
-  LEFT OUTER JOIN LKP.[Model Codes and Descr] ON "Model Descr" = "GripMODEL" 
+  LEFT OUTER JOIN LKP.[Model Codes and Descr] ON [Model Descr] = [GripMODEL] 
 
-  WHERE [SID]= @SID AND [First Day] = @FIRSTDAY AND "GripEQUIPTYPE" = 'WEDG'
+  WHERE [SID]= @SID AND [First Day] = @FIRSTDAY AND [GripEQUIPTYPE] = 'WEDG'
 
-  GROUP BY "Mfgr Descr", "Model Descr"
+  GROUP BY [Mfgr Descr], [Model Descr]
 
-      ORDER BY "Mfgr Descr" ASC, Model ASC;
+      ORDER BY [Mfgr Descr] ASC, Model ASC;
 
 
 
@@ -1278,19 +1278,19 @@ ELSE IF (@REPORTNAME = 'Wedge Grip Manufacturer Model')
 
       SELECT
 
-"Mfgr Descr" AS Brand, COUNT(GripMFGR) AS "Count",
+[Mfgr Descr] AS Brand, COUNT(GripMFGR) AS [Count],
 
-(SELECT COUNT("GripMATL") FROM [Input].[Grip] WHERE "SID" = @SID AND "First Day" = @FIRSTDAY AND [GripEQUIPTYPE] = 'WEDG') AS TOTAL
+(SELECT COUNT([GripMATL]) FROM [Input].[Grip] WHERE [SID] = @SID AND [First Day] = @FIRSTDAY AND [GripEQUIPTYPE] = 'WEDG') AS TOTAL
 
   FROM [Input].[Grip]
 
-  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON "Mfgr Descr" = GripMFGR 
+  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON [Mfgr Descr] = GripMFGR 
 
   WHERE [SID]= @SID AND [First Day] = @FIRSTDAY AND [GripEQUIPTYPE] = 'WEDG'
 
-  GROUP BY "Mfgr Descr"
+  GROUP BY [Mfgr Descr]
 
-      ORDER BY COUNT(GripMFGR) DESC, "Mfgr Descr" ASC;
+      ORDER BY COUNT(GripMFGR) DESC, [Mfgr Descr] ASC;
 
 
 
@@ -1300,19 +1300,19 @@ ELSE IF (@REPORTNAME = 'Wedge Grip Material Model')
 
       SELECT
 
-"Matl Descr" AS Brand, COUNT("GripMATL") AS "Count",
+[Matl Descr] AS Brand, COUNT([GripMATL]) AS [Count],
 
-(SELECT COUNT("GripMATL") FROM [Input].[Grip] WHERE "SID" = @SID AND "First Day" = @FIRSTDAY AND [GripEQUIPTYPE] = 'WEDG') AS TOTAL
+(SELECT COUNT([GripMATL]) FROM [Input].[Grip] WHERE [SID] = @SID AND [First Day] = @FIRSTDAY AND [GripEQUIPTYPE] = 'WEDG') AS TOTAL
 
   FROM [Input].[Grip]
 
-  LEFT OUTER JOIN [LKP].[Material Codes and Descript] ON "Matl Descr" = "GripMATL" 
+  LEFT OUTER JOIN [LKP].[Material Codes and Descript] ON [Matl Descr] = [GripMATL] 
 
   WHERE [SID]= @SID AND [First Day] = @FIRSTDAY AND [GripEQUIPTYPE] = 'WEDG'
 
-  GROUP BY "Matl Descr"
+  GROUP BY [Matl Descr]
 
-      ORDER BY COUNT("GripMATL") DESC, "Matl Descr" ASC;
+      ORDER BY COUNT([GripMATL]) DESC, [Matl Descr] ASC;
 
             
 
@@ -1322,21 +1322,21 @@ ELSE IF (@REPORTNAME = 'Wood Grip Brand Model')
 
       SELECT
 
-"Mfgr Descr" AS Brand, "Model Descr" as Model, COUNT("GripBRAND") AS "Count",
+[Mfgr Descr] AS Brand, [Model Descr] as Model, COUNT([GripBRAND]) AS [Count],
 
-(SELECT COUNT("GripBRAND") FROM [Input].[Grip] WHERE "SID" = @SID AND "First Day" = @FIRSTDAY AND "GripEQUIPTYPE" = 'WOOD') AS " TOTAL"
+(SELECT COUNT([GripBRAND]) FROM [Input].[Grip] WHERE [SID] = @SID AND [First Day] = @FIRSTDAY AND [GripEQUIPTYPE] = 'WOOD') AS [ TOTAL]
 
   FROM [Input].[Grip]
 
-  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON "Mfgr Descr" = "GripBRAND"
+  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON [Mfgr Descr] = [GripBRAND]
 
-  LEFT OUTER JOIN LKP.[Model Codes and Descr] ON "Model Descr" = "GripMODEL" 
+  LEFT OUTER JOIN LKP.[Model Codes and Descr] ON [Model Descr] = [GripMODEL] 
 
-  WHERE [SID]= @SID AND [First Day] = @FIRSTDAY AND "GripEQUIPTYPE" = 'WOOD'
+  WHERE [SID]= @SID AND [First Day] = @FIRSTDAY AND [GripEQUIPTYPE] = 'WOOD'
 
-  GROUP BY "Mfgr Descr", "Model Descr"
+  GROUP BY [Mfgr Descr], [Model Descr]
 
-      ORDER BY "Mfgr Descr" ASC, Model ASC;
+      ORDER BY [Mfgr Descr] ASC, Model ASC;
 
 
 
@@ -1346,19 +1346,19 @@ ELSE IF (@REPORTNAME = 'Wood Grip Manufacturer Model')
 
       SELECT
 
-"Mfgr Descr" AS Brand, COUNT(GripMFGR) AS "Count",
+[Mfgr Descr] AS Brand, COUNT(GripMFGR) AS [Count],
 
-(SELECT COUNT("GripMATL") FROM [Input].[Grip] WHERE "SID" = @SID AND "First Day" = @FIRSTDAY AND [GripEQUIPTYPE] = 'WOOD') AS TOTAL
+(SELECT COUNT([GripMATL]) FROM [Input].[Grip] WHERE [SID] = @SID AND [First Day] = @FIRSTDAY AND [GripEQUIPTYPE] = 'WOOD') AS TOTAL
 
   FROM [Input].[Grip]
 
-  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON "Mfgr Descr" = GripMFGR 
+  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON [Mfgr Descr] = GripMFGR 
 
   WHERE [SID]= @SID AND [First Day] = @FIRSTDAY AND [GripEQUIPTYPE] = 'WOOD'
 
-  GROUP BY "Mfgr Descr"
+  GROUP BY [Mfgr Descr]
 
-      ORDER BY COUNT(GripMFGR) DESC, "Mfgr Descr" ASC;
+      ORDER BY COUNT(GripMFGR) DESC, [Mfgr Descr] ASC;
 
 
 
@@ -1368,19 +1368,19 @@ ELSE IF (@REPORTNAME = 'Wood Grip Material Model')
 
       SELECT
 
-"Matl Descr" AS Brand, COUNT("GripMATL") AS "Count",
+[Matl Descr] AS Brand, COUNT([GripMATL]) AS [Count],
 
-(SELECT COUNT("GripMATL") FROM [Input].[Grip] WHERE "SID" = @SID AND "First Day" = @FIRSTDAY AND [GripEQUIPTYPE] = 'WOOD') AS TOTAL
+(SELECT COUNT([GripMATL]) FROM [Input].[Grip] WHERE [SID] = @SID AND [First Day] = @FIRSTDAY AND [GripEQUIPTYPE] = 'WOOD') AS TOTAL
 
   FROM [Input].[Grip]
 
-  LEFT OUTER JOIN [LKP].[Material Codes and Descript] ON "Matl Descr" = "GripMATL" 
+  LEFT OUTER JOIN [LKP].[Material Codes and Descript] ON [Matl Descr] = [GripMATL] 
 
   WHERE [SID]= @SID AND [First Day] = @FIRSTDAY AND [GripEQUIPTYPE] = 'WOOD'
 
-  GROUP BY "Matl Descr"
+  GROUP BY [Matl Descr]
 
-      ORDER BY COUNT("GripMATL") DESC, "Matl Descr" ASC;
+      ORDER BY COUNT([GripMATL]) DESC, [Matl Descr] ASC;
 
 
 
@@ -1394,21 +1394,21 @@ ELSE IF (@REPORTNAME = 'Putter Grip Brand Model')
 
       SELECT
 
-"Mfgr Descr" AS Brand, "Model Descr" as Model, COUNT("GripBRAND") AS "Count",
+[Mfgr Descr] AS Brand, [Model Descr] as Model, COUNT([GripBRAND]) AS [Count],
 
-(SELECT COUNT("GripBRAND") FROM [Input].[Grip] WHERE "SID" = @SID AND "First Day" = @FIRSTDAY AND "GripEQUIPTYPE" = 'PUTT') AS " TOTAL"
+(SELECT COUNT([GripBRAND]) FROM [Input].[Grip] WHERE [SID] = @SID AND [First Day] = @FIRSTDAY AND [GripEQUIPTYPE] = 'PUTT') AS [ TOTAL]
 
   FROM [Input].[Grip]
 
-  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON "Mfgr Descr" = "GripBRAND"
+  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON [Mfgr Descr] = [GripBRAND]
 
-  LEFT OUTER JOIN LKP.[Model Codes and Descr] ON "Model Descr" = "GripMODEL" 
+  LEFT OUTER JOIN LKP.[Model Codes and Descr] ON [Model Descr] = [GripMODEL] 
 
-  WHERE [SID]= @SID AND [First Day] = @FIRSTDAY AND "GripEQUIPTYPE" = 'PUTT'
+  WHERE [SID]= @SID AND [First Day] = @FIRSTDAY AND [GripEQUIPTYPE] = 'PUTT'
 
-  GROUP BY "Mfgr Descr", "Model Descr"
+  GROUP BY [Mfgr Descr], [Model Descr]
 
-      ORDER BY "Mfgr Descr" ASC, Model ASC;
+      ORDER BY [Mfgr Descr] ASC, Model ASC;
 
 
 
@@ -1418,19 +1418,19 @@ ELSE IF (@REPORTNAME = 'Putter Grip Manufacturer Model')
 
       SELECT
 
-"Mfgr Descr" AS Brand, COUNT(GripMFGR) AS "Count",
+[Mfgr Descr] AS Brand, COUNT(GripMFGR) AS [Count],
 
-(SELECT COUNT("GripMATL") FROM [Input].[Grip] WHERE "SID" = @SID AND "First Day" = @FIRSTDAY AND [GripEQUIPTYPE] = 'PUTT') AS TOTAL
+(SELECT COUNT([GripMATL]) FROM [Input].[Grip] WHERE [SID] = @SID AND [First Day] = @FIRSTDAY AND [GripEQUIPTYPE] = 'PUTT') AS TOTAL
 
   FROM [Input].[Grip]
 
-  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON "Mfgr Descr" = GripMFGR 
+  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON [Mfgr Descr] = GripMFGR 
 
   WHERE [SID]= @SID AND [First Day] = @FIRSTDAY AND [GripEQUIPTYPE] = 'PUTT'
 
-  GROUP BY "Mfgr Descr"
+  GROUP BY [Mfgr Descr]
 
-      ORDER BY COUNT(GripMFGR) DESC, "Mfgr Descr" ASC;
+      ORDER BY COUNT(GripMFGR) DESC, [Mfgr Descr] ASC;
 
 
 
@@ -1440,19 +1440,19 @@ ELSE IF (@REPORTNAME = 'Putter Grip Material Model')
 
       SELECT
 
-"Matl Descr" AS Brand, COUNT("GripMATL") AS "Count",
+[Matl Descr] AS Brand, COUNT([GripMATL]) AS [Count],
 
-(SELECT COUNT("GripMATL") FROM [Input].[Grip] WHERE "SID" = @SID AND "First Day" = @FIRSTDAY AND [GripEQUIPTYPE] = 'PUTT') AS TOTAL
+(SELECT COUNT([GripMATL]) FROM [Input].[Grip] WHERE [SID] = @SID AND [First Day] = @FIRSTDAY AND [GripEQUIPTYPE] = 'PUTT') AS TOTAL
 
   FROM [Input].[Grip]
 
-  LEFT OUTER JOIN [LKP].[Material Codes and Descript] ON "Matl Descr" = "GripMATL" 
+  LEFT OUTER JOIN [LKP].[Material Codes and Descript] ON [Matl Descr] = [GripMATL] 
 
   WHERE [SID]= @SID AND [First Day] = @FIRSTDAY AND [GripEQUIPTYPE] = 'PUTT'
 
-  GROUP BY "Matl Descr"
+  GROUP BY [Matl Descr]
 
-      ORDER BY COUNT("GripMATL") DESC, "Matl Descr" ASC;
+      ORDER BY COUNT([GripMATL]) DESC, [Matl Descr] ASC;
 
 
 
@@ -1466,21 +1466,21 @@ ELSE IF (@REPORTNAME = 'Wedge')
 
 --      SELECT
 
---"Mfgr Descr" AS Brand, "Model Descr" as Model, COUNT("BRAND") AS "Count",
+--[Mfgr Descr] AS Brand, [Model Descr] as Model, COUNT([BRAND]) AS [Count],
 
---(SELECT COUNT("BRAND") FROM [Input].[Wedge] WHERE "SID" = @SID AND "First Day" = @FIRSTDAY) AS "TOTAL"
+--(SELECT COUNT([BRAND]) FROM [Input].[Wedge] WHERE [SID] = @SID AND [First Day] = @FIRSTDAY) AS [TOTAL]
 
 --  FROM [Input].[Wedge]
 
---  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON "Mfgr Descr" = "BRAND"
+--  LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON [Mfgr Descr] = [BRAND]
 
---  LEFT OUTER JOIN LKP.[Model Codes and Descr] ON "Model Descr" = [MODEL] 
+--  LEFT OUTER JOIN LKP.[Model Codes and Descr] ON [Model Descr] = [MODEL] 
 
 --  WHERE [SID]= @SID AND [First Day] = @FIRSTDAY
 
---  GROUP BY "Mfgr Descr", "Model Descr"
+--  GROUP BY [Mfgr Descr], [Model Descr]
 
---      ORDER BY "Mfgr Descr" ASC, Model ASC;
+--      ORDER BY [Mfgr Descr] ASC, Model ASC;
 
 
 
@@ -1568,7 +1568,7 @@ ELSE
 
 --dummy select to set ourput variables for crystal reports
 
-SELECT 'asdf' AS Brand, 'asdf' AS Model, 11 as "Count", 12 as "TOTAL" WHERE 1=0;
+SELECT 'asdf' AS Brand, 'asdf' AS Model, 11 as [Count], 12 as [TOTAL] WHERE 1=0;
 
 
 

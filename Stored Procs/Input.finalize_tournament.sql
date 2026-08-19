@@ -56,11 +56,11 @@ SELECT [PKey]
       ,[INPUTNO]
 
   FROM [DARRELL_MASTER].[Input].[Wood] a
-  LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] brand ON BRAND = "Mfgr Descr"
-  LEFT OUTER JOIN LKP.[Model Codes and Descr] model on MODEL = "Model Descr"
-  LEFT OUTER JOIN LKP.[Material Codes and Descript] matl on MATERIAL = "Matl Descr"
+  LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] brand ON BRAND = [Mfgr Descr]
+  LEFT OUTER JOIN LKP.[Model Codes and Descr] model on MODEL = [Model Descr]
+  LEFT OUTER JOIN LKP.[Material Codes and Descript] matl on MATERIAL = [Matl Descr]
   LEFT OUTER JOIN LKP.[Size Codes and Description] size on SIZE = [Size Descr]
-  LEFT OUTER JOIN LKP.[Miscellaneous Codes and Des] misc on MISC = "Misc Descr"
+  LEFT OUTER JOIN LKP.[Miscellaneous Codes and Des] misc on MISC = [Misc Descr]
 
   where SID = @SID and [FIRST DAY] = @FIRSTDAY) data
   on inputnotable.PLAYERNAME2 = data.PLAYERNAME and inputnotable.INPUTNO2 = data.INPUTNO
@@ -85,7 +85,7 @@ SELECT [PKey]
       ,[DBRANDCODE]
       ,model.[Model Code] AS MODEL
       ,[DMODELCODE]
-      ,type.[Type Code] AS "TYPE"
+      ,type.[Type Code] AS [TYPE]
       ,DTYPECODE
       ,matl.[Matl Code] AS MATERIAL
       ,[DMATERIAL]
@@ -96,12 +96,12 @@ SELECT [PKey]
       ,[INPUTNO]
 
   FROM [DARRELL_MASTER].[Input].[Wedge] a
-  LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] brand ON BRAND = "Mfgr Descr"
-  LEFT OUTER JOIN LKP.[Model Codes and Descr] model on MODEL = "Model Descr"
-  LEFT OUTER JOIN LKP.[Material Codes and Descript] matl on MATERIAL = "Matl Descr"
+  LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] brand ON BRAND = [Mfgr Descr]
+  LEFT OUTER JOIN LKP.[Model Codes and Descr] model on MODEL = [Model Descr]
+  LEFT OUTER JOIN LKP.[Material Codes and Descript] matl on MATERIAL = [Matl Descr]
   LEFT OUTER JOIN LKP.[Size Codes and Description] size on SIZE = [Size Descr]
-  LEFT OUTER JOIN LKP.[Miscellaneous Codes and Des] misc on MISC = "Misc Descr"
-  LEFT OUTER JOIN LKP.[Type Codes and Description] type on [TYPE] = "Type Descr"
+  LEFT OUTER JOIN LKP.[Miscellaneous Codes and Des] misc on MISC = [Misc Descr]
+  LEFT OUTER JOIN LKP.[Type Codes and Description] type on [TYPE] = [Type Descr]
 
   where SID = @SID and [FIRST DAY] = @FIRSTDAY) data
   on inputnotable.PLAYERNAME2 = data.PLAYERNAME and inputnotable.INPUTNO2 = data.INPUTNO
@@ -127,7 +127,7 @@ SELECT [PKey]
       ,[DBRANDCODE]
       ,model.[Model Code] AS MODEL
       ,[DMODELCODE]
-      ,type.[Type Code] AS "TYPE"
+      ,type.[Type Code] AS [TYPE]
       ,DTYPECODE
       ,matl.[Matl Code] AS MATERIAL
       ,[DMATERIAL]
@@ -138,12 +138,12 @@ SELECT [PKey]
       ,[INPUTNO]
 
   FROM [DARRELL_MASTER].[Input].[Iron] a
-  LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] brand ON BRAND = "Mfgr Descr"
-  LEFT OUTER JOIN LKP.[Model Codes and Descr] model on MODEL = "Model Descr"
-  LEFT OUTER JOIN LKP.[Material Codes and Descript] matl on MATERIAL = "Matl Descr"
+  LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] brand ON BRAND = [Mfgr Descr]
+  LEFT OUTER JOIN LKP.[Model Codes and Descr] model on MODEL = [Model Descr]
+  LEFT OUTER JOIN LKP.[Material Codes and Descript] matl on MATERIAL = [Matl Descr]
   LEFT OUTER JOIN LKP.[Size Codes and Description] size on SIZE = [Size Descr]
-  --LEFT OUTER JOIN LKP.[Miscellaneous Codes and Des] misc on MISC = "Misc Descr"
-  LEFT OUTER JOIN LKP.[Type Codes and Description] type on [MISC] = "Type Descr"
+  --LEFT OUTER JOIN LKP.[Miscellaneous Codes and Des] misc on MISC = [Misc Descr]
+  LEFT OUTER JOIN LKP.[Type Codes and Description] type on [MISC] = [Type Descr]
 
   where SID = @SID and [FIRST DAY] = @FIRSTDAY) data
   on inputnotable.PLAYERNAME2 = data.PLAYERNAME and inputnotable.INPUTNO2 = data.INPUTNO
@@ -168,7 +168,7 @@ SELECT [PKey]
       ,[DBRANDCODE]
       ,model.[Model Code] AS MODEL
       ,[DMODELCODE]
-      ,type.[Type Code] AS "TYPE"
+      ,type.[Type Code] AS [TYPE]
       ,DTYPECODE
       ,matl.[Matl Code] AS MATERIAL
       ,[DMATERIAL]
@@ -179,12 +179,12 @@ SELECT [PKey]
       ,[INPUTNO]
 
   FROM [DARRELL_MASTER].[Input].[Putter] a
-  LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] brand ON BRAND = "Mfgr Descr"
-  LEFT OUTER JOIN LKP.[Model Codes and Descr] model on MODEL = "Model Descr"
-  LEFT OUTER JOIN LKP.[Material Codes and Descript] matl on MATERIAL = "Matl Descr"
+  LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] brand ON BRAND = [Mfgr Descr]
+  LEFT OUTER JOIN LKP.[Model Codes and Descr] model on MODEL = [Model Descr]
+  LEFT OUTER JOIN LKP.[Material Codes and Descript] matl on MATERIAL = [Matl Descr]
   LEFT OUTER JOIN LKP.[Size Codes and Description] size on SIZE = [Size Descr]
-  --LEFT OUTER JOIN LKP.[Miscellaneous Codes and Des] misc on MISC = "Misc Descr"
-  LEFT OUTER JOIN LKP.[Type Codes and Description] type on [TYPE] = "Type Descr"
+  --LEFT OUTER JOIN LKP.[Miscellaneous Codes and Des] misc on MISC = [Misc Descr]
+  LEFT OUTER JOIN LKP.[Type Codes and Description] type on [TYPE] = [Type Descr]
 
   where SID = @SID and [FIRST DAY] = @FIRSTDAY) data
   on inputnotable.PLAYERNAME2 = data.PLAYERNAME and inputnotable.INPUTNO2 = data.INPUTNO
@@ -292,24 +292,24 @@ SELECT [PLAYERNAME]
       ,[INPUTNO]
 
   FROM [DARRELL_MASTER].[Input].[All] a
-  LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] ballbrand ON BALLBRAND = ballbrand."Mfgr Descr"
-  LEFT OUTER JOIN LKP.[Model Codes and Descr] ballmodel on BALLMODEL = ballmodel."Model Descr"
-  LEFT OUTER JOIN LKP.[Material Codes and Descript] ballmatl on BALLMATERIAL = "Matl Descr"
-  LEFT OUTER JOIN LKP.[Miscellaneous Codes and Des] ballmisc on BALLMISC = "Misc Descr"
-  LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] bagbrand ON BAGBRAND = bagbrand."Mfgr Descr"
-  LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] glovebrand ON GLOVEBRAND = glovebrand."Mfgr Descr"
-  LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] shoebrand ON SHOEBRAND = shoebrand."Mfgr Descr"
-  LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] spikebrand ON SPIKEBRAND = spikebrand."Mfgr Descr"
-  LEFT OUTER JOIN LKP.[Model Codes and Descr] spikemodel on SPIKEMODEL = spikemodel."Model Descr"
-  LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] shirtbrand ON SHIRTBRAND = shirtbrand."Mfgr Descr"
-  LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] headgearbrand ON HEADGEARBRAND = headgearbrand."Mfgr Descr"
-  LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] sunglassesbrand ON GLASSESBRAND = sunglassesbrand."Mfgr Descr"
-  LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] caddyheadbrand ON CADDYHEADBRAND = caddyheadbrand."Mfgr Descr"
-  LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] towelbrand ON TOWELBRAND = towelbrand."Mfgr Descr"
-  LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] rangeplayerbrand ON RANGEPLAYERBRAND = rangeplayerbrand."Mfgr Descr"
-  LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] rangecaddiebrand ON RANGECADDIEBRAND = rangecaddiebrand."Mfgr Descr"
-  LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] travelbagbrand ON TRAVELBAGBRAND = travelbagbrand."Mfgr Descr"
-  LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] lmbrnd ON LAUNCHMONITORBRAND = lmbrnd."Mfgr Descr"
+  LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] ballbrand ON BALLBRAND = ballbrand.[Mfgr Descr]
+  LEFT OUTER JOIN LKP.[Model Codes and Descr] ballmodel on BALLMODEL = ballmodel.[Model Descr]
+  LEFT OUTER JOIN LKP.[Material Codes and Descript] ballmatl on BALLMATERIAL = [Matl Descr]
+  LEFT OUTER JOIN LKP.[Miscellaneous Codes and Des] ballmisc on BALLMISC = [Misc Descr]
+  LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] bagbrand ON BAGBRAND = bagbrand.[Mfgr Descr]
+  LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] glovebrand ON GLOVEBRAND = glovebrand.[Mfgr Descr]
+  LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] shoebrand ON SHOEBRAND = shoebrand.[Mfgr Descr]
+  LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] spikebrand ON SPIKEBRAND = spikebrand.[Mfgr Descr]
+  LEFT OUTER JOIN LKP.[Model Codes and Descr] spikemodel on SPIKEMODEL = spikemodel.[Model Descr]
+  LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] shirtbrand ON SHIRTBRAND = shirtbrand.[Mfgr Descr]
+  LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] headgearbrand ON HEADGEARBRAND = headgearbrand.[Mfgr Descr]
+  LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] sunglassesbrand ON GLASSESBRAND = sunglassesbrand.[Mfgr Descr]
+  LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] caddyheadbrand ON CADDYHEADBRAND = caddyheadbrand.[Mfgr Descr]
+  LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] towelbrand ON TOWELBRAND = towelbrand.[Mfgr Descr]
+  LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] rangeplayerbrand ON RANGEPLAYERBRAND = rangeplayerbrand.[Mfgr Descr]
+  LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] rangecaddiebrand ON RANGECADDIEBRAND = rangecaddiebrand.[Mfgr Descr]
+  LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] travelbagbrand ON TRAVELBAGBRAND = travelbagbrand.[Mfgr Descr]
+  LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] lmbrnd ON LAUNCHMONITORBRAND = lmbrnd.[Mfgr Descr]
   where SID = @SID and [FIRST DAY] = @FIRSTDAY) data
   on inputnotable.PLAYERNAME2 = data.PLAYERNAME and inputnotable.INPUTNO2 = data.INPUTNO
 ) x where PLAYERNAME IS NOT NULL
@@ -347,12 +347,12 @@ SELECT [PKey]
       ,[Mfgr Unknown]
       ,[INPUTNO]
   FROM [DARRELL_MASTER].[Input].[Shaft] a
-  LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] mfgr ON SHAFTMFGR = mfgr."Mfgr Descr"
-  LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] brand ON SHAFTBRAND = brand."Mfgr Descr"
-  LEFT OUTER JOIN LKP.[Model Codes and Descr] model on SHAFTMODEL = "Model Descr"
-  LEFT OUTER JOIN LKP.[Material Codes and Descript] matl on SHAFTMATL = "Matl Descr"
-  LEFT OUTER JOIN LKP.[Type Codes and Description] type on [SHAFTTYPE] = "Type Descr"
-  LEFT OUTER JOIN LKP.[Flex Codes and Desc] flex ON SHAFTFLEX = "Flex Descr"
+  LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] mfgr ON SHAFTMFGR = mfgr.[Mfgr Descr]
+  LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] brand ON SHAFTBRAND = brand.[Mfgr Descr]
+  LEFT OUTER JOIN LKP.[Model Codes and Descr] model on SHAFTMODEL = [Model Descr]
+  LEFT OUTER JOIN LKP.[Material Codes and Descript] matl on SHAFTMATL = [Matl Descr]
+  LEFT OUTER JOIN LKP.[Type Codes and Description] type on [SHAFTTYPE] = [Type Descr]
+  LEFT OUTER JOIN LKP.[Flex Codes and Desc] flex ON SHAFTFLEX = [Flex Descr]
 
   where SID = @SID and [FIRST DAY] = @FIRSTDAY) data
   on inputnotable.PLAYERNAME2 = data.PLAYERNAME and inputnotable.INPUTNO2 = data.INPUTNO
@@ -388,11 +388,11 @@ SELECT [PKey]
       ,[DMATERIAL]
       ,[INPUTNO]
   FROM [DARRELL_MASTER].[Input].[Grip] a
-  LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] mfgr ON GRIPMFGR = mfgr."Mfgr Descr"
-  LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] brand ON GRIPBRAND = brand."Mfgr Descr"
-  LEFT OUTER JOIN LKP.[Model Codes and Descr] model on GRIPMODEL = "Model Descr"
-  LEFT OUTER JOIN LKP.[Material Codes and Descript] matl on GRIPMATL = "Matl Descr"
-  LEFT OUTER JOIN LKP.[Type Codes and Description] type on [GRIPTYPE] = "Type Descr"
+  LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] mfgr ON GRIPMFGR = mfgr.[Mfgr Descr]
+  LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] brand ON GRIPBRAND = brand.[Mfgr Descr]
+  LEFT OUTER JOIN LKP.[Model Codes and Descr] model on GRIPMODEL = [Model Descr]
+  LEFT OUTER JOIN LKP.[Material Codes and Descript] matl on GRIPMATL = [Matl Descr]
+  LEFT OUTER JOIN LKP.[Type Codes and Description] type on [GRIPTYPE] = [Type Descr]
 
   where SID = @SID and [FIRST DAY] = @FIRSTDAY) data
   on inputnotable.PLAYERNAME2 = data.PLAYERNAME and inputnotable.INPUTNO2 = data.INPUTNO

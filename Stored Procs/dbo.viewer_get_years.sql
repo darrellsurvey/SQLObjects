@@ -22,15 +22,15 @@ BEGIN
 	IF @COMPANY = 'DARRELL'
 	
 	BEGIN
-	SELECT DISTINCT(YEAR("FIRST DAY")) as 'Year' from Player_Master.TOURNAMENTS_TABLE
-		order by YEAR("FIRST DAY") DESC
+	SELECT DISTINCT(YEAR([FIRST DAY])) as 'Year' from Player_Master.TOURNAMENTS_TABLE
+		order by YEAR([FIRST DAY]) DESC
 	END
 	
 	ELSE
 	
 	BEGIN
-	SELECT DISTINCT(YEAR("FIRST DAY")) as 'Year'  from Player_Master.TOURNAMENTS_TABLE WHERE YEAR([FIRST DAY]) > 2004
-		order by YEAR("FIRST DAY") DESC
+	SELECT DISTINCT(YEAR([FIRST DAY])) as 'Year'  from Player_Master.TOURNAMENTS_TABLE WHERE YEAR([FIRST DAY]) > 2004
+		order by YEAR([FIRST DAY]) DESC
 	END
 	*/
 	
@@ -38,17 +38,17 @@ BEGIN
 	IF @COMPANY = 'DARRELL SURVEY'
 	
 	BEGIN
-	SELECT DISTINCT(YEAR("FIRST DAY")) as 'Year' from Billing.AllOrdersYTD
+	SELECT DISTINCT(YEAR([FIRST DAY])) as 'Year' from Billing.AllOrdersYTD
 		where [Type]= @Tour
-		order by YEAR("FIRST DAY") DESC
+		order by YEAR([FIRST DAY]) DESC
 	END
 	
 	ELSE
 	
 	BEGIN
-	SELECT DISTINCT(YEAR("FIRST DAY")) as 'Year'  from Billing.AllOrdersYTD
+	SELECT DISTINCT(YEAR([FIRST DAY])) as 'Year'  from Billing.AllOrdersYTD
 		WHERE [Type]= @Tour and Company=@COMPANY and YEAR([First Day]) > 2004
-		order by YEAR("FIRST DAY") DESC
+		order by YEAR([FIRST DAY]) DESC
 	END
 
 

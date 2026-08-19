@@ -22,46 +22,46 @@ BEGIN
 
 SELECT a.PLAYERNAME, CATEGORY, EXTRA, b.SHAFTCLUBCODE AS WOODCLUBCODE, DCLUBCODE, 
 --wood info
-ISNULL(f."Mfgr Abbrev", f."Mfgr Descr") AS WOODBRAND, a.DBRANDCODE AS DWOODBRAND,
-h."Model Descr" AS WOODMODEL, a.DMODELCODE AS DWOODMODEL,
-ISNULL(i."Matl Abbrev", i."Matl Descr") AS WOODMATL, a.DMATERIAL AS DWOODMATERIAL,
-ISNULL(k."Size Abbrev", k."Size Descr") AS WOODSIZE, a.DSIZECODE AS DWOODSIZE,
+ISNULL(f.[Mfgr Abbrev], f.[Mfgr Descr]) AS WOODBRAND, a.DBRANDCODE AS DWOODBRAND,
+h.[Model Descr] AS WOODMODEL, a.DMODELCODE AS DWOODMODEL,
+ISNULL(i.[Matl Abbrev], i.[Matl Descr]) AS WOODMATL, a.DMATERIAL AS DWOODMATERIAL,
+ISNULL(k.[Size Abbrev], k.[Size Descr]) AS WOODSIZE, a.DSIZECODE AS DWOODSIZE,
 --shaft info
 b.SHAFTCLUBCODE AS SHAFTCLUBCODE, DCLUBCODE, 
-ISNULL(e."Mfgr Abbrev", e."Mfgr Descr") AS SHAFTMFGR, DMFGRCODE,
-ISNULL(c."Mfgr Abbrev", c."Mfgr Descr") AS SHAFTBRAND, b.DBRANDCODE,
-d."Model Descr" AS SHAFTMODEL, b.DMODELCODE,
-ISNULL(j."Matl Abbrev", j."Matl Descr") AS SHAFTMATL, b.DMATLCODE
+ISNULL(e.[Mfgr Abbrev], e.[Mfgr Descr]) AS SHAFTMFGR, DMFGRCODE,
+ISNULL(c.[Mfgr Abbrev], c.[Mfgr Descr]) AS SHAFTBRAND, b.DBRANDCODE,
+d.[Model Descr] AS SHAFTMODEL, b.DMODELCODE,
+ISNULL(j.[Matl Abbrev], j.[Matl Descr]) AS SHAFTMATL, b.DMATLCODE
 
 FROM (
-SELECT "PKey", PLAYERNAME, SID, "First Day", BRAND, DBRANDCODE, MODEL, DMODELCODE, SIZE, DSIZECODE, MATERIAL, DMATERIAL
+SELECT [PKey], PLAYERNAME, SID, [First Day], BRAND, DBRANDCODE, MODEL, DMODELCODE, SIZE, DSIZECODE, MATERIAL, DMATERIAL
 FROM input.wood
-WHERE "First Day" = @FIRSTDAY AND SID = @SID
-GROUP BY "PKey", PLAYERNAME, SID, "First Day", BRAND, DBRANDCODE, MODEL, DMODELCODE, SIZE, DSIZECODE, MATERIAL, DMATERIAL) a
+WHERE [First Day] = @FIRSTDAY AND SID = @SID
+GROUP BY [PKey], PLAYERNAME, SID, [First Day], BRAND, DBRANDCODE, MODEL, DMODELCODE, SIZE, DSIZECODE, MATERIAL, DMATERIAL) a
 
 
 LEFT OUTER JOIN (SELECT *,
-pkey - ((select MIN(pkey) FROM input.shaft WHERE "First Day" = @FIRSTDAY AND SID = @SID AND SHAFTEQUIPTYPE = 'WOOD') - 
-(select MIN(pkey) FROM input.wood WHERE "First Day" = @FIRSTDAY AND SID = @SID))
+pkey - ((select MIN(pkey) FROM input.shaft WHERE [First Day] = @FIRSTDAY AND SID = @SID AND SHAFTEQUIPTYPE = 'WOOD') - 
+(select MIN(pkey) FROM input.wood WHERE [First Day] = @FIRSTDAY AND SID = @SID))
 AS PKEYOFFSET
-FROM input.shaft WHERE "First Day" = @FIRSTDAY AND SID = @SID AND SHAFTEQUIPTYPE = 'WOOD') b
+FROM input.shaft WHERE [First Day] = @FIRSTDAY AND SID = @SID AND SHAFTEQUIPTYPE = 'WOOD') b
 ON a.PKey = PKEYOFFSET and a.PLAYERNAME = b.PLAYERNAME
 --shaft joins
-LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] e ON b.SHAFTMFGR = e."Mfgr Descr"
-LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] c ON b.SHAFTBRAND = c."Mfgr Descr"
-LEFT OUTER JOIN LKP.[Model Codes and Descr] d ON b.SHAFTMODEL = d."Model Descr"
-LEFT OUTER JOIN LKP.[Material Codes and Descript] j ON b.SHAFTMATL = j."Matl Descr"
+LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] e ON b.SHAFTMFGR = e.[Mfgr Descr]
+LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] c ON b.SHAFTBRAND = c.[Mfgr Descr]
+LEFT OUTER JOIN LKP.[Model Codes and Descr] d ON b.SHAFTMODEL = d.[Model Descr]
+LEFT OUTER JOIN LKP.[Material Codes and Descript] j ON b.SHAFTMATL = j.[Matl Descr]
 --wood joins
-LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] f ON a.BRAND = f."Mfgr Descr"
-LEFT OUTER JOIN LKP.[Model Codes and Descr] h ON a.MODEL = h."Model Descr"
-LEFT OUTER JOIN LKP.[Material Codes and Descript] i ON a.MATERIAL = i."Matl Descr"
+LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] f ON a.BRAND = f.[Mfgr Descr]
+LEFT OUTER JOIN LKP.[Model Codes and Descr] h ON a.MODEL = h.[Model Descr]
+LEFT OUTER JOIN LKP.[Material Codes and Descript] i ON a.MATERIAL = i.[Matl Descr]
 LEFT OUTER JOIN LKP.[Size Codes and Description] k on a.SIZE = k.[Size Code]
 
-LEFT OUTER JOIN Player_Master.PLAYERNAMES g on a.PLAYERNAME = g.PLAYERNAME and a.SID = g.SID AND a."First Day" = g.FIRSTDAY 
+LEFT OUTER JOIN Player_Master.PLAYERNAMES g on a.PLAYERNAME = g.PLAYERNAME and a.SID = g.SID AND a.[First Day] = g.FIRSTDAY 
 
 
 --no where--these fields will be null for players with no hybrids
-ORDER BY EXTRA, a.PLAYERNAME, b."PKey"
+ORDER BY EXTRA, a.PLAYERNAME, b.[PKey]
 
 
 END

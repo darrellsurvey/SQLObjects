@@ -118,7 +118,7 @@ ORDER BY [FIRST DAY] DESC;
 
 SELECT TOP 1 @SID = SID FROM [Player_Master].[TOURNAMENTS_TABLE] with (nolock)
 
-WHERE "TOURNAMENT NAME" = @TOURNAMENTNAME AND [FIRST DAY] = @FIRSTDAY;
+WHERE [TOURNAMENT NAME] = @TOURNAMENTNAME AND [FIRST DAY] = @FIRSTDAY;
 
 
 
@@ -126,13 +126,13 @@ IF (@REPORTNAME = 'Bag')
 
 
 
-SELECT COUNT([Mfgr Descr]) AS "COUNT", [Mfgr Descr] AS BRAND,
+SELECT COUNT([Mfgr Descr]) AS [COUNT], [Mfgr Descr] AS BRAND,
 
 	RIGHT( '0' + CAST(MONTH(a.[FIRST DAY]) AS NVARCHAR), 2) + '/' +
 
 	CAST(DAY(a.[First Day]) AS NVARCHAR) + '/' +
 
-	CAST(YEAR(a.[FIRST DAY]) AS NVARCHAR) AS "DATE", [Tournament Name] AS TOURNAMENT, [TYPE] AS TOUR
+	CAST(YEAR(a.[FIRST DAY]) AS NVARCHAR) AS [DATE], [Tournament Name] AS TOURNAMENT, [TYPE] AS TOUR
 
 FROM [Player_Master].[All] a with (nolock)
 
@@ -154,13 +154,13 @@ ORDER BY a.[FIRST DAY]
 
 ELSE IF (@REPORTNAME = 'Ball')
 
-SELECT COUNT([Mfgr Descr]) AS "COUNT", [Mfgr Descr] AS BRAND,
+SELECT COUNT([Mfgr Descr]) AS [COUNT], [Mfgr Descr] AS BRAND,
 
 	RIGHT( ('0' + CAST(MONTH(a.[FIRST DAY]) AS NVARCHAR)), 2) + '/' +
 
 	CAST(DAY(a.[First Day]) AS NVARCHAR) + '/' +
 
-	CAST(YEAR(a.[FIRST DAY]) AS NVARCHAR) AS "DATE", [Tournament Name] AS TOURNAMENT, [TYPE] AS TOUR
+	CAST(YEAR(a.[FIRST DAY]) AS NVARCHAR) AS [DATE], [Tournament Name] AS TOURNAMENT, [TYPE] AS TOUR
 
 FROM [Player_Master].[All] a
 
@@ -178,13 +178,13 @@ ORDER BY a.[FIRST DAY]
 
 ELSE IF (@REPORTNAME = 'Glove')
 
-SELECT COUNT([Mfgr Descr]) AS "COUNT", [Mfgr Descr] AS BRAND,
+SELECT COUNT([Mfgr Descr]) AS [COUNT], [Mfgr Descr] AS BRAND,
 
 	RIGHT( '0' + CAST(MONTH(a.[FIRST DAY]) AS NVARCHAR), 2) + '/' +
 
 	CAST(DAY(a.[First Day]) AS NVARCHAR) + '/' +
 
-	CAST(YEAR(a.[FIRST DAY]) AS NVARCHAR) AS "DATE", [Tournament Name] AS TOURNAMENT, [TYPE] AS TOUR
+	CAST(YEAR(a.[FIRST DAY]) AS NVARCHAR) AS [DATE], [Tournament Name] AS TOURNAMENT, [TYPE] AS TOUR
 
 FROM [Player_Master].[All] a with (nolock)
 
@@ -206,13 +206,13 @@ ORDER BY a.[FIRST DAY]
 
 ELSE IF (@REPORTNAME = 'Shoes')
 
-SELECT COUNT([Mfgr Descr]) AS "COUNT", [Mfgr Descr] AS BRAND,
+SELECT COUNT([Mfgr Descr]) AS [COUNT], [Mfgr Descr] AS BRAND,
 
 	RIGHT( '0' + CAST(MONTH(a.[FIRST DAY]) AS NVARCHAR), 2) + '/' +
 
 	CAST(DAY(a.[First Day]) AS NVARCHAR) + '/' +
 
-	CAST(YEAR(a.[FIRST DAY]) AS NVARCHAR) AS "DATE", [Tournament Name] AS TOURNAMENT, [TYPE] AS TOUR
+	CAST(YEAR(a.[FIRST DAY]) AS NVARCHAR) AS [DATE], [Tournament Name] AS TOURNAMENT, [TYPE] AS TOUR
 
 FROM [Player_Master].[All] a with (nolock)
 
@@ -234,19 +234,19 @@ ORDER BY a.[FIRST DAY]
 
 ELSE IF (@REPORTNAME = 'Driver')
 
-SELECT COUNT([Mfgr Descr]) AS "COUNT", [Mfgr Descr] AS BRAND,
+SELECT COUNT([Mfgr Descr]) AS [COUNT], [Mfgr Descr] AS BRAND,
 
 	CAST(MONTH(d.[FIRST DAY]) AS NVARCHAR) + '/' +
 
 	CAST(DAY(d.[First Day]) AS NVARCHAR) + '/' +
 
-	CAST(YEAR(d.[FIRST DAY]) AS NVARCHAR) AS "DATE", [Tournament Name] AS TOURNAMENT, [TYPE] AS TOUR
+	CAST(YEAR(d.[FIRST DAY]) AS NVARCHAR) AS [DATE], [Tournament Name] AS TOURNAMENT, [TYPE] AS TOUR
 
 FROM 
 
-(SELECT "Name", MIN("PKey") AS PKEY FROM [Player_Master].[Wood Detail] with (nolock)
+(SELECT [Name], MIN([PKey]) AS PKEY FROM [Player_Master].[Wood Detail] with (nolock)
 
-  WHERE YEAR([First Day]) = 2013 GROUP BY "Name") e
+  WHERE YEAR([First Day]) = 2013 GROUP BY [Name]) e
 
 LEFT OUTER JOIN
 
@@ -254,7 +254,7 @@ LEFT OUTER JOIN
 
   WHERE YEAR([First Day]) = 2013) d
 
-  ON e.PKEY = d."PKey" AND e."Name" = d."Name"
+  ON e.PKEY = d.[PKey] AND e.[Name] = d.[Name]
 
 LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] b with (nolock) 
 
@@ -274,13 +274,13 @@ ORDER BY d.[FIRST DAY]
 
 ELSE IF (@REPORTNAME = 'All Woods')
 
-SELECT COUNT([Mfgr Descr]) AS "COUNT", [Mfgr Descr] AS BRAND,
+SELECT COUNT([Mfgr Descr]) AS [COUNT], [Mfgr Descr] AS BRAND,
 
 	RIGHT( '0' + CAST(MONTH(a.[FIRST DAY]) AS NVARCHAR), 2) + '/' +
 
 	CAST(DAY(a.[First Day]) AS NVARCHAR) + '/' +
 
-	CAST(YEAR(a.[FIRST DAY]) AS NVARCHAR) AS "DATE", [Tournament Name] AS TOURNAMENT, [TYPE] AS TOUR
+	CAST(YEAR(a.[FIRST DAY]) AS NVARCHAR) AS [DATE], [Tournament Name] AS TOURNAMENT, [TYPE] AS TOUR
 
 FROM [Player_Master].[Wood Detail] a with (nolock)
 
@@ -304,9 +304,9 @@ ORDER BY a.[FIRST DAY]
 
 /*ELSE IF (@REPORTNAME = 'Fairway w/ Hybrid')
 
-SELECT b."Mfgr Descr" AS Brand, COUNT(b."Mfgr Descr") AS "Count",
+SELECT b.[Mfgr Descr] AS Brand, COUNT(b.[Mfgr Descr]) AS [Count],
 
-COUNT(b."Mfgr Descr") * 100 / (SELECT COUNT("Wood Brand Code") FROM [Player_Master].[Wood Detail] WHERE "Survey ID" = @SID AND "First Day" = @FIRSTDAY) AS "%"
+COUNT(b.[Mfgr Descr]) * 100 / (SELECT COUNT([Wood Brand Code]) FROM [Player_Master].[Wood Detail] WHERE [Survey ID] = @SID AND [First Day] = @FIRSTDAY) AS [%]
 
  FROM
 
@@ -314,17 +314,17 @@ COUNT(b."Mfgr Descr") * 100 / (SELECT COUNT("Wood Brand Code") FROM [Player_Mast
 
 LEFT OUTER JOIN
 
-(SELECT "Name" AS DRIVER, MIN("PKey") AS PKEY FROM [Player_Master].[Wood Detail] WHERE "First Day" = @FIRSTDAY AND "Survey ID" = @SID GROUP BY "Name") c
+(SELECT [Name] AS DRIVER, MIN([PKey]) AS PKEY FROM [Player_Master].[Wood Detail] WHERE [First Day] = @FIRSTDAY AND [Survey ID] = @SID GROUP BY [Name]) c
 
 ON a.PKey = c.PKEY 
 
-LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] b ON "Wood Brand Code" = b."Mfgr Code"
+LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] b ON [Wood Brand Code] = b.[Mfgr Code]
 
-WHERE "First Day" = @FIRSTDAY AND "Survey ID" = @SID AND DRIVER IS NULL
+WHERE [First Day] = @FIRSTDAY AND [Survey ID] = @SID AND DRIVER IS NULL
 
-GROUP BY "Mfgr Descr"
+GROUP BY [Mfgr Descr]
 
-ORDER BY COUNT(b."Mfgr Descr") DESC, b."Mfgr Descr" ASC;
+ORDER BY COUNT(b.[Mfgr Descr]) DESC, b.[Mfgr Descr] ASC;
 
       
 
@@ -332,9 +332,9 @@ ORDER BY COUNT(b."Mfgr Descr") DESC, b."Mfgr Descr" ASC;
 
 ELSE IF (@REPORTNAME = 'Fairway w/o Hybrid')
 
-SELECT b."Mfgr Descr" AS Brand, COUNT(b."Mfgr Descr") AS "Count",
+SELECT b.[Mfgr Descr] AS Brand, COUNT(b.[Mfgr Descr]) AS [Count],
 
-COUNT(b."Mfgr Descr") * 100 / (SELECT COUNT("Wood Brand Code") FROM [Player_Master].[Wood Detail] WHERE "Survey ID" = @SID AND "First Day" = @FIRSTDAY) AS "%"
+COUNT(b.[Mfgr Descr]) * 100 / (SELECT COUNT([Wood Brand Code]) FROM [Player_Master].[Wood Detail] WHERE [Survey ID] = @SID AND [First Day] = @FIRSTDAY) AS [%]
 
  FROM
 
@@ -342,17 +342,17 @@ COUNT(b."Mfgr Descr") * 100 / (SELECT COUNT("Wood Brand Code") FROM [Player_Mast
 
 LEFT OUTER JOIN
 
-(SELECT "Name" AS DRIVER, MIN("PKey") AS PKEY FROM [Player_Master].[Wood Detail] WHERE "First Day" = @FIRSTDAY AND "Survey ID" = @SID GROUP BY "Name") c
+(SELECT [Name] AS DRIVER, MIN([PKey]) AS PKEY FROM [Player_Master].[Wood Detail] WHERE [First Day] = @FIRSTDAY AND [Survey ID] = @SID GROUP BY [Name]) c
 
 ON a.PKey = c.PKEY 
 
-LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] b ON "Wood Brand Code" = b."Mfgr Code"
+LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] b ON [Wood Brand Code] = b.[Mfgr Code]
 
-WHERE "First Day" = @FIRSTDAY AND "Survey ID" = @SID AND DRIVER IS NULL AND a."Wood Club Code" <> 'HYB'
+WHERE [First Day] = @FIRSTDAY AND [Survey ID] = @SID AND DRIVER IS NULL AND a.[Wood Club Code] <> 'HYB'
 
-GROUP BY "Mfgr Descr"
+GROUP BY [Mfgr Descr]
 
-ORDER BY COUNT(b."Mfgr Descr") DESC, b."Mfgr Descr" ASC;*/
+ORDER BY COUNT(b.[Mfgr Descr]) DESC, b.[Mfgr Descr] ASC;*/
 
       
 
@@ -360,13 +360,13 @@ ORDER BY COUNT(b."Mfgr Descr") DESC, b."Mfgr Descr" ASC;*/
 
 ELSE IF (@REPORTNAME = 'Hybrid Woods')
 
-SELECT COUNT([Mfgr Descr]) AS "COUNT", [Mfgr Descr] AS BRAND,
+SELECT COUNT([Mfgr Descr]) AS [COUNT], [Mfgr Descr] AS BRAND,
 
 	RIGHT( '0' + CAST(MONTH(a.[FIRST DAY]) AS NVARCHAR), 2) + '/' +
 
 	CAST(DAY(a.[First Day]) AS NVARCHAR) + '/' +
 
-	CAST(YEAR(a.[FIRST DAY]) AS NVARCHAR) AS "DATE", [Tournament Name] AS TOURNAMENT, [TYPE] AS TOUR
+	CAST(YEAR(a.[FIRST DAY]) AS NVARCHAR) AS [DATE], [Tournament Name] AS TOURNAMENT, [TYPE] AS TOUR
 
 FROM [Player_Master].[Wood Detail] a with (nolock)
 
@@ -384,13 +384,13 @@ ORDER BY a.[FIRST DAY]
 
 ELSE IF (@REPORTNAME = 'Headgear')
 
-SELECT COUNT([Mfgr Descr]) AS "COUNT", [Mfgr Descr] AS BRAND,
+SELECT COUNT([Mfgr Descr]) AS [COUNT], [Mfgr Descr] AS BRAND,
 
 	RIGHT( '0' + CAST(MONTH(a.[FIRST DAY]) AS NVARCHAR), 2) + '/' +
 
 	CAST(DAY(a.[First Day]) AS NVARCHAR) + '/' +
 
-	CAST(YEAR(a.[FIRST DAY]) AS NVARCHAR) AS "DATE", [Tournament Name] AS TOURNAMENT, [TYPE] AS TOUR
+	CAST(YEAR(a.[FIRST DAY]) AS NVARCHAR) AS [DATE], [Tournament Name] AS TOURNAMENT, [TYPE] AS TOUR
 
 FROM [Player_Master].[All] a with (nolock)
 
@@ -408,13 +408,13 @@ ORDER BY a.[FIRST DAY]
 
 ELSE IF (@REPORTNAME = 'Iron')
 
-SELECT COUNT([Mfgr Descr]) AS "COUNT", [Mfgr Descr] AS BRAND,
+SELECT COUNT([Mfgr Descr]) AS [COUNT], [Mfgr Descr] AS BRAND,
 
 	RIGHT( '0' + CAST(MONTH(a.[FIRST DAY]) AS NVARCHAR), 2) + '/' +
 
 	CAST(DAY(a.[First Day]) AS NVARCHAR) + '/' +
 
-	CAST(YEAR(a.[FIRST DAY]) AS NVARCHAR) AS "DATE", [Tournament Name] AS TOURNAMENT, [TYPE] AS TOUR
+	CAST(YEAR(a.[FIRST DAY]) AS NVARCHAR) AS [DATE], [Tournament Name] AS TOURNAMENT, [TYPE] AS TOUR
 
 FROM [Player_Master].[Iron Detail] a with (nolock)
 
@@ -432,13 +432,13 @@ ORDER BY a.[FIRST DAY]
 
 ELSE IF (@REPORTNAME = 'Utility Iron')
 
-SELECT COUNT([Mfgr Descr]) AS "COUNT", [Mfgr Descr] AS BRAND,
+SELECT COUNT([Mfgr Descr]) AS [COUNT], [Mfgr Descr] AS BRAND,
 
 	RIGHT( '0' + CAST(MONTH(a.[FIRST DAY]) AS NVARCHAR), 2) + '/' +
 
 	CAST(DAY(a.[First Day]) AS NVARCHAR) + '/' +
 
-	CAST(YEAR(a.[FIRST DAY]) AS NVARCHAR) AS "DATE", [Tournament Name] AS TOURNAMENT, [TYPE] AS TOUR
+	CAST(YEAR(a.[FIRST DAY]) AS NVARCHAR) AS [DATE], [Tournament Name] AS TOURNAMENT, [TYPE] AS TOUR
 
 FROM [Player_Master].[Iron Detail] a with (nolock)
 
@@ -460,13 +460,13 @@ ORDER BY a.[FIRST DAY]
 
 ELSE IF (@REPORTNAME = 'Putter')
 
-SELECT COUNT([Mfgr Descr]) AS "COUNT", [Mfgr Descr] AS BRAND,
+SELECT COUNT([Mfgr Descr]) AS [COUNT], [Mfgr Descr] AS BRAND,
 
 	RIGHT( '0' + CAST(MONTH(a.[FIRST DAY]) AS NVARCHAR), 2) + '/' +
 
 	CAST(DAY(a.[First Day]) AS NVARCHAR) + '/' +
 
-	CAST(YEAR(a.[FIRST DAY]) AS NVARCHAR) AS "DATE", [Tournament Name] AS TOURNAMENT, [TYPE] AS TOUR
+	CAST(YEAR(a.[FIRST DAY]) AS NVARCHAR) AS [DATE], [Tournament Name] AS TOURNAMENT, [TYPE] AS TOUR
 
 FROM [Player_Master].[Putter Detail] a with (nolock)
 
@@ -490,13 +490,13 @@ ORDER BY a.[FIRST DAY]
 
 ELSE IF (@REPORTNAME = 'Wedge')
 
-SELECT COUNT([Mfgr Descr]) AS "COUNT", [Mfgr Descr] AS BRAND,
+SELECT COUNT([Mfgr Descr]) AS [COUNT], [Mfgr Descr] AS BRAND,
 
 	RIGHT( '0' + CAST(MONTH(a.[FIRST DAY]) AS NVARCHAR), 2) + '/' +
 
 	CAST(DAY(a.[First Day]) AS NVARCHAR) + '/' +
 
-	CAST(YEAR(a.[FIRST DAY]) AS NVARCHAR) AS "DATE", [Tournament Name] AS TOURNAMENT, [TYPE] AS TOUR
+	CAST(YEAR(a.[FIRST DAY]) AS NVARCHAR) AS [DATE], [Tournament Name] AS TOURNAMENT, [TYPE] AS TOUR
 
 FROM [Player_Master].[Wedge Detail] a with (nolock)
 
@@ -522,7 +522,7 @@ ELSE
 
 --dummy select to set output variables for crystal reports
 
-SELECT 12 AS "COUNT", 'TITLEIST' AS BRAND, 'The Masters' AS TOURNAMENT, 'PGA' AS TOUR WHERE 1=0
+SELECT 12 AS [COUNT], 'TITLEIST' AS BRAND, 'The Masters' AS TOURNAMENT, 'PGA' AS TOUR WHERE 1=0
 
 
 

@@ -20,17 +20,17 @@ BEGIN
 	SET NOCOUNT ON;
 
 
-SELECT c.PLAYERNAME, CATEGORY, EXTRA, CLUBCODE AS WEDGECLUBCODE, DCLUBCODE, ISNULL(a."Mfgr Abbrev", a."Mfgr Descr") AS WEDGEBRAND, DBRANDCODE,
-ISNULL(b."Model Abbrev", b."Model Descr") AS WEDGEMODEL, DMODELCODE, ISNULL("Type Abbrev", "Type Descr") AS "WEDGESIZE", DTYPECODE AS DSIZECODE
+SELECT c.PLAYERNAME, CATEGORY, EXTRA, CLUBCODE AS WEDGECLUBCODE, DCLUBCODE, ISNULL(a.[Mfgr Abbrev], a.[Mfgr Descr]) AS WEDGEBRAND, DBRANDCODE,
+ISNULL(b.[Model Abbrev], b.[Model Descr]) AS WEDGEMODEL, DMODELCODE, ISNULL([Type Abbrev], [Type Descr]) AS [WEDGESIZE], DTYPECODE AS DSIZECODE
  
 FROM input.wedge c
-LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] a ON BRAND = a."Mfgr Descr"
-LEFT OUTER JOIN LKP.[Model Codes and Descr] b ON MODEL = b."Model Descr"
-LEFT OUTER JOIN LKP.[Type Codes and Description] ON TYPE = "Type Descr"
-LEFT OUTER JOIN Player_Master.PLAYERNAMES g on c.PLAYERNAME = g.PLAYERNAME and c.SID = g.SID AND c."First Day" = g.FIRSTDAY 
+LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] a ON BRAND = a.[Mfgr Descr]
+LEFT OUTER JOIN LKP.[Model Codes and Descr] b ON MODEL = b.[Model Descr]
+LEFT OUTER JOIN LKP.[Type Codes and Description] ON TYPE = [Type Descr]
+LEFT OUTER JOIN Player_Master.PLAYERNAMES g on c.PLAYERNAME = g.PLAYERNAME and c.SID = g.SID AND c.[First Day] = g.FIRSTDAY 
 
-WHERE "First Day" = @FIRSTDAY AND c.SID = @SID 
-ORDER BY EXTRA, c.PLAYERNAME, c."PKey"
+WHERE [First Day] = @FIRSTDAY AND c.SID = @SID 
+ORDER BY EXTRA, c.PLAYERNAME, c.[PKey]
 
 
 END

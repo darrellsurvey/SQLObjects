@@ -20,16 +20,16 @@ BEGIN
 	SET NOCOUNT ON;
 
 if (@SID <> '')
-SELECT c.PLAYERNAME, CATEGORY, EXTRA, CLUBCODE, DSEQUENCENO AS DCLUBCODE, ISNULL(a."Mfgr Abbrev", a."Mfgr Descr") AS PUTTERBRAND, DBRANDCODE,
-b."Model Descr" AS PUTTERMODEL, DMODELCODE, d.[Size Descr] AS PUTTERSIZE, DSIZECODE
+SELECT c.PLAYERNAME, CATEGORY, EXTRA, CLUBCODE, DSEQUENCENO AS DCLUBCODE, ISNULL(a.[Mfgr Abbrev], a.[Mfgr Descr]) AS PUTTERBRAND, DBRANDCODE,
+b.[Model Descr] AS PUTTERMODEL, DMODELCODE, d.[Size Descr] AS PUTTERSIZE, DSIZECODE
 --REPLACE(d.[Size Descr], '-', '')
 FROM input.putter c
-LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] a ON BRAND = a."Mfgr Descr"
-LEFT OUTER JOIN LKP.[Model Codes and Descr] b ON MODEL = b."Model Descr"
-LEFT OUTER JOIN Player_Master.PLAYERNAMES g on c.PLAYERNAME = g.PLAYERNAME and c.SID = g.SID AND c."First Day" = g.FIRSTDAY 
+LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] a ON BRAND = a.[Mfgr Descr]
+LEFT OUTER JOIN LKP.[Model Codes and Descr] b ON MODEL = b.[Model Descr]
+LEFT OUTER JOIN Player_Master.PLAYERNAMES g on c.PLAYERNAME = g.PLAYERNAME and c.SID = g.SID AND c.[First Day] = g.FIRSTDAY 
 left outer join LKP.[Size Codes and Description] d on SIZE = [Size Descr]
 
-WHERE "First Day" = @FIRSTDAY AND c.SID = @SID 
+WHERE [First Day] = @FIRSTDAY AND c.SID = @SID 
 
 ORDER BY EXTRA, PLAYERNAME ASC
 

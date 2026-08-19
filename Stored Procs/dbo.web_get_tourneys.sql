@@ -22,46 +22,46 @@ BEGIN
 	SET NOCOUNT ON;
 	
 	IF @COMPANY = 'DARRELL SURVEY'
-		SELECT [TOURNAMENT NAME] AS "TOURNAMENT NAME",
+		SELECT [TOURNAMENT NAME] AS [TOURNAMENT NAME],
 				RIGHT('0' + CAST(MONTH([First Day]) as nvarchar), 2) + '/' + RIGHT('0' + CAST(DAY([First Day]) as nvarchar), 2)
-					+ ' - ' + [tournament name] AS "NAME AND DATE"
+					+ ' - ' + [tournament name] AS [NAME AND DATE]
 					 /*FROM Player_Master.TOURNAMENTS_TABLE
 			LEFT OUTER JOIN (SELECT DISTINCT(REPORTNAME) FROM LKP.Report_Lookup WHERE REPORTITEM = 'Top' AND REPORTCONTEXT = 'Website') b ON 1=1*/
 			FROM Billing.AllOrdersYTD
-		WHERE YEAR("FIRST DAY") = @YEAR AND "TYPE" = @TOUR
+		WHERE YEAR([FIRST DAY]) = @YEAR AND [TYPE] = @TOUR
 		GROUP BY [TOURNAMENT NAME], [FIRST DAY]
 		ORDER BY [FIRST DAY] DESC
 		
 		/*BEGIN
-			SELECT [TOURNAMENT NAME] AS "TOURNAMENT NAME",
+			SELECT [TOURNAMENT NAME] AS [TOURNAMENT NAME],
 				RIGHT('0' + CAST(MONTH([First Day]) as nvarchar), 2) + '/' + RIGHT('0' + CAST(DAY([First Day]) as nvarchar), 2)
-					+ ' - ' + [tournament name] AS "NAME AND DATE"
-			FROM Player_Master.TOURNAMENTS_TABLE WHERE YEAR("FIRST DAY") = @YEAR AND "TYPE" = @TOUR AND [FIRST DAY] <= GETDATE()
+					+ ' - ' + [tournament name] AS [NAME AND DATE]
+			FROM Player_Master.TOURNAMENTS_TABLE WHERE YEAR([FIRST DAY]) = @YEAR AND [TYPE] = @TOUR AND [FIRST DAY] <= GETDATE()
 			ORDER BY [FIRST DAY] DESC
 		END*/
 	ELSE
-		/*SELECT [TOURNAMENT NAME] AS "TOURNAMENT NAME",
+		/*SELECT [TOURNAMENT NAME] AS [TOURNAMENT NAME],
 				RIGHT('0' + CAST(MONTH([First Day]) as nvarchar), 2) + '/' + RIGHT('0' + CAST(DAY([First Day]) as nvarchar), 2)
-					+ ' - ' + [tournament name] AS "NAME AND DATE"
+					+ ' - ' + [tournament name] AS [NAME AND DATE]
 					 FROM Player_Master.TOURNAMENTS_TABLE
 			LEFT OUTER JOIN (SELECT DISTINCT(REPORTNAME) FROM LKP.Report_Lookup WHERE REPORTITEM = 'Top' AND REPORTCONTEXT = 'Website') b ON 1=1
-		WHERE YEAR("FIRST DAY") = @YEAR AND "TYPE" = @TOUR AND [FIRST DAY] <= GETDATE()
+		WHERE YEAR([FIRST DAY]) = @YEAR AND [TYPE] = @TOUR AND [FIRST DAY] <= GETDATE()
 		AND Billing.Has_Permission(@COMPANY, @USERNAME, TYPE, YEAR([first day]), [TOURNAMENT NAME], REPORTNAME) > 0
 		AND active_flag = 1
 		GROUP BY [TOURNAMENT NAME], [FIRST DAY]
 		ORDER BY [FIRST DAY] DESC
 		BEGIN
-			SELECT [TOURNAMENT NAME] AS "TOURNAMENT NAME",
+			SELECT [TOURNAMENT NAME] AS [TOURNAMENT NAME],
 				RIGHT('0' + CAST(MONTH([First Day]) as nvarchar), 2) + '/' + RIGHT('0' + CAST(DAY([First Day]) as nvarchar), 2)
-					+ ' - ' + [tournament name] AS "NAME AND DATE"
-			FROM Player_Master.TOURNAMENTS_TABLE WHERE YEAR("FIRST DAY") = @YEAR AND "TYPE" = @TOUR AND [FIRST DAY] <= GETDATE()
+					+ ' - ' + [tournament name] AS [NAME AND DATE]
+			FROM Player_Master.TOURNAMENTS_TABLE WHERE YEAR([FIRST DAY]) = @YEAR AND [TYPE] = @TOUR AND [FIRST DAY] <= GETDATE()
 			ORDER BY [FIRST DAY] DESC
 		END*/
-		SELECT [TOURNAMENT NAME] AS "TOURNAMENT NAME",
+		SELECT [TOURNAMENT NAME] AS [TOURNAMENT NAME],
 				RIGHT('0' + CAST(MONTH([First Day]) as nvarchar), 2) + '/' + RIGHT('0' + CAST(DAY([First Day]) as nvarchar), 2)
-					+ ' - ' + [tournament name] AS "NAME AND DATE"
+					+ ' - ' + [tournament name] AS [NAME AND DATE]
 					 /*FROM Player_Master.TOURNAMENTS_TABLE
-					 WHERE YEAR("FIRST DAY") = @YEAR AND "TYPE" = @TOUR AND [FIRST DAY] <= GETDATE() AND active_flag = 1
+					 WHERE YEAR([FIRST DAY]) = @YEAR AND [TYPE] = @TOUR AND [FIRST DAY] <= GETDATE() AND active_flag = 1
 					 AND ((select SID from Billing.permissions where rule_entity = 'TITLEIST' and year = '2012' and permission = 1 group by SID) IS NULL
 					 OR SID IN (select SID from Billing.permissions where rule_entity = 'TITLEIST' and year = '2012' and permission = 1 group by SID))
 					 AND ISFLASH <> 2*/
@@ -78,9 +78,9 @@ BEGIN
 	
 	IF @COMPANY = 'DARRELL'
 		BEGIN
-			Select b.[TOURNAMENT NAME] AS "TOURNAMENT NAME", RIGHT('0' + CAST(MONTH(a.[First Day]) as nvarchar), 2) + '/' + RIGHT('0' + CAST(DAY(a.[First Day]) as nvarchar), 2) + ' - ' + b.[tournament name] AS "NAME AND DATE"
+			Select b.[TOURNAMENT NAME] AS [TOURNAMENT NAME], RIGHT('0' + CAST(MONTH(a.[First Day]) as nvarchar), 2) + '/' + RIGHT('0' + CAST(DAY(a.[First Day]) as nvarchar), 2) + ' - ' + b.[tournament name] AS [NAME AND DATE]
 			 from Billing.AllOrdersYTD a
-			LEFT OUTER JOIN Player_Master.TOURNAMENTS_TABLE b ON YEAR(a."FIRST DAY") = YEAR(b."First Day") AND TD = SID
+			LEFT OUTER JOIN Player_Master.TOURNAMENTS_TABLE b ON YEAR(a.[FIRST DAY]) = YEAR(b.[First Day]) AND TD = SID
 			where b.TYPE = @TOUR AND YEAR(b.[first day]) = @YEAR and b.[Type] IS NOT NULL
 			GROUP BY b.[TOURNAMENT NAME], a.[First Day] 
 			 order by a.[First Day] DESC 
@@ -97,7 +97,7 @@ BEGIN
 				and [FIRST DAY] <= GETDATE() and YEAR([FIRST DAY]) > YEAR(GETDATE()) -2
 				
 				
-		Select [TOURNAMENT NAME] AS "TOURNAMENT NAME", RIGHT('0' + CAST(MONTH([First Day]) as nvarchar), 2) + '/' + RIGHT('0' + CAST(DAY([First Day]) as nvarchar), 2) + ' - ' + [tournament name] AS "NAME AND DATE"
+		Select [TOURNAMENT NAME] AS [TOURNAMENT NAME], RIGHT('0' + CAST(MONTH([First Day]) as nvarchar), 2) + '/' + RIGHT('0' + CAST(DAY([First Day]) as nvarchar), 2) + ' - ' + [tournament name] AS [NAME AND DATE]
 			FROM Player_Master.TOURNAMENTS_TABLE 
 			WHERE type  = @TOUR AND YEAR([first day]) = @YEAR and Billing.has_permission(@COMPANY, '', @TOUR, @YEAR, [Tournament Name], '') = 1
 			and [FIRST DAY] <= GETDATE() and YEAR([FIRST DAY]) > YEAR(GETDATE()) -2
@@ -107,16 +107,16 @@ BEGIN
 		
 		/*
 			IF ((SELECT COUNT(*) FROM Billing.AllOrdersYTD a
-			LEFT OUTER JOIN Player_Master.TOURNAMENTS_TABLE b ON YEAR(a."FIRST DAY") = YEAR(b."First Day") AND TD = SID
+			LEFT OUTER JOIN Player_Master.TOURNAMENTS_TABLE b ON YEAR(a.[FIRST DAY]) = YEAR(b.[First Day]) AND TD = SID
 			where Company = @COMPANY and b.TYPE = @TOUR AND YEAR(b.[first day]) = @YEAR and b.[Type] IS NOT NULL)
 			= 0)
 			
-			SELECT 'Event Not Purchased' as "TOURNAMENT NAME", 'Event Not Purchased' AS "NAME AND DATE"
+			SELECT 'Event Not Purchased' as [TOURNAMENT NAME], 'Event Not Purchased' AS [NAME AND DATE]
 			
 			ELSE
 			
 			
-			Select [TOURNAMENT NAME] AS "TOURNAMENT NAME", RIGHT('0' + CAST(MONTH([First Day]) as nvarchar), 2) + '/' + RIGHT('0' + CAST(DAY([First Day]) as nvarchar), 2) + ' - ' + [tournament name] AS "NAME AND DATE"
+			Select [TOURNAMENT NAME] AS [TOURNAMENT NAME], RIGHT('0' + CAST(MONTH([First Day]) as nvarchar), 2) + '/' + RIGHT('0' + CAST(DAY([First Day]) as nvarchar), 2) + ' - ' + [tournament name] AS [NAME AND DATE]
 			 from Player_Master.TOURNAMENTS_TABLE
 			where TYPE = @TOUR AND YEAR([first day]) = @YEAR and [Type] IS NOT NULL
 			GROUP BY [TOURNAMENT NAME], [First Day] 

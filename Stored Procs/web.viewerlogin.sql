@@ -20,7 +20,7 @@ BEGIN
 	SELECT *
 
 FROM web.Login_viewerinfo
-LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON COMPANY = "Mfgr Descr" 
+LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] ON COMPANY = [Mfgr Descr] 
 
 
 WHERE USERNAME = @USERNAME

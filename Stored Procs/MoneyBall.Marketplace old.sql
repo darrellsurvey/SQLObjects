@@ -49,10 +49,10 @@ PlayerName,
 EquipmentPlacement,
 DSRank,
 MoneyWon,
-'<p class="Brand">' + isnull(Brand, '') + case when CountOfBrands = 0 then '' else '(' + cast(CountOfBrands as varchar(2)) + ')' end + '</p>
-<p class="DSPoints">' + case when IsEstimate = 0 then cast(DSPoints as varchar(30)) else '' end + '</p>
-<p class="DSPointEstimate">' + case when IsEstimate = 1 then cast(DSPoints as varchar(30)) else '' end + '</p>
-<p class="TVAdCost">' + cast(TVAdCost as varchar(30)) + '</p>' as CellData
+'<p class=[Brand]>' + isnull(Brand, '') + case when CountOfBrands = 0 then '' else '(' + cast(CountOfBrands as varchar(2)) + ')' end + '</p>
+<p class=[DSPoints]>' + case when IsEstimate = 0 then cast(DSPoints as varchar(30)) else '' end + '</p>
+<p class=[DSPointEstimate]>' + case when IsEstimate = 1 then cast(DSPoints as varchar(30)) else '' end + '</p>
+<p class=[TVAdCost]>' + cast(TVAdCost as varchar(30)) + '</p>' as CellData
 from cte2  
 where EquipmentPlacement in ('BagBody', 'HeadgearBack', 'HeadgearFront', 'HeadgearLeftSide', 'HeadgearRightSide', 'ShirtBack', 'ShirtFront', 'Shoes'))
 

@@ -25,48 +25,48 @@ BEGIN
 with BALLTABLE AS (
 SELECT
 1 AS BALLNUMBER,
-d.PLAYERNAME, CATEGORY, EXTRA, a."Mfgr Descr" AS BALLBRAND, DBALLBRAND, b."Model Descr" AS BALLMODEL, DBALLMODEL,
+d.PLAYERNAME, CATEGORY, EXTRA, a.[Mfgr Descr] AS BALLBRAND, DBALLBRAND, b.[Model Descr] AS BALLMODEL, DBALLMODEL,
 e.[Mfgr Descr] AS GLOVEBRAND, DGLOVEBRAND, f.[Mfgr Descr] AS SHOEBRAND, DSHOEBRAND, g.[Mfgr Descr] AS HATBRAND, DHEADGEARBRAND, h.[Mfgr Descr] AS BAGBRAND, DBAGBRAND 
 FROM [Input].[All] d
-LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] a ON BALLBRAND = a."Mfgr Descr" 
-LEFT OUTER JOIN [LKP].[Model Codes and Descr] b ON BALLMODEL = b."Model Descr"
+LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] a ON BALLBRAND = a.[Mfgr Descr] 
+LEFT OUTER JOIN [LKP].[Model Codes and Descr] b ON BALLMODEL = b.[Model Descr]
 LEFT OUTER JOIN [Player_master].PLAYERNAMES c on d.PLAYERNAME = c.PLAYERNAME AND c.SID = d.SID AND c.FIRSTDAY = d.[FIRST DAY]
-LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] e ON GLOVEBRAND = e."Mfgr Descr" 
-LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] f ON SHOEBRAND = f."Mfgr Descr" 
-LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] g ON HEADGEARBRAND = g."Mfgr Descr" 
-LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] h ON BAGBRAND = h."Mfgr Descr" 
-WHERE "FIRST DAY" = @FIRSTDAY AND d.SID = @SID
+LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] e ON GLOVEBRAND = e.[Mfgr Descr] 
+LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] f ON SHOEBRAND = f.[Mfgr Descr] 
+LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] g ON HEADGEARBRAND = g.[Mfgr Descr] 
+LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] h ON BAGBRAND = h.[Mfgr Descr] 
+WHERE [FIRST DAY] = @FIRSTDAY AND d.SID = @SID
 ),
 
 
 IRONTABLE as 
 (SELECT
-row_number() OVER(PARTITION BY I.PLAYERNAME ORDER BY "PKey" ASC) AS IRONNUMBER,
+row_number() OVER(PARTITION BY I.PLAYERNAME ORDER BY [PKey] ASC) AS IRONNUMBER,
 COALESCE(BALLTABLE.PLAYERNAME, I.PLAYERNAME) AS PLAYERNAME, COALESCE(BALLTABLE.CATEGORY, I.CATEGORY) AS CATEGORY, COALESCE(BALLTABLE.EXTRA, I.EXTRA) AS EXTRA, BALLMODEL, DBALLMODEL, BALLBRAND, DBALLBRAND,
 GLOVEBRAND, DGLOVEBRAND, SHOEBRAND, DSHOEBRAND, HATBRAND, DHEADGEARBRAND, BAGBRAND, DBAGBRAND,
-IRONCLUBCODE, DCLUBCODE, IRONBRAND, DBRANDCODE, IRONMODEL, DMODELCODE, "PKey"
+IRONCLUBCODE, DCLUBCODE, IRONBRAND, DBRANDCODE, IRONMODEL, DMODELCODE, [PKey]
 FROM BALLTABLE
 RIGHT OUTER JOIN
 (SELECT
-row_number() OVER(PARTITION BY PLAYERNAME ORDER BY "PKey" ASC) AS SUBIRONNUMBER, * FROM
+row_number() OVER(PARTITION BY PLAYERNAME ORDER BY [PKey] ASC) AS SUBIRONNUMBER, * FROM
 --irons
 ( SELECT
-c.PLAYERNAME, CATEGORY, EXTRA, CLUBCODE AS IRONCLUBCODE, DCLUBCODE, a."Mfgr Descr" AS IRONBRAND, DBRANDCODE, b."Model Descr" AS IRONMODEL, DMODELCODE, c."PKey"
+c.PLAYERNAME, CATEGORY, EXTRA, CLUBCODE AS IRONCLUBCODE, DCLUBCODE, a.[Mfgr Descr] AS IRONBRAND, DBRANDCODE, b.[Model Descr] AS IRONMODEL, DMODELCODE, c.[PKey]
 FROM [Input].[Iron] c
 LEFT OUTER JOIN Player_Master.PLAYERNAMES d ON c.SID = d.SID and c.[FIRST DAY] = d.FIRSTDAY and c.PLAYERNAME = d.PLAYERNAME
-LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] a ON BRAND = a."Mfgr Descr"
-LEFT OUTER JOIN LKP.[Model Codes and Descr] b ON MODEL = b."Model Descr"
-WHERE "First Day" = @FIRSTDAY AND c.SID = @SID 
-GROUP BY c.PLAYERNAME, CATEGORY, EXTRA, CLUBCODE, a."Mfgr Descr", b."Model Descr", c."PKey", DCLUBCODE, DBRANDCODE, DMODELCODE
+LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] a ON BRAND = a.[Mfgr Descr]
+LEFT OUTER JOIN LKP.[Model Codes and Descr] b ON MODEL = b.[Model Descr]
+WHERE [First Day] = @FIRSTDAY AND c.SID = @SID 
+GROUP BY c.PLAYERNAME, CATEGORY, EXTRA, CLUBCODE, a.[Mfgr Descr], b.[Model Descr], c.[PKey], DCLUBCODE, DBRANDCODE, DMODELCODE
 UNION ALL
 --wedges
-SELECT c.PLAYERNAME, CATEGORY, EXTRA, CLUBCODE AS IRONCLUBCODE, DCLUBCODE, a."Mfgr Descr" AS IRONBRAND, DBRANDCODE, b."Model Descr" AS IRONMODEL, DMODELCODE, c."PKey" + 10
+SELECT c.PLAYERNAME, CATEGORY, EXTRA, CLUBCODE AS IRONCLUBCODE, DCLUBCODE, a.[Mfgr Descr] AS IRONBRAND, DBRANDCODE, b.[Model Descr] AS IRONMODEL, DMODELCODE, c.[PKey] + 10
 FROM [Input].[Wedge] c
 LEFT OUTER JOIN Player_Master.PLAYERNAMES d ON c.[FIRST DAY] = d.FIRSTDAY and c.SID = d.SID and c.PLAYERNAME = d.PLAYERNAME
-LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] a ON BRAND = a."Mfgr Descr"
-LEFT OUTER JOIN LKP.[Model Codes and Descr] b ON MODEL = b."Model Descr"
-WHERE "First Day" = @FIRSTDAY AND c.SID = @SID 
-GROUP BY c.PLAYERNAME, CATEGORY, EXTRA, CLUBCODE, a."Mfgr Descr", b."Model Descr", c."PKey", DCLUBCODE, DBRANDCODE, DMODELCODE
+LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] a ON BRAND = a.[Mfgr Descr]
+LEFT OUTER JOIN LKP.[Model Codes and Descr] b ON MODEL = b.[Model Descr]
+WHERE [First Day] = @FIRSTDAY AND c.SID = @SID 
+GROUP BY c.PLAYERNAME, CATEGORY, EXTRA, CLUBCODE, a.[Mfgr Descr], b.[Model Descr], c.[PKey], DCLUBCODE, DBRANDCODE, DMODELCODE
 )subtable) AS I
 ON BALLTABLE.PLAYERNAME = I.PLAYERNAME
 and BALLTABLE.BALLNUMBER = SUBIRONNUMBER 
@@ -74,44 +74,44 @@ and BALLTABLE.BALLNUMBER = SUBIRONNUMBER
 
 WOODTABLE AS (
 SELECT
-row_number() OVER(PARTITION BY BALLTABLE.PLAYERNAME ORDER BY "PKey") AS WOODNUMBER,
+row_number() OVER(PARTITION BY BALLTABLE.PLAYERNAME ORDER BY [PKey]) AS WOODNUMBER,
 BALLTABLE.PLAYERNAME, CATEGORY, EXTRA, WOODCLUBCODE, DCLUBCODE, WOODBRAND, DBRANDCODE, WOODMODEL, DMODELCODE, WOODSIZE, DSIZECODE, WOODMATL, DMATERIAL
 FROM BALLTABLE
 INNER JOIN
 ( SELECT
 PLAYERNAME, CLUBCODE AS WOODCLUBCODE, DCLUBCODE,
-ISNULL(a."Mfgr Abbrev", a."Mfgr Descr") AS WOODBRAND, DBRANDCODE,
-b."Model Descr" AS WOODMODEL, DMODELCODE, 
-c."Size Descr" AS WOODSIZE, DSIZECODE,
-ISNULL(d."Matl Abbrev", d."Matl Descr") AS WOODMATL, DMATERIAL,
-"PKey"
+ISNULL(a.[Mfgr Abbrev], a.[Mfgr Descr]) AS WOODBRAND, DBRANDCODE,
+b.[Model Descr] AS WOODMODEL, DMODELCODE, 
+c.[Size Descr] AS WOODSIZE, DSIZECODE,
+ISNULL(d.[Matl Abbrev], d.[Matl Descr]) AS WOODMATL, DMATERIAL,
+[PKey]
 FROM [Input].[Wood]
-LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] a ON BRAND = a."Mfgr Descr"
-LEFT OUTER JOIN LKP.[Model Codes and Descr] b ON MODEL = b."Model Descr"
-LEFT OUTER JOIN LKP.[Size Codes and Description] c ON SIZE = "Size Descr"
-LEFT OUTER JOIN LKP.[Material Codes and Descript] d ON MATERIAL = "Matl Descr"
-WHERE "First Day" = @FIRSTDAY AND SID = @SID 
+LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] a ON BRAND = a.[Mfgr Descr]
+LEFT OUTER JOIN LKP.[Model Codes and Descr] b ON MODEL = b.[Model Descr]
+LEFT OUTER JOIN LKP.[Size Codes and Description] c ON SIZE = [Size Descr]
+LEFT OUTER JOIN LKP.[Material Codes and Descript] d ON MATERIAL = [Matl Descr]
+WHERE [First Day] = @FIRSTDAY AND SID = @SID 
 ) W
 ON BALLTABLE.PLAYERNAME = W.PLAYERNAME
 ),
 
 PUTTERTABLE AS (
 SELECT
-row_number() OVER(PARTITION BY BALLTABLE.PLAYERNAME ORDER BY "PKey") AS PUTTERNUMBER,
+row_number() OVER(PARTITION BY BALLTABLE.PLAYERNAME ORDER BY [PKey]) AS PUTTERNUMBER,
 BALLTABLE.PLAYERNAME, CATEGORY, EXTRA, PUTTERBRAND, DBRANDCODE, PUTTERMODEL, DMODELCODE, PUTTERSIZE, DSIZECODE
 FROM BALLTABLE
 INNER JOIN
 ( SELECT
 PLAYERNAME, CLUBCODE AS PUTTERCLUBCODE, DSEQUENCENO,
-ISNULL(a."Mfgr Abbrev", a."Mfgr Descr") AS PUTTERBRAND, DBRANDCODE,
-b."Model Descr" AS PUTTERMODEL, DMODELCODE, 
-c."Size Descr" AS PUTTERSIZE, DSIZECODE,
-"PKey"
+ISNULL(a.[Mfgr Abbrev], a.[Mfgr Descr]) AS PUTTERBRAND, DBRANDCODE,
+b.[Model Descr] AS PUTTERMODEL, DMODELCODE, 
+c.[Size Descr] AS PUTTERSIZE, DSIZECODE,
+[PKey]
 FROM [Input].[Putter]
-LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] a ON BRAND = a."Mfgr Descr"
-LEFT OUTER JOIN LKP.[Model Codes and Descr] b ON MODEL = b."Model Descr"
-LEFT OUTER JOIN LKP.[Size Codes and Description] c ON SIZE = "Size Descr"
-WHERE "First Day" = @FIRSTDAY AND SID = @SID 
+LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] a ON BRAND = a.[Mfgr Descr]
+LEFT OUTER JOIN LKP.[Model Codes and Descr] b ON MODEL = b.[Model Descr]
+LEFT OUTER JOIN LKP.[Size Codes and Description] c ON SIZE = [Size Descr]
+WHERE [First Day] = @FIRSTDAY AND SID = @SID 
 ) W
 ON BALLTABLE.PLAYERNAME = W.PLAYERNAME
 )
@@ -137,7 +137,7 @@ ELSE
 
 SELECT 'NAMENAMENAMENAMENAMENAME' AS PLAYERNAME, 'CAT' AS CATEGORY, 
 'BALLBRAND' AS BALLBRAND, CAST(0 AS BIT) AS DBALLBRAND, 'BALLMODELBALLMODEL' AS BALLMODEL, CAST(1 AS BIT) AS DBALLMODEL,
-'IRONCLUBCODE' AS IRONCLUBCODE, CAST(0 AS BIT) AS "DCLUBCODE", 'IRONBRANDIRONBRANDIRONBRAND' AS IRONBRAND, CAST(1 AS BIT) AS "DBRANDCODE", 'IRONMODELIRONMODELIRONMODEL' AS IRONMODEL, CAST(0 AS BIT) AS "DMODELCODE",
+'IRONCLUBCODE' AS IRONCLUBCODE, CAST(0 AS BIT) AS [DCLUBCODE], 'IRONBRANDIRONBRANDIRONBRAND' AS IRONBRAND, CAST(1 AS BIT) AS [DBRANDCODE], 'IRONMODELIRONMODELIRONMODEL' AS IRONMODEL, CAST(0 AS BIT) AS [DMODELCODE],
 'WOODCLUBCODE' AS WOODCLUBCODE, CAST(1 AS BIT) AS DCLUBCODE, 'WOODBRANDWOODBRANDWOODBRAND' AS WOODBRAND, CAST(1 AS BIT) AS DBRANDCODE, 'WOODMODELWOODMODELWOODMODEL' AS WOODMODEL, CAST(1 AS BIT) AS DMODELCODE, 'WOODSIZE' AS WOODSIZE, CAST(0 AS BIT) AS DSIZECODE, 'WOODMATLWOODMATLWOODMATL' AS WOODMATL, CAST(0 AS BIT) AS DMATERIAL;
 
 
@@ -146,11 +146,11 @@ SELECT 'NAMENAMENAMENAMENAMENAME' AS PLAYERNAME, 'CAT' AS CATEGORY,
 /*
 SELECT
 --row_number() OVER(ORDER BY PLAYERNAME) AS BALLNUMBER,
-PLAYERNAME, a."Mfgr Descr" AS BALLBRAND, b."Model Descr" AS BALLMODEL
+PLAYERNAME, a.[Mfgr Descr] AS BALLBRAND, b.[Model Descr] AS BALLMODEL
 FROM [Input].[All]
-LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] a ON BALLBRAND = a."Mfgr Descr" 
-LEFT OUTER JOIN [LKP].[Model Codes and Descr] b ON BALLMODEL = b."Model Descr" 
-WHERE "FIRST DAY" = @FIRSTDAY AND SID = @SID 
+LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] a ON BALLBRAND = a.[Mfgr Descr] 
+LEFT OUTER JOIN [LKP].[Model Codes and Descr] b ON BALLMODEL = b.[Model Descr] 
+WHERE [FIRST DAY] = @FIRSTDAY AND SID = @SID 
 ) BALLTABLE
 LEFT OUTER JOIN
 IRONTABLE ON BALLTABLE.PLAYERNAME = IRONTABLE.PLAYERNAME
@@ -166,39 +166,39 @@ WOODTABLE ON BALLTABLE.PLAYERNAME = WOODTABLE.PLAYERNAME AND coalesce(IRONNUMBER
 /*FROM (
 SELECT
 row_number() OVER(ORDER BY PLAYERNAME) AS BALLNUMBER,
-PLAYERNAME, a."Mfgr Descr" AS BALLBRAND, b."Model Descr" AS BALLMODEL
+PLAYERNAME, a.[Mfgr Descr] AS BALLBRAND, b.[Model Descr] AS BALLMODEL
 FROM [Input].[All]
-LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] a ON BALLBRAND = a."Mfgr Descr" 
-LEFT OUTER JOIN [LKP].[Model Codes and Descr] b ON BALLMODEL = b."Model Descr" 
-WHERE "FIRST DAY" = @FIRSTDAY AND SID = @SID 
+LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] a ON BALLBRAND = a.[Mfgr Descr] 
+LEFT OUTER JOIN [LKP].[Model Codes and Descr] b ON BALLMODEL = b.[Model Descr] 
+WHERE [FIRST DAY] = @FIRSTDAY AND SID = @SID 
 ) BALLTABLE
 LEFT OUTER JOIN
 (
 SELECT
-row_number() OVER(PARTITION BY "Name" ORDER BY "PKey") AS IRONNUMBER,
-"Name" AS PLAYERNAME, "Iron Club Descr" AS IRONCLUBCODE, a."Mfgr Descr" AS IRONBRAND, b."Model Descr" AS IRONMODEL, "PKey"
+row_number() OVER(PARTITION BY [Name] ORDER BY [PKey]) AS IRONNUMBER,
+[Name] AS PLAYERNAME, [Iron Club Descr] AS IRONCLUBCODE, a.[Mfgr Descr] AS IRONBRAND, b.[Model Descr] AS IRONMODEL, [PKey]
 FROM [Input].[Iron]
-LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] a ON "Iron Brand Descr" = a."Mfgr Descr"
-LEFT OUTER JOIN LKP.[Model Codes and Descr] b ON "Iron Model Descr" = b."Model Descr"
-WHERE "First Day" = @FIRSTDAY AND "Survey ID" = @SID 
-GROUP BY "Name", "Iron Club Descr", a."Mfgr Descr", b."Model Descr", "PKey"
+LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] a ON [Iron Brand Descr] = a.[Mfgr Descr]
+LEFT OUTER JOIN LKP.[Model Codes and Descr] b ON [Iron Model Descr] = b.[Model Descr]
+WHERE [First Day] = @FIRSTDAY AND [Survey ID] = @SID 
+GROUP BY [Name], [Iron Club Descr], a.[Mfgr Descr], b.[Model Descr], [PKey]
 ) IRONTABLE ON BALLTABLE.PLAYERNAME = IRONTABLE.PLAYERNAME
 LEFT OUTER JOIN
 (
 SELECT
-row_number() OVER(PARTITION BY "Name" ORDER BY "PKey") AS WOODNUMBER,
-"Name" AS PLAYERNAME, "Wood Club Descr" AS WOODCLUBCODE,
-ISNULL(a."Mfgr Abbrev", a."Mfgr Descr") AS WOODBRAND,
-ISNULL(b."Model Abbrev", b."Model Descr") AS WOODMODEL,
-c."Size Descr" AS WOODSIZE,
-ISNULL(d."Matl Abbrev", d."Matl Descr") AS WOODMATL,
-"PKey"
+row_number() OVER(PARTITION BY [Name] ORDER BY [PKey]) AS WOODNUMBER,
+[Name] AS PLAYERNAME, [Wood Club Descr] AS WOODCLUBCODE,
+ISNULL(a.[Mfgr Abbrev], a.[Mfgr Descr]) AS WOODBRAND,
+ISNULL(b.[Model Abbrev], b.[Model Descr]) AS WOODMODEL,
+c.[Size Descr] AS WOODSIZE,
+ISNULL(d.[Matl Abbrev], d.[Matl Descr]) AS WOODMATL,
+[PKey]
 FROM [Input].[Wood]
-LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] a ON "Wood Brand Descr" = a."Mfgr Descr"
-LEFT OUTER JOIN LKP.[Model Codes and Descr] b ON "Wood Model Descr" = b."Model Descr"
-LEFT OUTER JOIN LKP.[Size Codes and Description] c ON "Wood Size Descr" = "Size Descr"
-LEFT OUTER JOIN LKP.[Material Codes and Descript] d ON "Wood Mat'l Descr" = "Matl Descr"
-WHERE "First Day" = @FIRSTDAY AND "Survey ID" = @SID 
+LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] a ON [Wood Brand Descr] = a.[Mfgr Descr]
+LEFT OUTER JOIN LKP.[Model Codes and Descr] b ON [Wood Model Descr] = b.[Model Descr]
+LEFT OUTER JOIN LKP.[Size Codes and Description] c ON [Wood Size Descr] = [Size Descr]
+LEFT OUTER JOIN LKP.[Material Codes and Descript] d ON [Wood Mat'l Descr] = [Matl Descr]
+WHERE [First Day] = @FIRSTDAY AND [Survey ID] = @SID 
 ) WOODTABLE ON BALLTABLE.PLAYERNAME = WOODTABLE.PLAYERNAME AND COALESCE(IRONNUMBER, 0) = COALESCE(WOODNUMBER, 0)
 
 GROUP BY BALLTABLE.PLAYERNAME, BALLBRAND, BALLMODEL, IRONCLUBCODE, IRONBRAND, IRONMODEL, WOODCLUBCODE, WOODBRAND, WOODMODEL, WOODSIZE, WOODMATL
@@ -209,28 +209,28 @@ ORDER BY BALLTABLE.PLAYERNAME
 
 
 
-/*SELECT PLAYERNAME, a."Mfgr Descr" AS BALLBRAND, b."Model Descr" AS BALLMODEL,
-"Iron Club Descr" AS IRONCLUBCODE, e."Mfgr Descr" AS IRONBRAND, f."Model Descr" AS IRONMODEL,
- "Wood Club Descr" AS WOODCLUBCODE,
-ISNULL(a."Mfgr Abbrev", a."Mfgr Descr") AS WOODBRAND,
-ISNULL(b."Model Abbrev", b."Model Descr") AS WOODMODEL,
-c."Size Descr" AS WOODSIZE,
-ISNULL(d."Matl Abbrev", d."Matl Descr") AS WOODMATL
+/*SELECT PLAYERNAME, a.[Mfgr Descr] AS BALLBRAND, b.[Model Descr] AS BALLMODEL,
+[Iron Club Descr] AS IRONCLUBCODE, e.[Mfgr Descr] AS IRONBRAND, f.[Model Descr] AS IRONMODEL,
+ [Wood Club Descr] AS WOODCLUBCODE,
+ISNULL(a.[Mfgr Abbrev], a.[Mfgr Descr]) AS WOODBRAND,
+ISNULL(b.[Model Abbrev], b.[Model Descr]) AS WOODMODEL,
+c.[Size Descr] AS WOODSIZE,
+ISNULL(d.[Matl Abbrev], d.[Matl Descr]) AS WOODMATL
 
-FROM (SELECT * FROM [Input].[All] WHERE "FIRST DAY" = @FIRSTDAY AND SID = @SID) x
-LEFT OUTER JOIN (SELECT * FROM [Input].[Iron] WHERE "First Day" = @FIRSTDAY and "Survey ID" = @SID) z ON PLAYERNAME = z.Name
-LEFT OUTER JOIN (SELECT * FROM [Input].[Wood] WHERE "First Day" = @FIRSTDAY and "Survey ID" = @SID) y ON PLAYERNAME = y.Name
-LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] a ON "Wood Brand Descr" = a."Mfgr Descr"
-LEFT OUTER JOIN LKP.[Model Codes and Descr] b ON "Wood Model Descr" = b."Model Descr"
-LEFT OUTER JOIN LKP.[Size Codes and Description] c ON "Wood Size Descr" = "Size Descr"
-LEFT OUTER JOIN LKP.[Material Codes and Descript] d ON "Wood Mat'l Descr" = "Matl Descr"
-LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] e ON "Iron Brand Descr" = e."Mfgr Descr"
-LEFT OUTER JOIN LKP.[Model Codes and Descr] f ON "Iron Model Descr" = f."Model Descr"
-LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] g ON BALLBRAND = g."Mfgr Descr" 
-LEFT OUTER JOIN [LKP].[Model Codes and Descr] h ON BALLMODEL = h."Model Descr"
+FROM (SELECT * FROM [Input].[All] WHERE [FIRST DAY] = @FIRSTDAY AND SID = @SID) x
+LEFT OUTER JOIN (SELECT * FROM [Input].[Iron] WHERE [First Day] = @FIRSTDAY and [Survey ID] = @SID) z ON PLAYERNAME = z.Name
+LEFT OUTER JOIN (SELECT * FROM [Input].[Wood] WHERE [First Day] = @FIRSTDAY and [Survey ID] = @SID) y ON PLAYERNAME = y.Name
+LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] a ON [Wood Brand Descr] = a.[Mfgr Descr]
+LEFT OUTER JOIN LKP.[Model Codes and Descr] b ON [Wood Model Descr] = b.[Model Descr]
+LEFT OUTER JOIN LKP.[Size Codes and Description] c ON [Wood Size Descr] = [Size Descr]
+LEFT OUTER JOIN LKP.[Material Codes and Descript] d ON [Wood Mat'l Descr] = [Matl Descr]
+LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] e ON [Iron Brand Descr] = e.[Mfgr Descr]
+LEFT OUTER JOIN LKP.[Model Codes and Descr] f ON [Iron Model Descr] = f.[Model Descr]
+LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] g ON BALLBRAND = g.[Mfgr Descr] 
+LEFT OUTER JOIN [LKP].[Model Codes and Descr] h ON BALLMODEL = h.[Model Descr]
 
 
-WHERE  x."FIRST DAY" = @FIRSTDAY AND SID = @SID */
+WHERE  x.[FIRST DAY] = @FIRSTDAY AND SID = @SID */
 
 
 END

@@ -18,10 +18,10 @@ BEGIN
 	
 
 SELECT 
-[type] AS "Tour", 
-YEAR([First Day]) AS "Year",
+[type] AS [Tour], 
+YEAR([First Day]) AS [Year],
       ([Tournament Name] + ' - ' + CONVERT(VARCHAR(10), [First Day], 101)) AS Tournament
-      , [Report Name] AS "Report Name"
+      , [Report Name] AS [Report Name]
       , Rep_ID
   FROM [DARRELL_MASTER].[Billing].[AllOrdersYTD]
   WHERE Company = @COMPANY

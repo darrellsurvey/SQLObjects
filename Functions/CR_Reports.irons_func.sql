@@ -17,13 +17,13 @@ AS
 RETURN 
 (
 
-SELECT "Name" AS PLAYERNAME, CATEGORY, EXTRA, "Iron Club Code" AS CLUBCODE, DCLUBCODE, "Iron Brand Code" AS BRAND, DBRANDCODE,
-"Iron Model Code" AS MODEL, DMODELCODE
+SELECT [Name] AS PLAYERNAME, CATEGORY, EXTRA, [Iron Club Code] AS CLUBCODE, DCLUBCODE, [Iron Brand Code] AS BRAND, DBRANDCODE,
+[Iron Model Code] AS MODEL, DMODELCODE
 
 FROM Player_Master.[Iron Detail] c
-LEFT OUTER JOIN Player_Master.PLAYERNAMES g on c."Name" = g.PLAYERNAME and c."Survey ID" = g.SID AND c."First Day" = g.FIRSTDAY 
+LEFT OUTER JOIN Player_Master.PLAYERNAMES g on c.[Name] = g.PLAYERNAME and c.[Survey ID] = g.SID AND c.[First Day] = g.FIRSTDAY 
 
-WHERE "First Day" = @FIRSTDAY AND "Survey ID" = @SID 
+WHERE [First Day] = @FIRSTDAY AND [Survey ID] = @SID 
 
 )
 GO

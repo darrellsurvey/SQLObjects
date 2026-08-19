@@ -61,7 +61,7 @@ BEGIN
 
 /*
 Select b.[Type] from Billing.AllOrdersYTD a
-LEFT OUTER JOIN Player_Master.TOURNAMENTS_TABLE b ON YEAR(a."FIRST DAY") = YEAR(b."First Day") AND TD = SID
+LEFT OUTER JOIN Player_Master.TOURNAMENTS_TABLE b ON YEAR(a.[FIRST DAY]) = YEAR(b.[First Day]) AND TD = SID
 where Company = @COMPANY and b.[Type] IS NOT NULL
 GROUP BY b.[Type]
 order by 

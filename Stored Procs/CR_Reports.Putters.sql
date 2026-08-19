@@ -20,18 +20,18 @@ BEGIN
 	SET NOCOUNT ON;
 
 if (@SID <> '')
-SELECT "Name" AS PLAYERNAME, CATEGORY, EXTRA, "Putter Sequence No" AS CLUBCODE, DCLUBCODE, ISNULL(a."Mfgr Abbrev", a."Mfgr Descr") AS PUTTERBRAND, DBRANDCODE,
-b."Model Descr" AS PUTTERMODEL, DMODELCODE, d.[Size Descr] AS PUTTERSIZE, DSIZECODE
+SELECT [Name] AS PLAYERNAME, CATEGORY, EXTRA, [Putter Sequence No] AS CLUBCODE, DCLUBCODE, ISNULL(a.[Mfgr Abbrev], a.[Mfgr Descr]) AS PUTTERBRAND, DBRANDCODE,
+b.[Model Descr] AS PUTTERMODEL, DMODELCODE, d.[Size Descr] AS PUTTERSIZE, DSIZECODE
 --REPLACE(d.[Size Descr], '-', '')
 FROM Player_Master.[Putter Detail] c
-LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] a ON "Putter Brand Code" = a."Mfgr Code"
-LEFT OUTER JOIN LKP.[Model Codes and Descr] b ON "Putter Model Code" = b."Model Code"
-LEFT OUTER JOIN Player_Master.PLAYERNAMES g on c."Name" = g.PLAYERNAME and c."Survey ID" = g.SID AND c."First Day" = g.FIRSTDAY 
+LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] a ON [Putter Brand Code] = a.[Mfgr Code]
+LEFT OUTER JOIN LKP.[Model Codes and Descr] b ON [Putter Model Code] = b.[Model Code]
+LEFT OUTER JOIN Player_Master.PLAYERNAMES g on c.[Name] = g.PLAYERNAME and c.[Survey ID] = g.SID AND c.[First Day] = g.FIRSTDAY 
 left outer join LKP.[Size Codes and Description] d on [Putter Size Code] = [Size Code]
 
-WHERE "First Day" = @FIRSTDAY AND "Survey ID" = @SID 
+WHERE [First Day] = @FIRSTDAY AND [Survey ID] = @SID 
 
-ORDER BY EXTRA, "Name" ASC
+ORDER BY EXTRA, [Name] ASC
 
 else
 

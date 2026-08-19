@@ -25,12 +25,12 @@ BEGIN
 	ELSE
 	
 	BEGIN
-	SELECT DISTINCT(YEAR("FIRST DAY")) as [Year]
+	SELECT DISTINCT(YEAR([FIRST DAY])) as [Year]
 	  FROM Billing.AllOrdersYTD with (nolock)
 		WHERE YEAR([FIRST DAY]) > YEAR(GETDATE()) -3 
         AND [First Day] is not null
 		AND Company = @COMPANY
-		order by YEAR("FIRST DAY") DESC
+		order by YEAR([FIRST DAY]) DESC
 	END
 	
 	-- select * from billing.allordersytd

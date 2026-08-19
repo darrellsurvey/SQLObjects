@@ -20,15 +20,15 @@ BEGIN
 	SET NOCOUNT ON;
 
 
-SELECT d.PLAYERNAME, CATEGORY, EXTRA, ISNULL(a."Mfgr Abbrev", a."Mfgr Descr") AS BALLBRAND, DBALLBRAND, b."Model Descr" AS BALLMODEL, DBALLMODEL
+SELECT d.PLAYERNAME, CATEGORY, EXTRA, ISNULL(a.[Mfgr Abbrev], a.[Mfgr Descr]) AS BALLBRAND, DBALLBRAND, b.[Model Descr] AS BALLMODEL, DBALLMODEL
 
 FROM [Player_Master].[All] d
-LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] a ON BALLBRAND = a."Mfgr Code" 
-LEFT OUTER JOIN [LKP].[Model Codes and Descr] b ON BALLMODEL = b."Model Code" 
+LEFT OUTER JOIN [LKP].[Manufacturer Codes and Desc] a ON BALLBRAND = a.[Mfgr Code] 
+LEFT OUTER JOIN [LKP].[Model Codes and Descr] b ON BALLMODEL = b.[Model Code] 
 LEFT OUTER JOIN Player_Master.PLAYERNAMES c on d.PLAYERNAME = c.PLAYERNAME AND d.SID = c.SID AND c.FIRSTDAY = d.[FIRST DAY] 
 
 
-WHERE "FIRST DAY" = @FIRSTDAY AND d.SID = @SID 
+WHERE [FIRST DAY] = @FIRSTDAY AND d.SID = @SID 
 order by EXTRA, PLAYERNAME ASC
 END
 GO

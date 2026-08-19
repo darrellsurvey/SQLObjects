@@ -36,7 +36,7 @@ DECLARE @SID INT;
 
 
 
-SELECT TOP 1 @SID = SID, @TournamentID = TournamentID FROM [Player_Master].[TOURNAMENTS_TABLE] WHERE "TOURNAMENT NAME" = @TOURNAMENTNAME AND [FIRST DAY] = @FIRSTDAY;
+SELECT TOP 1 @SID = SID, @TournamentID = TournamentID FROM [Player_Master].[TOURNAMENTS_TABLE] WHERE [TOURNAMENT NAME] = @TOURNAMENTNAME AND [FIRST DAY] = @FIRSTDAY;
 
 
 
@@ -246,7 +246,7 @@ exec(@SQLString)
 
 --dummy select to set ourput variables for crystal reports
 
-SELECT 'TITLEISTTITLEISTTITLEISTTITLEIST' AS Brand, 34 as "Count", 12 as "%" WHERE 1=0;
+SELECT 'TITLEISTTITLEISTTITLEISTTITLEIST' AS Brand, 34 as [Count], 12 as [%] WHERE 1=0;
 
 
 

@@ -21,15 +21,15 @@ BEGIN
 
 SELECT drivers.PLAYERNAME AS PLAYERNAME, CATEGORY, EXTRA, SHAFTCLUBCODE AS WOODCLUBCODE, DSHAFTCLUBCODE,
 --woods
-COALESCE(h."Mfgr Abbrev", h."Mfgr Descr") AS WOODBRAND, DBRANDCODE,
-i."Model Descr" AS WOODMODEL, DMODELCODE,
-COALESCE(j."Matl Abbrev", j."Matl Descr") AS WOODMATL, DMATERIAL,
-COALESCE(k."Size Abbrev", k."Size Descr") AS WOODSIZE, DSIZECODE,
+COALESCE(h.[Mfgr Abbrev], h.[Mfgr Descr]) AS WOODBRAND, DBRANDCODE,
+i.[Model Descr] AS WOODMODEL, DMODELCODE,
+COALESCE(j.[Matl Abbrev], j.[Matl Descr]) AS WOODMATL, DMATERIAL,
+COALESCE(k.[Size Abbrev], k.[Size Descr]) AS WOODSIZE, DSIZECODE,
 --shafts
-COALESCE(a."Mfgr Abbrev", a."Mfgr Descr") AS SHAFTMFGR, DSHAFTMFGR,
-COALESCE(b."Mfgr Abbrev", b."Mfgr Descr") AS SHAFTBRAND, DSHAFTBRAND,
-c."Model Descr" AS SHAFTMODEL, DSHAFTMODEL,
-COALESCE(f."Matl Abbrev", f."Matl Descr") AS SHAFTMATL, DSHAFTMATL
+COALESCE(a.[Mfgr Abbrev], a.[Mfgr Descr]) AS SHAFTMFGR, DSHAFTMFGR,
+COALESCE(b.[Mfgr Abbrev], b.[Mfgr Descr]) AS SHAFTBRAND, DSHAFTBRAND,
+c.[Model Descr] AS SHAFTMODEL, DSHAFTMODEL,
+COALESCE(f.[Matl Abbrev], f.[Matl Descr]) AS SHAFTMATL, DSHAFTMATL
 FROM
 
 (SELECT * FROM Input.[Wood] where [First Day] = @FIRSTDAY and SID = @SID and ISDRIVER = 1) drivers
@@ -46,19 +46,19 @@ on drivers.PLAYERNAME = shafts.PLAYERNAME and drivers.CLUBCODE = shafts.SHAFTCLU
 
 
 --shaft joins
-LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] a ON SHAFTMFGR = a."Mfgr Descr"
-LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] b ON SHAFTBRAND = b."Mfgr Descr"
-LEFT OUTER JOIN LKP.[Model Codes and Descr] c ON SHAFTMODEL = c."Model Descr"
-LEFT OUTER JOIN LKP.[Material Codes and Descript] f ON SHAFTMATL = f."Matl Descr"
+LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] a ON SHAFTMFGR = a.[Mfgr Descr]
+LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] b ON SHAFTBRAND = b.[Mfgr Descr]
+LEFT OUTER JOIN LKP.[Model Codes and Descr] c ON SHAFTMODEL = c.[Model Descr]
+LEFT OUTER JOIN LKP.[Material Codes and Descript] f ON SHAFTMATL = f.[Matl Descr]
 --wood joins
-LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] h ON BRAND = h."Mfgr Descr"
-LEFT OUTER JOIN LKP.[Model Codes and Descr] i ON MODEL = i."Model Descr"
-LEFT OUTER JOIN LKP.[Material Codes and Descript] j ON MATERIAL = j."Matl Descr"
+LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] h ON BRAND = h.[Mfgr Descr]
+LEFT OUTER JOIN LKP.[Model Codes and Descr] i ON MODEL = i.[Model Descr]
+LEFT OUTER JOIN LKP.[Material Codes and Descript] j ON MATERIAL = j.[Matl Descr]
 LEFT OUTER JOIN LKP.[Size Codes and Description] k ON SIZE = k.[Size Descr]
 
-LEFT OUTER JOIN Player_Master.PLAYERNAMES g on drivers.PLAYERNAME = g.PLAYERNAME and drivers.SID = g.SID AND drivers."First Day" = g.FIRSTDAY 
+LEFT OUTER JOIN Player_Master.PLAYERNAMES g on drivers.PLAYERNAME = g.PLAYERNAME and drivers.SID = g.SID AND drivers.[First Day] = g.FIRSTDAY 
 
-WHERE drivers."First Day" = @FIRSTDAY AND drivers.SID = @SID 
+WHERE drivers.[First Day] = @FIRSTDAY AND drivers.SID = @SID 
 ORDER BY EXTRA, drivers.PLAYERNAME ASC
 
 END

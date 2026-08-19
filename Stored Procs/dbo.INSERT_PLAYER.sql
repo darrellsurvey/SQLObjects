@@ -82,7 +82,7 @@ VALUES (
     @SURVEYORNOTE);
 
 --SCOPE_IDENTITY() must be selected here, inside this procedure's own scope, to reflect
---the INSERT above -- a caller doing "EXEC INSERT_PLAYER; SELECT SCOPE_IDENTITY();" from
+--the INSERT above -- a caller doing [EXEC INSERT_PLAYER; SELECT SCOPE_IDENTITY();] from
 --its own batch always gets NULL, since the EXEC call is a separate scope from the caller.
 SELECT SCOPE_IDENTITY();
 

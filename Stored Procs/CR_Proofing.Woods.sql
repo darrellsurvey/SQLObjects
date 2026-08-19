@@ -27,46 +27,46 @@ IF (@PLAYERNAME<>'')
 BEGIN
 SELECT
 CLUBCODE,
-COALESCE(a."Mfgr Abbrev", a."Mfgr Descr") AS BRAND,
-COALESCE(b."model abbrev", b."Model Descr") AS MODEL,
-COALESCE(c."Matl Abbrev", c."Matl Descr") AS MATERIAL,
-"SIZE",
+COALESCE(a.[Mfgr Abbrev], a.[Mfgr Descr]) AS BRAND,
+COALESCE(b.[model abbrev], b.[Model Descr]) AS MODEL,
+COALESCE(c.[Matl Abbrev], c.[Matl Descr]) AS MATERIAL,
+[SIZE],
 z.MISC,
-CASE WHEN @WOODSHAFTVIS = 'True' OR (@WOODSHAFTVIS = 'DriverOnly' AND ISNULL(z.ISDRIVER,0) = 1) THEN CASE WHEN COALESCE(d."Mfgr Abbrev", d."Mfgr Descr") = COALESCE(e."Mfgr Abbrev", e."Mfgr Descr") THEN '=' ELSE COALESCE(d."Mfgr Abbrev", d."Mfgr Descr") END ELSE NULL END AS SHAFTMFGR,
-CASE WHEN @WOODSHAFTVIS = 'True' OR (@WOODSHAFTVIS = 'DriverOnly' AND ISNULL(z.ISDRIVER,0) = 1) THEN COALESCE(e."Mfgr Abbrev", e."Mfgr Descr") ELSE NULL END AS SHAFTBRAND,
-CASE WHEN @WOODSHAFTVIS = 'True' OR (@WOODSHAFTVIS = 'DriverOnly' AND ISNULL(z.ISDRIVER,0) = 1) THEN COALESCE(f."model abbrev", f."Model Descr") ELSE NULL END AS SHAFTMODEL,
+CASE WHEN @WOODSHAFTVIS = 'True' OR (@WOODSHAFTVIS = 'DriverOnly' AND ISNULL(z.ISDRIVER,0) = 1) THEN CASE WHEN COALESCE(d.[Mfgr Abbrev], d.[Mfgr Descr]) = COALESCE(e.[Mfgr Abbrev], e.[Mfgr Descr]) THEN '=' ELSE COALESCE(d.[Mfgr Abbrev], d.[Mfgr Descr]) END ELSE NULL END AS SHAFTMFGR,
+CASE WHEN @WOODSHAFTVIS = 'True' OR (@WOODSHAFTVIS = 'DriverOnly' AND ISNULL(z.ISDRIVER,0) = 1) THEN COALESCE(e.[Mfgr Abbrev], e.[Mfgr Descr]) ELSE NULL END AS SHAFTBRAND,
+CASE WHEN @WOODSHAFTVIS = 'True' OR (@WOODSHAFTVIS = 'DriverOnly' AND ISNULL(z.ISDRIVER,0) = 1) THEN COALESCE(f.[model abbrev], f.[Model Descr]) ELSE NULL END AS SHAFTMODEL,
 CASE WHEN @WOODSHAFTVIS = 'True' OR (@WOODSHAFTVIS = 'DriverOnly' AND ISNULL(z.ISDRIVER,0) = 1) THEN SHAFTFLEX ELSE NULL END AS SHAFTFLEX,
 CASE WHEN @WOODSHAFTVIS = 'True' OR (@WOODSHAFTVIS = 'DriverOnly' AND ISNULL(z.ISDRIVER,0) = 1) THEN SHAFTTYPE ELSE NULL END AS SHAFTTYPE,
-CASE WHEN @WOODSHAFTVIS = 'True' OR (@WOODSHAFTVIS = 'DriverOnly' AND ISNULL(z.ISDRIVER,0) = 1) THEN COALESCE(g."Matl Abbrev", g."Matl Descr") ELSE NULL END AS SHAFTMATL,
-CASE WHEN @WOODGRIPVIS <> 'True' THEN NULL ELSE CASE WHEN COALESCE(h."Mfgr Abbrev", h."Mfgr Descr") = COALESCE(i."Mfgr Abbrev", i."Mfgr Descr") THEN '=' ELSE COALESCE(h."Mfgr Abbrev", h."Mfgr Descr") END END AS GRIPMFGR,
-CASE WHEN @WOODGRIPVIS <> 'True' THEN NULL ELSE COALESCE(i."Mfgr Abbrev", i."Mfgr Descr") END AS GRIPBRAND,
-CASE WHEN @WOODGRIPVIS <> 'True' THEN NULL ELSE COALESCE(j."Model Abbrev", j."Model Descr") END AS GRIPMODEL,
+CASE WHEN @WOODSHAFTVIS = 'True' OR (@WOODSHAFTVIS = 'DriverOnly' AND ISNULL(z.ISDRIVER,0) = 1) THEN COALESCE(g.[Matl Abbrev], g.[Matl Descr]) ELSE NULL END AS SHAFTMATL,
+CASE WHEN @WOODGRIPVIS <> 'True' THEN NULL ELSE CASE WHEN COALESCE(h.[Mfgr Abbrev], h.[Mfgr Descr]) = COALESCE(i.[Mfgr Abbrev], i.[Mfgr Descr]) THEN '=' ELSE COALESCE(h.[Mfgr Abbrev], h.[Mfgr Descr]) END END AS GRIPMFGR,
+CASE WHEN @WOODGRIPVIS <> 'True' THEN NULL ELSE COALESCE(i.[Mfgr Abbrev], i.[Mfgr Descr]) END AS GRIPBRAND,
+CASE WHEN @WOODGRIPVIS <> 'True' THEN NULL ELSE COALESCE(j.[Model Abbrev], j.[Model Descr]) END AS GRIPMODEL,
 CASE WHEN @WOODGRIPVIS <> 'True' THEN NULL ELSE GRIPTYPE END AS GRIPTYPE,
-CASE WHEN @WOODGRIPVIS <> 'True' THEN NULL ELSE CASE WHEN COALESCE(k."Matl Abbrev", k."Matl Descr") = '(RUBB)' THEN '-' ELSE COALESCE(k."Matl Abbrev", k."Matl Descr") END END AS GRIPMATL,
+CASE WHEN @WOODGRIPVIS <> 'True' THEN NULL ELSE CASE WHEN COALESCE(k.[Matl Abbrev], k.[Matl Descr]) = '(RUBB)' THEN '-' ELSE COALESCE(k.[Matl Abbrev], k.[Matl Descr]) END END AS GRIPMATL,
 'True' as isvisible, CASE WHEN @WOODSHAFTVIS = 'True' OR (@WOODSHAFTVIS = 'DriverOnly' AND ISNULL(z.ISDRIVER,0) = 1) THEN 'True' ELSE 'False' END AS shaftisvisible, @WOODGRIPVIS AS gripisvisible
 
 FROM [Input].[Wood] z
 LEFT OUTER JOIN
-(SELECT * FROM [Input].[Shaft] WHERE PLAYERNAME = @PLAYERNAME AND "FIRST DAY" = @FIRSTDAY AND SHAFTEQUIPTYPE = 'WOOD') y
-ON CLUBCODE = SHAFTCLUBCODE AND z."FIRST DAY" = y."FIRST DAY" and z.PLAYERNAME = y.PLAYERNAME AND z."PKey" = y."PKey"
+(SELECT * FROM [Input].[Shaft] WHERE PLAYERNAME = @PLAYERNAME AND [FIRST DAY] = @FIRSTDAY AND SHAFTEQUIPTYPE = 'WOOD') y
+ON CLUBCODE = SHAFTCLUBCODE AND z.[FIRST DAY] = y.[FIRST DAY] and z.PLAYERNAME = y.PLAYERNAME AND z.[PKey] = y.[PKey]
 LEFT OUTER JOIN
-(SELECT * FROM [Input].[Grip] WHERE PLAYERNAME = @PLAYERNAME AND "FIRST DAY" = @FIRSTDAY AND GRIPEQUIPTYPE = 'WOOD') x
-ON CLUBCODE = GRIPCLUBCODE AND z."FIRST DAY" = x."FIRST DAY" and z.PLAYERNAME = x.PLAYERNAME AND z."PKey" = x."PKey"
+(SELECT * FROM [Input].[Grip] WHERE PLAYERNAME = @PLAYERNAME AND [FIRST DAY] = @FIRSTDAY AND GRIPEQUIPTYPE = 'WOOD') x
+ON CLUBCODE = GRIPCLUBCODE AND z.[FIRST DAY] = x.[FIRST DAY] and z.PLAYERNAME = x.PLAYERNAME AND z.[PKey] = x.[PKey]
 
-LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] a ON BRAND = a."Mfgr Descr"
-LEFT OUTER JOIN LKP.[Model Codes and Descr] b ON MODEL = b."Model Descr"
-LEFT OUTER JOIN LKP.[Material Codes and Descript] c ON MATERIAL = c."Matl Descr"
-LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] d ON SHAFTMFGR = d."Mfgr Descr"
-LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] e ON SHAFTBRAND = e."Mfgr Descr"
-LEFT OUTER JOIN LKP.[Model Codes and Descr] f ON SHAFTMODEL = f."Model Descr"
-LEFT OUTER JOIN LKP.[Material Codes and Descript] g ON SHAFTMATL = g."Matl Descr"
-LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] h ON GRIPMFGR = h."Mfgr Descr"
-LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] i ON GRIPBRAND = i."Mfgr Descr"
-LEFT OUTER JOIN LKP.[Model Codes and Descr] j ON GRIPMODEL = j."Model Descr"
-LEFT OUTER JOIN LKP.[Material Codes and Descript] k ON GRIPMATL = k."Matl Descr"
+LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] a ON BRAND = a.[Mfgr Descr]
+LEFT OUTER JOIN LKP.[Model Codes and Descr] b ON MODEL = b.[Model Descr]
+LEFT OUTER JOIN LKP.[Material Codes and Descript] c ON MATERIAL = c.[Matl Descr]
+LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] d ON SHAFTMFGR = d.[Mfgr Descr]
+LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] e ON SHAFTBRAND = e.[Mfgr Descr]
+LEFT OUTER JOIN LKP.[Model Codes and Descr] f ON SHAFTMODEL = f.[Model Descr]
+LEFT OUTER JOIN LKP.[Material Codes and Descript] g ON SHAFTMATL = g.[Matl Descr]
+LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] h ON GRIPMFGR = h.[Mfgr Descr]
+LEFT OUTER JOIN LKP.[Manufacturer Codes and Desc] i ON GRIPBRAND = i.[Mfgr Descr]
+LEFT OUTER JOIN LKP.[Model Codes and Descr] j ON GRIPMODEL = j.[Model Descr]
+LEFT OUTER JOIN LKP.[Material Codes and Descript] k ON GRIPMATL = k.[Matl Descr]
 
-WHERE z.PLAYERNAME = @PLAYERNAME AND z."FIRST DAY" = @FIRSTDAY
-ORDER BY z."PKey" ASC
+WHERE z.PLAYERNAME = @PLAYERNAME AND z.[FIRST DAY] = @FIRSTDAY
+ORDER BY z.[PKey] ASC
 END
 ELSE
 
