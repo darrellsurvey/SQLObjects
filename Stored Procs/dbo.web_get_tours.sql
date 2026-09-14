@@ -40,25 +40,31 @@ begin
 				else 12
 				END
 		ELSE
-			SELECT [Type]=[Tour] 
-			from Billing.user_levels 
-			WHERE [YEAR] >= @YEAR AND username = @loginid 
-			GROUP BY TOUR
-			order by 
+			SELECT [Type]=ul.[Tour]
+			from Billing.user_levels ul
+			WHERE ul.[YEAR] >= @YEAR AND ul.username = @loginid
+			  AND EXISTS (
+				  SELECT 1 FROM Billing.OrderCompleted oc
+				  WHERE oc.CustomerId = ul.CompanyId
+					AND oc.[Type] = ul.[Tour]
+					AND oc.[Year] >= @YEAR
+			  )
+			GROUP BY ul.[Tour]
+			order by
 				CASE
-				when TOUR = 'PGA' then 1
-				when TOUR = 'KORN FERRY' then 2
-				when TOUR = 'WEB.COM' then 3
-				when TOUR = 'NATIONWIDE' then 4
-				when TOUR = 'CHAMPIONS' then 5
-				when TOUR = 'LPGA' then 6
-				when TOUR = 'JGTO' then 7
-				when TOUR = 'JLPGA' then 8
-				when TOUR = 'CLPGA' then 9
-				when TOUR = 'ONEASIA' then 10
-				when TOUR = 'AMATEUR' then 11
+				when ul.[Tour] = 'PGA' then 1
+				when ul.[Tour] = 'KORN FERRY' then 2
+				when ul.[Tour] = 'WEB.COM' then 3
+				when ul.[Tour] = 'NATIONWIDE' then 4
+				when ul.[Tour] = 'CHAMPIONS' then 5
+				when ul.[Tour] = 'LPGA' then 6
+				when ul.[Tour] = 'JGTO' then 7
+				when ul.[Tour] = 'JLPGA' then 8
+				when ul.[Tour] = 'CLPGA' then 9
+				when ul.[Tour] = 'ONEASIA' then 10
+				when ul.[Tour] = 'AMATEUR' then 11
 				else 12
-				END	
+				END
 		END
 	else
 		begin
@@ -83,25 +89,31 @@ begin
 				else 12
 				END
 		ELSE
-			SELECT [Type]=[Tour] 
-			from Billing.user_levels 
-			WHERE [YEAR] = @YEAR AND username = @loginid 
-			GROUP BY TOUR
-			order by 
+			SELECT [Type]=ul.[Tour]
+			from Billing.user_levels ul
+			WHERE ul.[YEAR] = @YEAR AND ul.username = @loginid
+			  AND EXISTS (
+				  SELECT 1 FROM Billing.OrderCompleted oc
+				  WHERE oc.CustomerId = ul.CompanyId
+					AND oc.[Type] = ul.[Tour]
+					AND oc.[Year] = @YEAR
+			  )
+			GROUP BY ul.[Tour]
+			order by
 				CASE
-				when TOUR = 'PGA' then 1
-				when TOUR = 'KORN FERRY' then 2
-				when TOUR = 'WEB.COM' then 3
-				when TOUR = 'NATIONWIDE' then 4
-				when TOUR = 'CHAMPIONS' then 5
-				when TOUR = 'LPGA' then 6
-				when TOUR = 'JGTO' then 7
-				when TOUR = 'JLPGA' then 8
-				when TOUR = 'CLPGA' then 9
-				when TOUR = 'ONEASIA' then 10
-				when TOUR = 'AMATEUR' then 11
+				when ul.[Tour] = 'PGA' then 1
+				when ul.[Tour] = 'KORN FERRY' then 2
+				when ul.[Tour] = 'WEB.COM' then 3
+				when ul.[Tour] = 'NATIONWIDE' then 4
+				when ul.[Tour] = 'CHAMPIONS' then 5
+				when ul.[Tour] = 'LPGA' then 6
+				when ul.[Tour] = 'JGTO' then 7
+				when ul.[Tour] = 'JLPGA' then 8
+				when ul.[Tour] = 'CLPGA' then 9
+				when ul.[Tour] = 'ONEASIA' then 10
+				when ul.[Tour] = 'AMATEUR' then 11
 				else 12
-				END	
+				END
 		end
 	
 end
