@@ -44,10 +44,12 @@ begin
 			from Billing.user_levels ul
 			WHERE ul.[YEAR] >= @YEAR AND ul.username = @loginid
 			  AND EXISTS (
-				  SELECT 1 FROM Billing.OrderCompleted oc
+				  SELECT 1
+				  FROM Billing.OrderCompleted oc
+				  JOIN Player_Master.TOURNAMENTS_TABLE tt ON tt.TournamentId = oc.TournamentId
 				  WHERE oc.CustomerId = ul.CompanyId
-					AND oc.[Type] = ul.[Tour]
-					AND oc.[Year] >= @YEAR
+					AND COALESCE(oc.[Type], tt.[TYPE]) = ul.[Tour]
+					AND COALESCE(oc.[Year], tt.[Year]) >= @YEAR
 			  )
 			GROUP BY ul.[Tour]
 			order by
@@ -93,10 +95,12 @@ begin
 			from Billing.user_levels ul
 			WHERE ul.[YEAR] = @YEAR AND ul.username = @loginid
 			  AND EXISTS (
-				  SELECT 1 FROM Billing.OrderCompleted oc
+				  SELECT 1
+				  FROM Billing.OrderCompleted oc
+				  JOIN Player_Master.TOURNAMENTS_TABLE tt ON tt.TournamentId = oc.TournamentId
 				  WHERE oc.CustomerId = ul.CompanyId
-					AND oc.[Type] = ul.[Tour]
-					AND oc.[Year] = @YEAR
+					AND COALESCE(oc.[Type], tt.[TYPE]) = ul.[Tour]
+					AND COALESCE(oc.[Year], tt.[Year]) = @YEAR
 			  )
 			GROUP BY ul.[Tour]
 			order by
